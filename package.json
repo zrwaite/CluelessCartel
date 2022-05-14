@@ -1,0 +1,25 @@
+{
+  "name": "zaclukegame",
+  "version": "1.0.0",
+  "description": "Typescript web game",
+  "main": "build/index.js",
+  "scripts": {
+    "dev": "onchange '**/*.ts' -- npm run compile",
+    "compile": "tsc;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zrwaite/SpaceshipJavascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "onchange": "^7.1.0",
+    "typescript": "^4.6.4"
+  },
+  "bugs": {
+    "url": "https://github.com/zrwaite/SpaceshipJavascript/issues"
+  },
+  "homepage": "https://github.com/zrwaite/SpaceshipJavascript#readme"
+}
