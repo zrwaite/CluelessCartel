@@ -1,5 +1,8 @@
 import Game from "./game.js";
 
+let rootElement = document.getElementById("gameSection");
+if (!rootElement) throw Error("Element #gameSection does not exist");
+
 let canvasHolder = document.getElementById("canvasHolder");
 if (!canvasHolder) throw Error("Element #canvasHolder does not exist");
 
@@ -13,7 +16,7 @@ let dynamicCtx = dynamicCanvas.getContext("2d");
 
 
 let game = new Game();
-game.start();
+game.start(rootElement);
 
 let lastTime = 0;
 function gameLoop(timestamp: number) {
