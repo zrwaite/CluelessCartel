@@ -14,9 +14,8 @@ let dynamicCanvas = document.createElement("canvas");
 canvasHolder.appendChild(dynamicCanvas);
 let dynamicCtx = dynamicCanvas.getContext("2d");
 
-
 let game = new Game();
-game.start(rootElement);
+game.start(rootElement); 
 
 let lastTime = 0;
 function gameLoop(timestamp: number) {

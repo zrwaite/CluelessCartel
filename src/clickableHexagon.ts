@@ -19,16 +19,21 @@ export default class ClickableHexagon {
 		this.hexButton.style.backgroundImage = "url('assets/Hexagon.png')";
 		this.hexButton.style.backgroundSize = "100px 100px";
 		parentElement.appendChild(this.hexButton);
-		this.hexButton.onmouseenter = () => {
-			this.hexButton.style.scale = "1.2"
-			this.hexButton.style.zIndex = "1000";
-		}
-		this.hexButton.onmouseleave = () => {
-			this.hexButton.style.scale = "1"
-			this.hexButton.style.zIndex = "1";
-		}
+
+		this.hexButton.onmouseenter = (() => this.onHover(true))
+		this.hexButton.onmouseleave = (() => this.onHover(false))
 	}
 	onClick () {
 		alert(`${this.pos.x},${this.pos.y}`);
+	}
+	onHover(mouseIn:boolean){
+		if (mouseIn){
+			console.log(mouseIn);
+			this.hexButton.style.scale = "1.2"
+			this.hexButton.style.zIndex = "1000";
+		}else{
+			this.hexButton.style.scale = "1"
+			this.hexButton.style.zIndex = "1";
+		}
 	}
 }
