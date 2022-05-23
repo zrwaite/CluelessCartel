@@ -37,16 +37,17 @@ class ClickableHexagon {
 		parentElement.appendChild(this.hexButton);
 		this.hexButton.onmouseenter = (() => this.onHover(true));
 		this.hexButton.onmouseleave = (() => this.onHover(false));
+		this.hexButton.style.transition = "all .2s ease";
 	}
 	onClick () {
 		alert(`${this.pos.x},${this.pos.y}`);
 	}
 	onHover(mouseIn:boolean){
 		if (mouseIn){
-			this.hexButton.style.scale = "1.2"; //Scale doesn't work in chrome
+			this.hexButton.style.transform = "scale(1.2)"; //Scale doesn't work in chrome
 			this.hexButton.style.zIndex = "1000";
 		}else{
-			this.hexButton.style.scale = "1"
+			this.hexButton.style.transform = "scale(1)"; //Scale doesn't work in chrome
 			this.hexButton.style.zIndex = "1";
 		}
 	}
