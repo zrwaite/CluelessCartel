@@ -1,13 +1,12 @@
 #gameSection {
 	overflow:scroll;
 	border: 2px solid black;
-	height: 500px;
-	width:800px;
 	white-space:nowrap;
 }
 
 #canvasHolder{
 	border: 1px solid green;
+	position:absolute;
 }
 
 body>img {
@@ -17,6 +16,13 @@ body>img {
 .clickableHexagon{
 	/* float: left; */
 	display: inline-block;
+	position:relative;
+	/* overflow: hidden; */
+}
+
+.clickableHexagonRow{
+	/* float: left; */
+	/* display: inline-block; */
 	position:relative;
 	/* overflow: hidden; */
 }

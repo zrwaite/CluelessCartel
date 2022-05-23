@@ -1,10 +1,20 @@
 import Game from "./game.js";
 
+const WIDTH=800;
+const HEIGHT=500;
+
 let rootElement = document.getElementById("gameSection");
 if (!rootElement) throw Error("Element #gameSection does not exist");
 
 let canvasHolder = document.getElementById("canvasHolder");
 if (!canvasHolder) throw Error("Element #canvasHolder does not exist");
+canvasHolder.style.height = "100%";
+canvasHolder.style.width = "100%";
+
+[canvasHolder, rootElement].forEach(element => {
+	element.style.height = `${HEIGHT}px`;
+	element.style.width = `${WIDTH}px`;
+});
 
 let staticCanvas = document.createElement("canvas");
 canvasHolder.appendChild(staticCanvas);
