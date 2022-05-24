@@ -13,7 +13,7 @@ canvasHolder.style.width = "100%";
 
 [canvasHolder, rootElement].forEach(element => {
 	element.style.height = `${HEIGHT}px`;
-	element.style.width = `${WIDTH}px`; 
+	element.style.width = `${WIDTH}px`;
 });
 
 let staticCanvas = document.createElement("canvas");

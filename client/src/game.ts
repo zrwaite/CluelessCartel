@@ -1,6 +1,5 @@
-import {ClickableHexagon, ClickableHexagonRow} from "./clickableHexagon.js";
-import Modal from "./modal.js";
-import Vector2 from "./modules/Vector2.js";
+import ClickableGridHexagonRow from "./components/ClickableGridHexagonRow.js";
+import Modal from "./components/Modal.js";
 
 export default class Game {
 	constructor() {
@@ -9,7 +8,7 @@ export default class Game {
 	start(rootElement: HTMLElement) {
 		let modal = new Modal();
 		for (let i1=0; i1<10; i1++) {
-			let newrow = new ClickableHexagonRow(i1, rootElement);
+			let newrow = new ClickableGridHexagonRow(i1, rootElement);
 			for (let i2=0; i2<10; i2++) {
 				newrow.addHexagon(i2);
 				newrow.hexagons[i2].onClick = () => modal.open();
