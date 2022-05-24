@@ -10,9 +10,11 @@ export default class ClickableGridHexagon extends Component {
 		this.addStyles({
 			height: "100px",
 			width: "100px",
-			backgroundImage: "url('assets/Hexagon.png')",
+			backgroundImage: "url('/assets/Hexagon.png')",
 			backgroundSize: "100px 100px",
-			transition: "all .2s ease"
+			transition: "all .2s ease",
+			position: "relative",
+			display: "inline-block"
 		})
 	}
 	onClick (e:MouseEvent) {

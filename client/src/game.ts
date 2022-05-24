@@ -3,7 +3,11 @@ import Modal from "./components/Modal.js";
 
 export default class Game {
 	constructor() {
-
+		let user = {
+			name: "Dave",
+			password: "Hi"
+		} 
+		console.log("user: ", user);
 	}
 	start(rootElement: HTMLElement) {
 		let modal = new Modal();
@@ -13,7 +17,6 @@ export default class Game {
 				newrow.addHexagon(i2);
 				newrow.hexagons[i2].onClick = () => modal.open();
 			}
-		let modal = new Modal();
 		}
 		// setTimeout(() => modal.open(), 2000);
 	}
