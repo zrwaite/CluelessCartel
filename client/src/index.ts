@@ -1,7 +1,7 @@
 import Game from "./game.js";
 
 const WIDTH=800;
-const HEIGHT=500;
+const HEIGHT=500; 
 
 let rootElement = document.getElementById("gameSection");
 if (!rootElement) throw Error("Element #gameSection does not exist");
