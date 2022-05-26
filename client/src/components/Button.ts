@@ -7,17 +7,17 @@ export default class Button extends Component {
 		this.addStyles({
 			height: "10px",
 			width: "10px",
+			cursor: "pointer",
+			transition: "all .2s ease",
 		})
 		this.onClick = (e:MouseEvent) => onClick(e)
 		this.icon = new Icon(this.element, ()=>{});
 	}
     onHover(e: MouseEvent, mouseIn:boolean){
 		if (mouseIn){
-			this.element.style.transform = "scale(1.1)"; //Scale doesn't work in chrome
-			this.element.style.zIndex = "1000";
+			this.element.style.transform = "scale(1.1)"; 
 		}else{
-			this.element.style.transform = "scale(1)"; //Scale doesn't work in chrome
-			this.element.style.zIndex = "1";
+			this.element.style.transform = "scale(1)"; 
 		}
 	}
 }

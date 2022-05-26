@@ -4,7 +4,7 @@ export default class Icon extends Component {
     constructor (parentElement: HTMLElement, onClick:Function) {
 		super("div", parentElement);
 		this.element = new Image();
-		this.element.src = "/assets/close.svg"
+		this.element.src = "../../assets/close.svg"
 		this.addStyles({
 			height: "100%",
 			width: "100%",

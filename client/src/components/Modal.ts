@@ -1,16 +1,20 @@
 import Button from "./Button.js";
+import ClickableGridHexagon from "./ClickableGridHexagon.js";
 import Component from "./Component.js";
 import Icon from "./Icon.js";
 
 export default class Modal extends Component {
 	closeButton:Button
+	text:HTMLElement
 	constructor() {
 		super("div",  document.getElementsByTagName("body")[0]);
+		this.text = document.createElement("p")
+		this.element.appendChild(this.text);
 		this.addStyles({
 			display: "none",
 			position: "absolute",
 			height: "500px",
-			width: "500px",
+			width: "650px",
 			top: "50%",
 			left: "50%",
 			transform: "translate(-50%, -50%)",
@@ -31,10 +35,14 @@ export default class Modal extends Component {
 			backgroundColor: "red",
 		});
 	}
-	open() {
+	open(hex:ClickableGridHexagon) {
 		this.addStyles({display: "block"});
+		this.text.innerText = `${hex.pos.x},${hex.pos.y}`
+		
+
 	}
 	close() {
 		this.addStyles({display: "none"});
+		this.text.innerText = ""
 	}
 }
