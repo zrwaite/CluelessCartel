@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "dev": "onchange '**/*.ts' -- npm run compile",
-    "compile": "tsc; echo $RANDOM"
+    "compile": "tsc"
   },
   "repository": {
     "type": "git",

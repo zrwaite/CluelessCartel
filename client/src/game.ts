@@ -22,14 +22,41 @@ export default class Game {
 		let settingsButton = new Button(uiElement,  ()=>{alert("hi")});
 		settingsButton.addStyles({
 			height: "40px", 
-			width: "40px", 
-			right: "0px",
-			top: "0px",
+			width: "50px", 
+			right: "5px",
+			top: "5px",
 			border: "3px solid black",
 			borderRadius: "6px",
 			position: "absolute",
 			backgroundColor: "grey",
 		});
+		settingsButton.initializeIcon("settings.svg")
+
+		let homeButton = new Button(uiElement,  ()=>{alert("ahhhhh fuck oh fuck oh shit")});
+		homeButton.addStyles({
+			height: "40px", 
+			width: "50px", 
+			left: "5px",
+			top: "5px",
+			border: "3px solid black",
+			borderRadius: "6px",
+			position: "absolute",
+			backgroundColor: "grey",
+		});
+		homeButton.initializeIcon("home.svg")
+
+		let storageButton = new Button(uiElement,  ()=>{alert("haha:)")});
+		storageButton.addStyles({
+			height: "40px", 
+			width: "50px", 
+			right: "5px",
+			bottom: "5px",
+			border: "3px solid black",
+			borderRadius: "6px",
+			position: "absolute",
+			backgroundColor: "grey",
+		});
+		storageButton.initializeIcon("storage.svg")
 
 		// setTimeout(() => modal.open(), 2000);
 	}

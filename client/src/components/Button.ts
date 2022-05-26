@@ -1,7 +1,7 @@
 import Component from "./Component.js";
 import Icon from "./Icon.js";
 export default class Button extends Component {
-	icon: Icon;
+	icon: Icon | null = null;
     constructor (parentElement: HTMLElement, onClick:Function) {
 		super("button", parentElement);
 		this.addStyles({
@@ -11,7 +11,9 @@ export default class Button extends Component {
 			transition: "all .2s ease",
 		})
 		this.onClick = (e:MouseEvent) => onClick(e)
-		this.icon = new Icon(this.element, ()=>{});
+	}
+	initializeIcon ( assetFilename:string){
+		this.icon = new Icon(this.element, assetFilename)
 	}
     onHover(e: MouseEvent, mouseIn:boolean){
 		if (mouseIn){

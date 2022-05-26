@@ -8,6 +8,7 @@ export default class Modal extends Component {
 	text:HTMLElement
 	constructor() {
 		super("div",  document.getElementsByTagName("body")[0]);
+		
 		this.text = document.createElement("p")
 		this.element.appendChild(this.text);
 		this.addStyles({
@@ -26,7 +27,7 @@ export default class Modal extends Component {
 		this.closeButton = new Button(this.element, this.close.bind(this))
 		this.closeButton.addStyles({
 			height: "30px", 
-			width: "30px", 
+			width: "38px", 
 			right: "-4px",
 			top: "-4px",
 			border: "3px solid black",
@@ -34,6 +35,7 @@ export default class Modal extends Component {
 			position: "absolute",
 			backgroundColor: "red",
 		});
+		this.closeButton.initializeIcon("close.svg")
 	}
 	open(hex:ClickableGridHexagon) {
 		this.addStyles({display: "block"});
