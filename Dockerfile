@@ -14,5 +14,5 @@ RUN go mod download
 RUN go build -o ./docker-gs-ping
 
 WORKDIR /app
-EXPOSE 8080
+EXPOSE 8004
 CMD [ "server/docker-gs-ping" ]

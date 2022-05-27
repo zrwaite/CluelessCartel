@@ -14,8 +14,8 @@ func main() {
 	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/user", user.UserHandler)
 	http.Handle("/", fileServer)
-	fmt.Printf("Starting server at port 6969 with hello\n")
-	if err := http.ListenAndServe(":6969", nil); err != nil {
+	fmt.Printf("Starting server at port 8004 with hello\n")
+	if err := http.ListenAndServe(":8004", nil); err != nil {
 		log.Fatal(err)
 	}
 }
