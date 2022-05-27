@@ -71,6 +71,19 @@ export default class Game {
 		});
 		editButton.initializeIcon("edit.svg")
 
+		let buildButton = new Button(uiElement,  ()=>{alert("is that erin over there")});
+		buildButton.addStyles({
+			height: "40px", 
+			width: "50px", 
+			left: "5px",
+			bottom: "50px",
+			border: "3px solid black",
+			borderRadius: "6px",
+			position: "absolute",
+			backgroundColor: "grey",
+		});
+		buildButton.initializeIcon("build.svg")
+
 		// setTimeout(() => modal.open(), 2000);
 	}
 	update() {
