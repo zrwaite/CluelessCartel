@@ -7,33 +7,45 @@ import (
 )
 
 var GetUserQuery = struct {
-	Username  int
-	FirstName int `bson:"first_name"`
-	LastName  int `bson:"last_name"`
-}{1, 1, 1}
+	Username    int
+	Cash        int
+	Resources   int
+	Drugs       int
+	Weapons     int
+	HexagonRows int `bson:"hexagon_rows"`
+}{1, 1, 1, 1, 1, 1}
 
 var GetUserReturn = struct {
-	Username  string
-	FirstName string `bson:"first_name"`
-	LastName  string `bson:"last_name"`
+	Username    string
+	Cash        int
+	Resources   Resources
+	Drugs       Drugs
+	Weapons     Weapons
+	HexagonRows []Hexagon `bson:"hexagon_rows"`
 }{}
 
 type PostUserParams struct {
-	Username  string
-	Password  string
-	FirstName string
-	LastName  string
+	Username string
+	Password string
 }
 
 type PostUser struct {
-	Username  string
-	FirstName string `bson:"first_name"`
-	LastName  string `bson:"last_name"`
-	Hash      string
+	Username    string
+	Hash        string
+	Cash        int
+	Resources   Resources
+	Drugs       Drugs
+	Weapons     Weapons
+	HexagonRows []HexagonRow `bson:"hexagon_rows"`
 }
 
-func (user *PostUser) ParseData(userParams *PostUserParams) {
+func (user *PostUser) InitData(userParams *PostUserParams) {
 	copier.Copy(user, userParams)
+	user.Cash = 5000
+	user.Resources = StartingResources
+	user.Drugs = StartingDrugs
+	user.Weapons = StartingWeapons
+	user.HexagonRows = StartingHexagonRows[:]
 }
 func (user *PostUser) CreateHash(password string) error {
 	var err error

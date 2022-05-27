@@ -20,7 +20,7 @@ func postUser(r *http.Request, res *api.Response) {
 	}
 	if len(res.Errors) == 0 {
 		var user models.PostUser
-		user.ParseData(&userParams)
+		user.InitData(&userParams)
 		err = user.CreateHash(userParams.Password)
 		if err != nil {
 			res.Errors = append(res.Errors, "Failed to hash password - "+err.Error())
