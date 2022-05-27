@@ -1,0 +1,7 @@
+services:
+  server:
+    env_file: "./server/.env"
+    build: "./"
+    image: "zrwaite/cluelesscartel:1.0"
+    ports:
+      - "8080:8080"
