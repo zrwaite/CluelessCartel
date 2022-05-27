@@ -17,7 +17,7 @@ type Hello struct {
 }
 
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	api.AddJSONHeader(w)
 	if r.URL.Path != "/hello" {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
@@ -32,7 +32,7 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func helloGetHandler(w http.ResponseWriter, r *http.Request) {
-	res := api.Response{true, []string{}, "hello", nil}
+	res := new(api.Response).Init()
 	filter := bson.D{{
 		Key: "age",
 		Value: bson.D{{
@@ -56,7 +56,7 @@ func helloGetHandler(w http.ResponseWriter, r *http.Request) {
 }
 func helloPostHandler(w http.ResponseWriter, r *http.Request) {
 	var h Hello
-	res := api.Response{false, []string{}, "", nil}
+	res := new(api.Response).Init()
 	err := json.NewDecoder(r.Body).Decode(&h)
 	if err != nil {
 		// http.Error(w, err.Error(), http.StatusBadRequest)
