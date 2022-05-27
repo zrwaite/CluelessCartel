@@ -1,3 +1,4 @@
+import { getPx } from "../index.js";
 import Vector2 from "../modules/Vector2.js";
 import ClickableGridHexagon from "./ClickableGridHexagon.js";
 import Component from "./Component.js";
@@ -13,11 +14,11 @@ export default class ClickableGridHexagonRow extends Component {
 		this.addStyles({position: "relative"})
 		if (index%2!==0) {
 			this.addStyles({
-				top: `-${29*index}px`,
-				left: `50px`,
+				top: getPx(-29*index),
+				left: getPx(50),
 			})
 		} else if (index!==0) {
-			this.addStyles({top: `-${29*index}px`})
+			this.addStyles({top: getPx(-29*index)})
 		}
 	}
 	addHexagon(xIndex:number, modal: Modal) {

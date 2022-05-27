@@ -1,3 +1,4 @@
+import { getPx } from "../index.js";
 import Component from "./Component.js";
 import Icon from "./Icon.js";
 export default class Button extends Component {
@@ -5,8 +6,8 @@ export default class Button extends Component {
     constructor (parentElement: HTMLElement, onClick:Function) {
 		super("button", parentElement);
 		this.addStyles({
-			height: "10px",
-			width: "10px",
+			height: getPx(10),
+			width: getPx(10),
 			cursor: "pointer",
 			transition: "all .2s ease",
 		})

@@ -1,7 +1,17 @@
 import Game from "./game.js";
 
-const WIDTH=800;
-const HEIGHT=500; 
+const windowSize = { // Accessible through game.width and game.height.
+	x: 800,
+	y: 500,
+    border: 50
+}
+const unit = (((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? (window.innerHeight - windowSize.border * 2) / windowSize.y : (window.innerWidth - windowSize.border * 2) / windowSize.x);
+export const getPx = (num:number):string => ((num*unit).toString() + "px")
+alert(unit)
+
+
+let gameElement = document.getElementById("gameSection");
+if (!gameElement) throw Error("Element #gameSection does not exist");
 
 let hexElement = document.getElementById("hexSection");
 if (!hexElement) throw Error("Element #hexSection does not exist");
@@ -11,13 +21,11 @@ if (!uiElement) throw Error("Element #uiElement does not exist");
 
 let canvasElement = document.getElementById("canvasSection");
 if (!canvasElement) throw Error("Element #canvasSection does not exist");
-canvasElement.style.height = "100%";
-canvasElement.style.width = "100%";
 
-[canvasElement, hexElement, uiElement].forEach(element => {
-	element.style.height = `${HEIGHT}px`;
-	element.style.width = `${WIDTH}px`;
-	element.style.position = "absolute";
+[gameElement, canvasElement, hexElement, uiElement].forEach(element => {
+	element.style.height = getPx(windowSize.y);
+	element.style.width =  getPx(windowSize.x);
+	if (element!==gameElement) element.style.position = "absolute";
 });
 
 let staticCanvas = document.createElement("canvas");

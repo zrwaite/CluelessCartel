@@ -1,3 +1,4 @@
+import { getPx } from "../index.js";
 import Button from "./Button.js";
 import ClickableGridHexagon from "./ClickableGridHexagon.js";
 import Component from "./Component.js";
@@ -14,24 +15,24 @@ export default class Modal extends Component {
 		this.addStyles({
 			display: "none",
 			position: "absolute",
-			height: "500px",
-			width: "650px",
+			height: getPx(500),
+			width: getPx(650),
 			top: "50%",
 			left: "50%",
 			transform: "translate(-50%, -50%)",
-			borderRadius: "15px",
-			border: "3px solid black",
+			borderRadius: getPx(15),
+			border: getPx(3) + " solid black",
 			backgroundColor: "#994C00",
 			zIndex: "10000",
 		})
 		this.closeButton = new Button(this.element, this.close.bind(this))
 		this.closeButton.addStyles({
-			height: "30px", 
-			width: "38px", 
-			right: "-4px",
-			top: "-4px",
-			border: "3px solid black",
-			borderRadius: "6px",
+			height: getPx(30), 
+			width: getPx(38), 
+			right: getPx(-4),
+			top: getPx(-4),
+			border: getPx(3) + " solid black",
+			borderRadius: getPx(6),
 			position: "absolute",
 			backgroundColor: "red",
 		});

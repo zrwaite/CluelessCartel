@@ -2,3 +2,10 @@
 body>img {
 	display:none;
 }
+
+h1{
+	text-align: center;
+}
+#gameSection{
+	margin: auto;
+}

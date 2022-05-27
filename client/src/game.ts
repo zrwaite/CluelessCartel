@@ -1,14 +1,10 @@
 import Button from "./components/Button.js";
 import ClickableGridHexagonRow from "./components/ClickableGridHexagonRow.js";
 import Modal from "./components/Modal.js";
+import {getPx} from "./index.js"
 
 export default class Game {
 	constructor() {
-		let user = {
-			name: "Dave",
-			password: "Hi"
-		} 
-		console.log("user: ", user);
 	}
 	start(hexElement: HTMLElement, uiElement:HTMLElement) {
 		let modal = new Modal();
@@ -21,12 +17,12 @@ export default class Game {
 
 		let settingsButton = new Button(uiElement,  ()=>{alert("hi")});
 		settingsButton.addStyles({
-			height: "40px", 
-			width: "50px", 
-			right: "5px",
-			top: "5px",
-			border: "3px solid black",
-			borderRadius: "6px",
+			height: getPx(40), 
+			width: getPx(50), 
+			right: getPx(5),
+			top: getPx(5),
+			border: getPx(3) + " solid black",
+			borderRadius: getPx(6),
 			position: "absolute",
 			backgroundColor: "grey",
 		});
@@ -34,12 +30,12 @@ export default class Game {
 
 		let homeButton = new Button(uiElement,  ()=>{alert("ahhhhh fuck oh fuck oh shit")});
 		homeButton.addStyles({
-			height: "40px", 
-			width: "50px", 
-			left: "5px",
-			top: "5px",
-			border: "3px solid black",
-			borderRadius: "6px",
+			height: getPx(40), 
+			width: getPx(50), 
+			left: getPx(5),
+			top: getPx(5),
+			border: getPx(3) + " solid black",
+			borderRadius: getPx(6),
 			position: "absolute",
 			backgroundColor: "grey",
 		});
@@ -47,12 +43,12 @@ export default class Game {
 
 		let storageButton = new Button(uiElement,  ()=>{alert("haha:)")});
 		storageButton.addStyles({
-			height: "40px", 
-			width: "50px", 
-			right: "5px",
-			bottom: "5px",
-			border: "3px solid black",
-			borderRadius: "6px",
+			height: getPx(40), 
+			width: getPx(50), 
+			right: getPx(5),
+			bottom: getPx(5),
+			border: getPx(3) + " solid black",
+			borderRadius: getPx(6),
 			position: "absolute",
 			backgroundColor: "grey",
 		});
@@ -60,12 +56,12 @@ export default class Game {
 
 		let editButton = new Button(uiElement,  ()=>{alert("haha:)")});
 		editButton.addStyles({
-			height: "40px", 
-			width: "50px", 
-			left: "5px",
-			bottom: "5px",
-			border: "3px solid black",
-			borderRadius: "6px",
+			height: getPx(40), 
+			width: getPx(50), 
+			left: getPx(5),
+			bottom: getPx(5),
+			border: getPx(3) + " solid black",
+			borderRadius: getPx(6),
 			position: "absolute",
 			backgroundColor: "grey",
 		});
@@ -73,12 +69,12 @@ export default class Game {
 
 		let buildButton = new Button(uiElement,  ()=>{alert("is that erin over there")});
 		buildButton.addStyles({
-			height: "40px", 
-			width: "50px", 
-			left: "5px",
-			bottom: "50px",
-			border: "3px solid black",
-			borderRadius: "6px",
+			height: getPx(40), 
+			width: getPx(50), 
+			left: getPx(5),
+			bottom: getPx(50),
+			border: getPx(3) + " solid black",
+			borderRadius: getPx(6),
 			position: "absolute",
 			backgroundColor: "grey",
 		});

@@ -1,3 +1,4 @@
+import { getPx } from "../index.js";
 import Vector2 from "../modules/Vector2.js";
 import Component from "./Component.js";
 import Modal from "./Modal.js";
@@ -11,10 +12,10 @@ export default class ClickableGridHexagon extends Component {
 		this.modal = modal;
 		this.element.classList.add("clickableHexagon");
 		this.addStyles({
-			height: "100px",
-			width: "100px",
+			height: getPx(100),
+			width: getPx(100),
 			backgroundImage: "url('../../assets/Hexagon.png')",
-			backgroundSize: "100px 100px",
+			backgroundSize: getPx(100) + " " + getPx(100),
 			transition: "all .2s ease",
 			position: "relative",
 			display: "inline-block",
