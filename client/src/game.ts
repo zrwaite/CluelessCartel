@@ -58,6 +58,19 @@ export default class Game {
 		});
 		storageButton.initializeIcon("storage.svg")
 
+		let editButton = new Button(uiElement,  ()=>{alert("haha:)")});
+		editButton.addStyles({
+			height: "40px", 
+			width: "50px", 
+			left: "5px",
+			bottom: "5px",
+			border: "3px solid black",
+			borderRadius: "6px",
+			position: "absolute",
+			backgroundColor: "grey",
+		});
+		editButton.initializeIcon("edit.svg")
+
 		// setTimeout(() => modal.open(), 2000);
 	}
 	update() {
