@@ -9,9 +9,10 @@
 	<title>Zac/Luke Game</title>
 	<style>
 		#gameSection {
-			border: 2px solid black;
+			border: 2px solid green;
 			width: 100%;
 			height: auto;
+			background-color: white;
 		}
 		#hexSection  {
 			overflow:scroll;
@@ -20,13 +21,18 @@
 		#uiSection>* {
 			z-index: 1000
 		}
+		body {
+			background-color: black;
+		}
 	</style>
 </head>
 <body>
-	<section id="gameSection">
-		<section id="uiSection">
-			<section id="canvasSection">
-				<section id="hexSection"></section>
+	<section class="center">
+		<section id="gameSection">
+			<section id="uiSection">
+				<section id="canvasSection">
+					<section id="hexSection"></section>
+				</section>
 			</section>
 		</section>
 	</section>

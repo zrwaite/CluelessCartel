@@ -3,11 +3,10 @@ import Game from "./game.js";
 const windowSize = { // Accessible through game.width and game.height.
 	x: 800,
 	y: 500,
-    border: 50
+    border: 10
 }
 const unit = (((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? (window.innerHeight - windowSize.border * 2) / windowSize.y : (window.innerWidth - windowSize.border * 2) / windowSize.x);
 export const getPx = (num:number):string => ((num*unit).toString() + "px")
-alert(unit)
 
 
 let gameElement = document.getElementById("gameSection");
