@@ -11,15 +11,11 @@ export default class ClickableGridHexagonRow extends Component {
 		super("div", parentElement);
 		this.index = index;
 		this.element.classList.add("clickableHexagonRow");
-		this.addStyles({position: "relative"})
-		if (index%2!==0) {
-			this.addStyles({
-				top: getPx(-29*index),
-				left: getPx(50),
-			})
-		} else if (index!==0) {
-			this.addStyles({top: getPx(-29*index)})
-		}
+		this.addStyles({
+			position: "relative",
+			maxHeight: getPx(76),
+		})
+		if (index%2!==0) this.addStyles({left: getPx(50)})
 	}
 	addHexagon(xIndex:number, modal: Modal) {
 		this.hexagons.push(new ClickableGridHexagon(new Vector2(xIndex,this.index), this.element, modal));
