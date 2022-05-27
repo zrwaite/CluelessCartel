@@ -6,11 +6,16 @@ export default class Button extends Component {
     constructor (parentElement: HTMLElement, onClick:Function) {
 		super("button", parentElement);
 		this.addStyles({
-			height: getPx(10),
-			width: getPx(10),
+			height: getPx(40),
+			width: getPx(50),
+			borderRadius: getPx(6),
+			border: getPx(3) + " solid black",
+			position: "absolute",
+			backgroundColor: "grey",
 			cursor: "pointer",
 			transition: "all .2s ease",
-			padding: "0"
+			padding: "0",
+
 		})
 		this.onClick = (e:MouseEvent) => onClick(e)
 	}
@@ -24,4 +29,5 @@ export default class Button extends Component {
 			this.element.style.transform = "scale(1)"; 
 		}
 	}
+	animate(animateIn:boolean){}
 }
