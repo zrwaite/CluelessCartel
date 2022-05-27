@@ -3,6 +3,7 @@ package user
 import (
 	"clueless-cartel-server/api"
 	"clueless-cartel-server/database"
+	"clueless-cartel-server/database/models"
 	"context"
 
 	"net/http"
@@ -13,8 +14,6 @@ import (
 
 func getUser(r *http.Request, res *api.Response) {
 	username := r.URL.Query().Get("username")
-	var getProjection = bson.D{{"username", 1}}
-
 	if username == "" {
 		res.Errors = append(res.Errors, "Username not defined")
 		return
@@ -27,14 +26,13 @@ func getUser(r *http.Request, res *api.Response) {
 		}},
 	}}
 	usersCollection := database.MongoDatabase.Collection("users")
-	opts := options.FindOne().SetProjection(getProjection)
+	opts := options.FindOne().SetProjection(models.GetUserQuery)
 	cursor := usersCollection.FindOne(context.TODO(), filter, opts)
-	var result bson.M
-	if err := cursor.Decode(&result); err != nil {
+	if err := cursor.Decode(&models.GetUserReturn); err != nil {
 		res.Errors = append(res.Errors, "Failed to get database data - "+err.Error())
 	} else {
 		res.Success = true
 		res.Status = 200
-		res.Response = result
+		res.Response = models.GetUserReturn
 	}
 }

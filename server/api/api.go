@@ -8,7 +8,6 @@ type Response struct {
 	Success  bool
 	Errors   []string
 	Status   int
-	Message  string
 	Response interface{}
 }
 
