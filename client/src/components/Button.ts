@@ -10,6 +10,7 @@ export default class Button extends Component {
 			width: getPx(10),
 			cursor: "pointer",
 			transition: "all .2s ease",
+			padding: "0"
 		})
 		this.onClick = (e:MouseEvent) => onClick(e)
 	}
