@@ -4,6 +4,7 @@ import Modal from "./components/Modal.js";
 import {getPx} from "./index.js"
 
 export default class Game {
+	editMenuOpen = false
 	constructor() {
 	}
 	start(hexElement: HTMLElement, uiElement:HTMLElement) {
@@ -73,9 +74,12 @@ export default class Game {
 		}
 
 		let editButton = new Button(uiElement,  ()=>{
-			deleteButton.animate(true)
-			moveButton.animate(true)
-			buildButton.animate(true)});
+			deleteButton.animate(!this.editMenuOpen)
+			moveButton.animate(!this.editMenuOpen)
+			buildButton.animate(!this.editMenuOpen)
+			this.editMenuOpen = !this.editMenuOpen;
+		})
+			
 		editButton.addStyles({
 			left: getPx(5),
 			bottom: getPx(5),
