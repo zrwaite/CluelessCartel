@@ -16,69 +16,72 @@ export default class Game {
 		}
 
 		let settingsButton = new Button(uiElement,  ()=>{alert("hi")});
-		settingsButton.addStyles({
-			height: getPx(40), 
-			width: getPx(50), 
+		settingsButton.addStyles({ 
 			right: getPx(5),
 			top: getPx(5),
-			border: getPx(3) + " solid black",
-			borderRadius: getPx(6),
-			position: "absolute",
-			backgroundColor: "grey",
 		});
 		settingsButton.initializeIcon("settings.svg")
 
 		let homeButton = new Button(uiElement,  ()=>{alert("ahhhhh fuck oh fuck oh shit")});
 		homeButton.addStyles({
-			height: getPx(40), 
-			width: getPx(50), 
 			left: getPx(5),
 			top: getPx(5),
-			border: getPx(3) + " solid black",
-			borderRadius: getPx(6),
-			position: "absolute",
-			backgroundColor: "grey",
 		});
 		homeButton.initializeIcon("home.svg")
 
 		let storageButton = new Button(uiElement,  ()=>{alert("haha:)")});
 		storageButton.addStyles({
-			height: getPx(40), 
-			width: getPx(50), 
 			right: getPx(5),
 			bottom: getPx(5),
-			border: getPx(3) + " solid black",
-			borderRadius: getPx(6),
-			position: "absolute",
-			backgroundColor: "grey",
 		});
 		storageButton.initializeIcon("storage.svg")
 
-		let editButton = new Button(uiElement,  ()=>{alert("haha:)")});
-		editButton.addStyles({
-			height: getPx(40), 
-			width: getPx(50), 
+		let buildButton = new Button(uiElement,  ()=>{alert("is that erin over there")});
+		buildButton.addStyles({
 			left: getPx(5),
 			bottom: getPx(5),
-			border: getPx(3) + " solid black",
-			borderRadius: getPx(6),
-			position: "absolute",
-			backgroundColor: "grey",
+			transition: "bottom 0.7s"
+		});
+		buildButton.initializeIcon("build.svg")
+		buildButton.animate = (animateIn: boolean) => {
+			if (animateIn) buildButton.addStyles({bottom: getPx(140)})
+			else  buildButton.addStyles({bottom: getPx(5)})
+		}
+
+		let moveButton = new Button(uiElement,  ()=>{alert("is that erin over there")});
+		moveButton.addStyles({
+			left: getPx(5),
+			bottom: getPx(5),
+			transition: "bottom 0.7s"
+		});
+		moveButton.initializeIcon("move.svg")
+		moveButton.animate = (animateIn: boolean) => {
+			if (animateIn) moveButton.addStyles({bottom: getPx(95)})
+			else  moveButton.addStyles({bottom: getPx(5)})
+		}
+
+		let deleteButton = new Button(uiElement,  ()=>{alert("is that erin over there")});
+		deleteButton.addStyles({
+			left: getPx(5),
+			bottom: getPx(5),
+			transition: "bottom 0.7s"
+		});
+		deleteButton.initializeIcon("delete.svg")
+		deleteButton.animate = (animateIn: boolean) => {
+			if (animateIn) deleteButton.addStyles({bottom: getPx(50)})
+			else  deleteButton.addStyles({bottom: getPx(5)})
+		}
+
+		let editButton = new Button(uiElement,  ()=>{
+			deleteButton.animate(true)
+			moveButton.animate(true)
+			buildButton.animate(true)});
+		editButton.addStyles({
+			left: getPx(5),
+			bottom: getPx(5),
 		});
 		editButton.initializeIcon("edit.svg")
 
-		let buildButton = new Button(uiElement,  ()=>{alert("is that erin over there")});
-		buildButton.addStyles({
-			height: getPx(40), 
-			width: getPx(50), 
-			left: getPx(5),
-			bottom: getPx(50),
-			border: getPx(3) + " solid black",
-			borderRadius: getPx(6),
-			position: "absolute",
-			backgroundColor: "grey",
-		});
-		buildButton.initializeIcon("build.svg")
 
 		// setTimeout(() => modal.open(), 2000);
 	}
