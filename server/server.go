@@ -3,6 +3,7 @@ package main
 import (
 	"clueless-cartel-server/api/user"
 	"clueless-cartel-server/database"
+	"clueless-cartel-server/settings"
 
 	"fmt"
 	"log"
@@ -11,6 +12,7 @@ import (
 
 func main() {
 	database.ConnectToMongoDB()
+	settings.MatchDev()
 	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/user", user.UserHandler)
 	http.Handle("/", fileServer)

@@ -29,7 +29,12 @@ func getUser(r *http.Request, res *api.Response) {
 	opts := options.FindOne().SetProjection(models.GetUserQuery)
 	cursor := usersCollection.FindOne(context.TODO(), filter, opts)
 	if err := cursor.Decode(&models.GetUserReturn); err != nil {
-		res.Errors = append(res.Errors, "Failed to get database data - "+err.Error())
+		if err.Error() == "mongo: no documents in result" {
+			res.Errors = append(res.Errors, "User not found")
+			res.Status = 404
+		} else {
+			res.Errors = append(res.Errors, "Failed to get database data - "+err.Error())
+		}
 	} else {
 		res.Success = true
 		res.Status = 200
