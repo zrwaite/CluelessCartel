@@ -4,6 +4,7 @@ import (
 	"clueless-cartel-server/auth"
 
 	"github.com/jinzhu/copier"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 var GetUserQuery = struct {
@@ -25,18 +26,37 @@ var GetUserReturn = struct {
 }{}
 
 type PostUserParams struct {
+	Dev      string
 	Username string
 	Password string
 }
 
 type PostUser struct {
-	Username    string
+	Username    string `bson:"username"`
 	Hash        string
 	Cash        int
 	Resources   Resources
 	Drugs       Drugs
 	Weapons     Weapons
 	HexagonRows []HexagonRow `bson:"hexagon_rows"`
+}
+
+var userSchema = bson.M{
+	"bsonType": "object",
+	"required": []string{"username", "hash", "cash", "resources", "drugs", "weapons", "hexagon_rows"},
+	"properties": bson.M{
+		"username":  bson.M{"bsonType": "string"},
+		"hash":      bson.M{"bsonType": "string"},
+		"cash":      bson.M{"bsonType": "int"},
+		"resources": resourcesSchema,
+		"drugs":     drugsSchema,
+		"weapons":   weaponsStruct,
+		"hexagon_rows": bson.M{
+			"bsonType":    "array",
+			"uniqueItems": false,
+			"items":       hexagonRowsSchema,
+		},
+	},
 }
 
 func (user *PostUser) InitData(userParams *PostUserParams) {

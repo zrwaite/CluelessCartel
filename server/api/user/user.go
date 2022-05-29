@@ -14,15 +14,15 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	res := new(api.Response).Init()
-	if auth.DevCheck(r, res) {
-		if r.Method == "GET" {
+	if r.Method == "GET" {
+		if auth.DevCheck(auth.GetDevParam(r), res) {
 			getUser(r, res)
-		} else if r.Method == "POST" {
-			postUser(r, res)
-		} else {
-			res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
-			res.Status = 404
 		}
+	} else if r.Method == "POST" {
+		postUser(r, res)
+	} else {
+		res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
+		res.Status = 404
 	}
 	w.WriteHeader(res.Status)
 	json.NewEncoder(w).Encode(res)

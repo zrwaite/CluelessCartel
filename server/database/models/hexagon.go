@@ -1,5 +1,7 @@
 package models
 
+import "go.mongodb.org/mongo-driver/bson"
+
 var LandMaterial = struct {
 	Dirt     int
 	Grass    int
@@ -8,19 +10,43 @@ var LandMaterial = struct {
 }{0, 1, 2, 3}
 
 type Hexagon struct {
-	LandMaterial int
+	LandMaterial int `bson:"land_material"`
 	Structure    Structure
 	Index        int
 }
 
+var hexagonsSchema = bson.M{
+	"bsonType": "object",
+	"required": []string{"land_material", "structure", "index"},
+	"properties": bson.M{
+		"land_material": bson.M{"bsonType": "int"},
+		"structure":     structureSchema,
+		"index":         bson.M{"bsonType": "int"},
+	},
+}
+
 type HexagonRow struct {
-	index    int
+	Index    int
 	Hexagons []Hexagon
+}
+
+var hexagonRowsSchema = bson.M{
+	"bsonType": "object",
+	"required": []string{"index", "hexagons"},
+	"properties": bson.M{
+		"index": bson.M{"bsonType": "int"},
+		"hexagons": bson.M{
+			"bsonType":    "array",
+			"uniqueItems": false,
+			"items":       hexagonsSchema,
+		},
+		"resource_capacity": resourcesSchema,
+	},
 }
 
 var StartingHexagonRows = [3]HexagonRow{
 	{
-		index: -1,
+		Index: -1,
 		Hexagons: []Hexagon{
 			{
 				LandMaterial: LandMaterial.Dirt,
@@ -35,7 +61,7 @@ var StartingHexagonRows = [3]HexagonRow{
 		},
 	},
 	{
-		index: 0,
+		Index: 0,
 		Hexagons: []Hexagon{
 			{
 				LandMaterial: LandMaterial.Dirt,
@@ -55,7 +81,7 @@ var StartingHexagonRows = [3]HexagonRow{
 		},
 	},
 	{
-		index: 1,
+		Index: 1,
 		Hexagons: []Hexagon{
 			{
 				LandMaterial: LandMaterial.Dirt,

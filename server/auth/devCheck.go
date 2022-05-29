@@ -3,33 +3,23 @@ package auth
 import (
 	"clueless-cartel-server/api"
 	"clueless-cartel-server/settings"
-	"encoding/json"
 	"net/http"
 )
 
-func DevCheck(r *http.Request, res *api.Response) bool {
-	var devQuery = struct {
-		Dev string
-	}{}
-	if r.URL.Path == "GET" {
-		devQuery.Dev = r.URL.Query().Get("dev")
-		if devQuery.Dev == "" {
-			res.Errors = append(res.Errors, "dev query param not defined")
-			return false
-		}
-	} else {
-		err := json.NewDecoder(r.Body).Decode(&devQuery)
-		if err != nil || devQuery.Dev == "" {
-			res.Errors = append(res.Errors, "dev param not defined")
-			return false
-		}
+func DevCheck(frontendDev string, res *api.Response) bool {
+	if frontendDev == "" {
+		res.Errors = append(res.Errors, "dev parameter not defined")
 	}
-	if devQuery.Dev != "true" && settings.DEV {
+	if frontendDev != "true" && settings.DEV {
 		res.Errors = append(res.Errors, "Frontend is in dev mode but backend is in production mode")
 		return false
-	} else if devQuery.Dev != "false" && !settings.DEV {
+	} else if frontendDev != "false" && !settings.DEV {
 		res.Errors = append(res.Errors, "Frontend is in production mode but backend is in dev mode")
 		return false
 	}
 	return true
+}
+
+func GetDevParam(r *http.Request) string {
+	return r.URL.Query().Get("username")
 }

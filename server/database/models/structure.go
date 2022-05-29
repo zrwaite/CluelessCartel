@@ -1,11 +1,29 @@
 package models
 
+import "go.mongodb.org/mongo-driver/bson"
+
 type Structure struct {
 	Moveable         bool
 	Name             string
 	Image            string
 	Materials        []int
-	ResourceCapacity Resources
+	ResourceCapacity Resources `bson:"resource_capacity"`
+}
+
+var structureSchema = bson.M{
+	"bsonType": "object",
+	"required": []string{"moveable", "name", "image", "materials", "resource_capacity"},
+	"properties": bson.M{
+		"moveable": bson.M{"bsonType": "bool"},
+		"name":     bson.M{"bsonType": "string"},
+		"index":    bson.M{"bsonType": "string"},
+		"materials": bson.M{
+			"bsonType":    "array",
+			"uniqueItems": true,
+			"items":       bson.M{"bsonType": "int"},
+		},
+		"resource_capacity": resourcesSchema,
+	},
 }
 
 var EmptyStructure = Structure{
