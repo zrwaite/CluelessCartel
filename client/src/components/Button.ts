@@ -1,8 +1,11 @@
 import { getPx } from "../index.js";
 import Component from "./Component.js";
 import Icon from "./Icon.js";
+import Modal from "./Modal.js";
+
 export default class Button extends Component {
 	icon: Icon | null = null;
+
     constructor (parentElement: HTMLElement, onClick:Function) {
 		super("button", parentElement);
 		this.addStyles({

@@ -1,4 +1,5 @@
 import Button from "./components/Button.js";
+import ClickableGridHexagon from "./components/ClickableGridHexagon.js";
 import ClickableGridHexagonRow from "./components/ClickableGridHexagonRow.js";
 import Modal from "./components/Modal.js";
 import {getPx} from "./index.js"
@@ -8,15 +9,19 @@ export default class Game {
 	constructor() {
 	}
 	start(hexElement: HTMLElement, uiElement:HTMLElement) {
-		let modal = new Modal();
+		let hexModal = new Modal(uiElement);
+		let settingsModal = new Modal(uiElement);
 		for (let i1=0; i1<10; i1++) {
 			let newrow = new ClickableGridHexagonRow(i1, hexElement);
 			for (let i2=0; i2<10; i2++) {
-				newrow.addHexagon(i2, modal);
+				newrow.addHexagon(i2, hexModal);
 			}
 		}
 
-		let settingsButton = new Button(uiElement,  ()=>{alert("hi")});
+		
+		//let settingsButton = new Button(uiElement, ()=>{settingsModal.open().bind(settingsModal)});
+		let settingsButton = new Button(uiElement, ()=>{alert("what??")});
+
 		settingsButton.addStyles({ 
 			right: getPx(5),
 			top: getPx(5),
