@@ -3,10 +3,21 @@ package auth
 import (
 	"clueless-cartel-server/api"
 	"clueless-cartel-server/settings"
+	"fmt"
 	"net/http"
 )
 
+type DevStruct struct {
+	Dev string
+}
+
+type FunctionDevStruct struct {
+	Function string
+	DevStruct
+}
+
 func DevCheck(frontendDev string, res *api.Response) bool {
+	fmt.Println(frontendDev)
 	if frontendDev == "" {
 		res.Errors = append(res.Errors, "dev parameter not defined")
 	}
@@ -21,5 +32,5 @@ func DevCheck(frontendDev string, res *api.Response) bool {
 }
 
 func GetDevParam(r *http.Request) string {
-	return r.URL.Query().Get("username")
+	return r.URL.Query().Get("dev")
 }

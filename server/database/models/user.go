@@ -8,53 +8,40 @@ import (
 )
 
 var GetUserQuery = struct {
-	Username    int
-	Cash        int
-	Resources   int
-	Drugs       int
-	Weapons     int
-	HexagonRows int `bson:"hexagon_rows"`
-}{1, 1, 1, 1, 1, 1}
+	Username int
+	Cash     int
+	Bases    int
+}{1, 1, 1}
 
 var GetUserReturn = struct {
-	Username    string
-	Cash        int
-	Resources   Resources
-	Drugs       Drugs
-	Weapons     Weapons
-	HexagonRows []Hexagon `bson:"hexagon_rows"`
+	Username string
+	Cash     int
+	Bases    []Base
 }{}
 
 type PostUserParams struct {
-	Dev      string
 	Username string
 	Password string
 }
 
 type PostUser struct {
-	Username    string `bson:"username"`
-	Hash        string
-	Cash        int
-	Resources   Resources
-	Drugs       Drugs
-	Weapons     Weapons
-	HexagonRows []HexagonRow `bson:"hexagon_rows"`
+	Username string `bson:"username"`
+	Hash     string
+	Cash     int
+	Bases    []Base
 }
 
 var userSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"username", "hash", "cash", "resources", "drugs", "weapons", "hexagon_rows"},
+	"required": []string{"username", "hash", "cash", "bases"},
 	"properties": bson.M{
-		"username":  bson.M{"bsonType": "string"},
-		"hash":      bson.M{"bsonType": "string"},
-		"cash":      bson.M{"bsonType": "int"},
-		"resources": resourcesSchema,
-		"drugs":     drugsSchema,
-		"weapons":   weaponsStruct,
-		"hexagon_rows": bson.M{
+		"username": bson.M{"bsonType": "string"},
+		"hash":     bson.M{"bsonType": "string"},
+		"cash":     bson.M{"bsonType": "int"},
+		"bases": bson.M{
 			"bsonType":    "array",
 			"uniqueItems": false,
-			"items":       hexagonRowsSchema,
+			"items":       baseSchema,
 		},
 	},
 }
@@ -62,10 +49,7 @@ var userSchema = bson.M{
 func (user *PostUser) InitData(userParams *PostUserParams) {
 	copier.Copy(user, userParams)
 	user.Cash = 5000
-	user.Resources = StartingResources
-	user.Drugs = StartingDrugs
-	user.Weapons = StartingWeapons
-	user.HexagonRows = StartingHexagonRows[:]
+	user.Bases = []Base{}
 }
 func (user *PostUser) CreateHash(password string) error {
 	var err error

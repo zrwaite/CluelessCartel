@@ -1,4 +1,4 @@
-package user
+package base
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 )
 
-func postUser(body []byte, res *api.Response) {
+func newBase(body []byte, res *api.Response) {
 	var userParams models.PostUserParams
 	userReader := bytes.NewReader(body)
 	err := json.NewDecoder(userReader).Decode(&userParams)

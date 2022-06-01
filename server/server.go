@@ -1,6 +1,7 @@
 package main
 
 import (
+	"clueless-cartel-server/api/test"
 	"clueless-cartel-server/api/user"
 	"clueless-cartel-server/database"
 	"clueless-cartel-server/settings"
@@ -16,6 +17,7 @@ func main() {
 	settings.MatchDev()
 	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/user", user.UserHandler)
+	http.HandleFunc("/api/test", test.TestHandler)
 	http.Handle("/", fileServer)
 	fmt.Printf("Starting server at port 8004 with hello\n")
 	if err := http.ListenAndServe(":8004", nil); err != nil {

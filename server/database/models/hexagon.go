@@ -71,7 +71,7 @@ var StartingHexagonRows = [3]HexagonRow{
 			{
 				LandMaterial: LandMaterial.Dirt,
 				Index:        0,
-				Structure:    RV,
+				Structure:    EmptyStructure,
 			},
 			{
 				LandMaterial: LandMaterial.Dirt,
