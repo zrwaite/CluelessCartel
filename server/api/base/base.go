@@ -1,4 +1,4 @@
-package user
+package base
 
 import (
 	"bytes"
@@ -9,30 +9,29 @@ import (
 	"net/http"
 )
 
-func UserHandler(w http.ResponseWriter, r *http.Request) {
+func BaseHandler(w http.ResponseWriter, r *http.Request) {
 	api.AddJSONHeader(w)
-	if r.URL.Path != "/api/user" {
+	if r.URL.Path != "/api/base" {
 		http.Error(w, "404 not found.", http.StatusNotFound)
 		return
 	}
 	res := new(api.Response).Init()
-	if r.Method == "GET" {
-		if auth.DevCheck(auth.GetDevParam(r), res) {
-			getUser(r, res)
-		}
-	} else if r.Method == "POST" {
+	if r.Method == "POST" {
 		data, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			res.Errors = append(res.Errors, "Invalid body - "+err.Error())
 		} else {
-			var devStruct auth.DevStruct
+			var functionDevStruct auth.FunctionDevStruct
 			devReader := bytes.NewReader(data)
-			err := json.NewDecoder(devReader).Decode(&devStruct)
+			err := json.NewDecoder(devReader).Decode(&functionDevStruct)
 			if err != nil {
 				res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 			} else {
-				if auth.DevCheck(devStruct.Dev, res) {
-					postUser(data, res)
+				if auth.DevCheck(functionDevStruct.Dev, res) {
+					switch functionDevStruct.Function {
+					case "new":
+						newBase(data, res)
+					}
 				}
 			}
 		}
