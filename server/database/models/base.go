@@ -1,6 +1,10 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson"
+import (
+	"errors"
+
+	"go.mongodb.org/mongo-driver/bson"
+)
 
 var Location = struct {
 	Nevada         string
@@ -17,7 +21,8 @@ type Base struct {
 	HexagonRows []HexagonRow `bson:"hexagon_rows"`
 }
 
-func CreateStartingBase(location string) Base {
+func CreateStartingBase(location string) (Base, error) {
+	var base Base
 	var material string
 	switch location {
 	case "Nevada":
@@ -29,15 +34,16 @@ func CreateStartingBase(location string) Base {
 	case "New York":
 		material = "Pavement"
 	default:
-		material = "Dirt"
+		return base, errors.New("invalid location")
 	}
-	return Base{
+	base = Base{
 		Location:    location,
 		Resources:   StartingResources,
 		Drugs:       StartingDrugs,
 		Weapons:     StartingWeapons,
 		HexagonRows: CreateStartingHexagonRows(material),
 	}
+	return base, nil
 
 }
 

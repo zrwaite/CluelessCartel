@@ -7,17 +7,17 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-var GetUserQuery = struct {
+var GetUserOpts = struct {
 	Username int
 	Cash     int
 	Bases    int
 }{1, 1, 1}
 
-var GetUserReturn = struct {
+type GetUserReturn struct {
 	Username string
 	Cash     int
 	Bases    []Base
-}{}
+}
 
 type PostUserParams struct {
 	Username string
@@ -48,7 +48,7 @@ var userSchema = bson.M{
 
 func (user *PostUser) InitData(userParams *PostUserParams) {
 	copier.Copy(user, userParams)
-	user.Cash = 5000
+	user.Cash = 15000
 	user.Bases = []Base{}
 }
 func (user *PostUser) CreateHash(password string) error {

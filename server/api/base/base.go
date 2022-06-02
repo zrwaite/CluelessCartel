@@ -31,6 +31,8 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 					switch functionDevStruct.Function {
 					case "new":
 						newBase(data, res)
+					default:
+						res.Errors = append(res.Errors, "Invalid function")
 					}
 				}
 			}

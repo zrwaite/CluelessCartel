@@ -2,14 +2,10 @@ package user
 
 import (
 	"clueless-cartel-server/api"
-	"clueless-cartel-server/database"
+	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
-	"context"
 
 	"net/http"
-
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func getUser(r *http.Request, res *api.Response) {
@@ -18,26 +14,12 @@ func getUser(r *http.Request, res *api.Response) {
 		res.Errors = append(res.Errors, "Username not defined")
 		return
 	}
-	filter := bson.D{{
-		Key: "username",
-		Value: bson.D{{
-			Key:   "$eq",
-			Value: username,
-		}},
-	}}
-	usersCollection := database.MongoDatabase.Collection("users")
-	opts := options.FindOne().SetProjection(models.GetUserQuery)
-	cursor := usersCollection.FindOne(context.TODO(), filter, opts)
-	if err := cursor.Decode(&models.GetUserReturn); err != nil {
-		if err.Error() == "mongo: no documents in result" {
-			res.Errors = append(res.Errors, "User not found")
-			res.Status = 404
-		} else {
-			res.Errors = append(res.Errors, "Failed to get database data - "+err.Error())
-		}
-	} else {
+	res.Response, res.Status = dbModules.GetUserData(username, models.GetUserOpts)
+	if res.Status == 404 {
+		res.Errors = append(res.Errors, "User not found")
+	} else if res.Status == 200 {
 		res.Success = true
-		res.Status = 200
-		res.Response = models.GetUserReturn
+	} else {
+		res.Errors = append(res.Errors, "Failed to get user")
 	}
 }
