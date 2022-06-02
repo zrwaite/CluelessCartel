@@ -33,6 +33,7 @@ func postUser(body []byte, res *api.Response) {
 		}
 		res.Success = true
 		res.Status = 201
+		user.Hash = ""
 		res.Response = user
 	} else {
 		res.Response = userParams
