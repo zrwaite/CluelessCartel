@@ -14,3 +14,9 @@
 	* Creamy Cartel(s)
 	* Cursed Cartel(s)
 	* Curious Cartel(s)
+
+* Resources
+	* Gas
+	* Metal
+	* Wood
+	* Water?	
