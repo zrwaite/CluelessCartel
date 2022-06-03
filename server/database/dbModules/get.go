@@ -20,18 +20,35 @@ func CreateUsernameFilter(username string) bson.D {
 	}}
 }
 
-func GetUserData(username string, projection interface{}) (*models.GetUserReturn, int) {
+func getUserData(username string, projection interface{}, userReturn interface{}) int {
 	opts := options.FindOne().SetProjection(projection)
 	cursor := database.MongoDatabase.Collection("users").FindOne(context.TODO(), CreateUsernameFilter(username), opts)
-	userReturn := new(models.GetUserReturn)
 	if err := cursor.Decode(userReturn); err != nil {
 		if err.Error() == "mongo: no documents in result" {
-			return userReturn, 404
+			return 404
 		} else {
 			fmt.Println("Failed to get user " + username + " ; " + err.Error())
-			return userReturn, 400
+			return 400
 		}
 	} else {
-		return userReturn, 200
+		return 200
 	}
+}
+
+func GetUserGameData(username string) (user *models.GetUserReturn, status int) {
+	user = new(models.GetUserReturn)
+	status = getUserData(username, models.GetUserOpts, &user)
+	return
+}
+
+func GetUserIdData(username string) (user *models.GetIdStruct, status int) {
+	user = new(models.GetIdStruct)
+	status = getUserData(username, models.GetIdOpts, &user)
+	return
+}
+
+func GetUserAuthData(username string) (user *models.GetUserAuthReturn, status int) {
+	user = new(models.GetUserAuthReturn)
+	status = getUserData(username, models.GetUserAuthOpts, &user)
+	return
 }

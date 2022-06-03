@@ -19,6 +19,16 @@ type GetUserReturn struct {
 	Bases    []Base
 }
 
+var GetUserAuthOpts = struct {
+	Username int
+	Hash     int
+}{1, 1}
+
+type GetUserAuthReturn struct {
+	Username string
+	Hash     string
+}
+
 type PostUserParams struct {
 	Username string
 	Password string

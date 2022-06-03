@@ -3,8 +3,8 @@ package user
 import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
+	"clueless-cartel-server/auth/tokens"
 	"clueless-cartel-server/database"
-	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"context"
 	"encoding/json"
@@ -18,7 +18,7 @@ func postUser(body []byte, res *apiModels.Response) {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
 		models.ValidateData(userParams, res)
-		if usernameUsed(userParams.Username) {
+		if UsernameUsed(userParams.Username) {
 			res.Errors = append(res.Errors, "Username in use")
 		}
 	}
@@ -35,22 +35,21 @@ func postUser(body []byte, res *apiModels.Response) {
 			res.Errors = append(res.Errors, "Failed to add user to database - "+err.Error())
 			return
 		}
+		token, success := tokens.EncodeToken(user.Username)
+
+		if !success {
+			res.Errors = append(res.Errors, "Failed to create token")
+			return
+		}
 		res.Success = true
 		res.Status = 201
 		user.Hash = ""
-		res.Response = user
+		res.Response = struct {
+			User  models.PostUser
+			Token string
+		}{user, token}
 	} else {
 		userParams.Password = ""
 		res.Response = userParams
 	}
-}
-
-func usernameUsed(username string) bool {
-	_, status := dbModules.GetUserData(username, models.GetIdOpts)
-	if status == 404 {
-		return false
-	} else if status == 200 {
-		return true
-	}
-	return false
 }

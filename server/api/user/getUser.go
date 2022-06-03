@@ -3,7 +3,6 @@ package user
 import (
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/database/dbModules"
-	"clueless-cartel-server/database/models"
 
 	"net/http"
 )
@@ -14,7 +13,7 @@ func getUser(r *http.Request, res *apiModels.Response) {
 		res.Errors = append(res.Errors, "Username not defined")
 		return
 	}
-	res.Response, res.Status = dbModules.GetUserData(username, models.GetUserOpts)
+	res.Response, res.Status = dbModules.GetUserGameData(username)
 	if res.Status == 404 {
 		res.Errors = append(res.Errors, "User not found")
 	} else if res.Status == 200 {

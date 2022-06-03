@@ -32,7 +32,7 @@ func newBase(body []byte, res *apiModels.Response) {
 		}
 		//Set new base location
 		base.Location = newBaseParams.Location
-		user, res.Status = dbModules.GetUserData(newBaseParams.Username, models.GetUserOpts)
+		user, res.Status = dbModules.GetUserGameData(newBaseParams.Username)
 		if res.Status == 404 {
 			res.Errors = append(res.Errors, "User not found")
 			return
