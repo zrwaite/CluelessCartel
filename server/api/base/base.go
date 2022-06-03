@@ -2,45 +2,27 @@ package base
 
 import (
 	"bytes"
-	"clueless-cartel-server/api"
-	"clueless-cartel-server/auth"
+	"clueless-cartel-server/api/apiModels"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 )
 
-func BaseHandler(w http.ResponseWriter, r *http.Request) {
-	api.AddJSONHeader(w)
-	if r.URL.Path != "/api/base" {
-		http.Error(w, "404 not found.", http.StatusNotFound)
+func BaseHandler(r *http.Request, data []byte, res *apiModels.Response) {
+	if r.Method != "POST" {
+		res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
 		return
 	}
-	res := new(api.Response).Init()
-	if r.Method == "POST" {
-		data, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			res.Errors = append(res.Errors, "Invalid body - "+err.Error())
-		} else {
-			var functionDevStruct auth.FunctionDevStruct
-			devReader := bytes.NewReader(data)
-			err := json.NewDecoder(devReader).Decode(&functionDevStruct)
-			if err != nil {
-				res.Errors = append(res.Errors, "Invalid json - "+err.Error())
-			} else {
-				if auth.DevCheck(functionDevStruct.Dev, res) {
-					switch functionDevStruct.Function {
-					case "new":
-						newBase(data, res)
-					default:
-						res.Errors = append(res.Errors, "Invalid function")
-					}
-				}
-			}
-		}
+	var functionStruct apiModels.FunctionStruct
+	devReader := bytes.NewReader(data)
+	err := json.NewDecoder(devReader).Decode(&functionStruct)
+	if err != nil {
+		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
-		res.Status = 404
+		switch functionStruct.Function {
+		case "new":
+			newBase(data, res)
+		default:
+			res.Errors = append(res.Errors, "Invalid function")
+		}
 	}
-	w.WriteHeader(res.Status)
-	json.NewEncoder(w).Encode(res)
 }

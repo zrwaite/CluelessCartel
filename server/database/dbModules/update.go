@@ -9,14 +9,12 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-func UpdateUser(user *models.GetUserReturn) (*models.GetUserReturn, bool) {
-	var newUser *models.GetUserReturn
+func UpdateUser(user *models.GetUserReturn) bool {
 	update := bson.D{{"$set", user}}
-	updateResult, err := database.MongoDatabase.Collection("users").UpdateOne(context.TODO(), CreateUsernameFilter(user.Username), update)
+	_, err := database.MongoDatabase.Collection("users").UpdateOne(context.TODO(), CreateUsernameFilter(user.Username), update)
 	if err != nil {
 		fmt.Println(err.Error())
-		return newUser, false
+		return false
 	}
-	fmt.Println(updateResult)
-	return newUser, true
+	return true
 }

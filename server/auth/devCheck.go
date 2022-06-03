@@ -1,9 +1,8 @@
 package auth
 
 import (
-	"clueless-cartel-server/api"
+	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/settings"
-	"fmt"
 	"net/http"
 )
 
@@ -11,13 +10,7 @@ type DevStruct struct {
 	Dev string
 }
 
-type FunctionDevStruct struct {
-	Function string
-	DevStruct
-}
-
-func DevCheck(frontendDev string, res *api.Response) bool {
-	fmt.Println(frontendDev)
+func DevCheck(frontendDev string, res *apiModels.Response) bool {
 	if frontendDev == "" {
 		res.Errors = append(res.Errors, "dev parameter not defined")
 	}

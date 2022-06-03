@@ -1,14 +1,14 @@
 package user
 
 import (
-	"clueless-cartel-server/api"
+	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 
 	"net/http"
 )
 
-func getUser(r *http.Request, res *api.Response) {
+func getUser(r *http.Request, res *apiModels.Response) {
 	username := r.URL.Query().Get("username")
 	if username == "" {
 		res.Errors = append(res.Errors, "Username not defined")

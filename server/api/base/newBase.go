@@ -2,7 +2,7 @@ package base
 
 import (
 	"bytes"
-	"clueless-cartel-server/api"
+	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"encoding/json"
@@ -14,7 +14,7 @@ type PostBaseParams struct {
 	Location string
 }
 
-func newBase(body []byte, res *api.Response) {
+func newBase(body []byte, res *apiModels.Response) {
 	var newBaseParams PostBaseParams
 	baseReader := bytes.NewReader(body)
 	err := json.NewDecoder(baseReader).Decode(&newBaseParams)
@@ -49,14 +49,14 @@ func newBase(body []byte, res *api.Response) {
 		// Update user cash, and add base
 		user.Cash -= baseCost
 		user.Bases = append(user.Bases, base)
-		newUser, success := dbModules.UpdateUser(user)
+		success := dbModules.UpdateUser(user)
 		if !success {
 			res.Errors = append(res.Errors, "Failed to update user - "+err.Error())
 			return
 		}
 		res.Success = true
 		res.Status = 200
-		res.Response = newUser
+		res.Response = user
 	} else {
 		res.Response = newBaseParams
 	}

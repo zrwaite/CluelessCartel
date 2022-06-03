@@ -2,7 +2,7 @@ package user
 
 import (
 	"bytes"
-	"clueless-cartel-server/api"
+	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/database"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 )
 
-func postUser(body []byte, res *api.Response) {
+func postUser(body []byte, res *apiModels.Response) {
 	var userParams models.PostUserParams
 	userReader := bytes.NewReader(body)
 	err := json.NewDecoder(userReader).Decode(&userParams)

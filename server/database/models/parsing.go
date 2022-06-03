@@ -1,11 +1,11 @@
 package models
 
 import (
-	"clueless-cartel-server/api"
+	"clueless-cartel-server/api/apiModels"
 	"reflect"
 )
 
-func ValidateData(params interface{}, res *api.Response) {
+func ValidateData(params interface{}, res *apiModels.Response) {
 	values := reflect.ValueOf(params)
 	for i := 0; i < values.NumField(); i++ {
 		if values.Field(i).Interface() == "" {
