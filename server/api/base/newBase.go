@@ -30,7 +30,6 @@ func newBase(body []byte, res *apiModels.Response) {
 			res.Errors = append(res.Errors, err.Error())
 			return
 		}
-		//Set new base location
 		base.Location = newBaseParams.Location
 		user, res.Status = dbModules.GetUserGameData(newBaseParams.Username)
 		if res.Status == 404 {
@@ -39,7 +38,17 @@ func newBase(body []byte, res *apiModels.Response) {
 		} else if res.Status == 400 {
 			res.Errors = append(res.Errors, "Failed to get user")
 			return
+		} else {
+			res.Status = 400
 		}
+		for _, userBase := range user.Bases {
+			// Check all bases for if location is in use
+			if userBase.Location == base.Location {
+				res.Errors = append(res.Errors, "Location already used!")
+				return
+			}
+		}
+		//Set new base location
 		//Find the cost for the new base
 		baseCost := int(10000 * math.Pow(10, float64(len(user.Bases))))
 		if user.Cash < baseCost {

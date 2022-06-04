@@ -13,6 +13,7 @@ type Hexagon struct {
 	LandMaterial string `bson:"land_material"`
 	Structure    Structure
 	Index        int
+	Owned        bool
 }
 
 var hexagonsSchema = bson.M{
@@ -45,56 +46,34 @@ var hexagonRowsSchema = bson.M{
 }
 
 func CreateStartingHexagonRows(landMaterial string) []HexagonRow {
-	return []HexagonRow{
-		{
-			Index: -1,
-			Hexagons: []Hexagon{
-				{
-					LandMaterial: landMaterial,
-					Index:        -1,
-					Structure:    EmptyStructure,
-				},
-				{
-					LandMaterial: landMaterial,
-					Index:        0,
-					Structure:    EmptyStructure,
-				},
-			},
-		},
-		{
-			Index: 0,
-			Hexagons: []Hexagon{
-				{
-					LandMaterial: landMaterial,
-					Index:        -1,
-					Structure:    EmptyStructure,
-				},
-				{
-					LandMaterial: landMaterial,
-					Index:        0,
-					Structure:    EmptyStructure,
-				},
-				{
-					LandMaterial: landMaterial,
-					Index:        1,
-					Structure:    EmptyStructure,
-				},
-			},
-		},
-		{
-			Index: 1,
-			Hexagons: []Hexagon{
-				{
-					LandMaterial: landMaterial,
-					Index:        -1,
-					Structure:    EmptyStructure,
-				},
-				{
-					LandMaterial: landMaterial,
-					Index:        0,
-					Structure:    EmptyStructure,
-				},
-			},
-		},
+	var hexagonRows = []HexagonRow{}
+	for i := -2; i <= 2; i++ {
+		var hexagonRow = HexagonRow{Index: i}
+		var startIndex int
+		var endIndex int
+		if i == 2 || i == -2 {
+			startIndex = -1
+			endIndex = 1
+		} else if i == 1 || i == -1 {
+			startIndex = -2
+			endIndex = 1
+		} else {
+			startIndex = -2
+			endIndex = 2
+		}
+		for i2 := startIndex; i2 <= endIndex; i2++ {
+			owned := true
+			if i == -2 || i == 2 || i2 == startIndex || i2 == endIndex {
+				owned = false
+			}
+			hexagonRow.Hexagons = append(hexagonRow.Hexagons, Hexagon{
+				LandMaterial: landMaterial,
+				Index:        i2,
+				Structure:    EmptyStructure,
+				Owned:        owned,
+			})
+		}
+		hexagonRows = append(hexagonRows, hexagonRow)
 	}
+	return hexagonRows
 }

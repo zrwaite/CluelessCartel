@@ -2,6 +2,27 @@ package models
 
 import "go.mongodb.org/mongo-driver/bson"
 
+type ResourceCost struct {
+	Resource Resource
+	Cost     int
+}
+
+type Resource struct {
+	Name string
+}
+
+var Metal = Resource{
+	Name: "Metal",
+}
+
+var Plants = Resource{
+	Name: "Plants",
+}
+
+var Chemicals = Resource{
+	Name: "Chemicals",
+}
+
 type Resources struct {
 	Metal     int
 	Plants    int

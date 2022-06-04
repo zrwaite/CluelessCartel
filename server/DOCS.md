@@ -16,3 +16,23 @@
 
 ### Location Type: 
 {"Nevada", "Florida", "Canadian Border", "New York"}
+
+
+Operations:
+
+Instant:
+* Buy Base
+* Buy chemicals
+* Buy hexagon
+
+
+Timed/Instant Claim
+* Make drugs
+* Sell drugs
+* Buy structure for hexagon
+* Upgrade structure for hexagon
+
+Probabilistic:
+* Rob drugs
+* Drive by
+* Blow up enemy structure
