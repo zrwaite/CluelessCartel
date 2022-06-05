@@ -1,32 +1,32 @@
 import { getPx, unit } from '../../index.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from '../Buttons/Button.js'
+import ClickableGridHexagonRow from '../ClickableGridHexagonRow.js'
 import Modal from './Modal.js'
 
 export default class SettingsModal extends Modal {
 	zoom: number = 1
-	constructor(parentElement: HTMLElement, styles: StyleObject = {}) {
+	constructor(parentElement: HTMLElement, hexagonRows: ClickableGridHexagonRow[], styles: StyleObject = {}) {
 		super(parentElement, styles)
 		// const hexElement = document.getElementById('hexSection')
 		// if (!hexElement) throw Error('hexSection not found')
 
 		const zoomIn = () => {
-			const scale = 1.1 / unit
-			const hexRows = document.querySelectorAll('#hexSection>*') as unknown as HTMLElement[]
-			const hexs = document.querySelectorAll('#hexSection>*>*') as unknown as HTMLElement[]
-
-			hexRows.forEach((hr) => {
-				hr.style.height = getPx(hr.offsetHeight * scale)
-				if (hr.style.left != '') hr.style.left = getPx(parseFloat(hr.style.left.split('px')[0]) * scale)
+			this.zoom *= 1.1
+			hexagonRows.forEach((hr) => {
+				hr.addStyles({
+					height: getPx(hr.height * this.zoom),
+					left: getPx(hr.left * this.zoom),
+				})
+				hr.hexagons.forEach((hex) => {
+					let newSize = getPx(hex.size * this.zoom)
+					hex.addStyles({
+						backgroundSize: newSize + ' ' + newSize,
+						height: newSize,
+						width: newSize,
+					})
+				})
 			})
-			hexs.forEach((hr) => {
-				let newHeight = getPx(hr.offsetHeight * scale)
-				hr.style.backgroundSize = newHeight + ' ' + newHeight
-				hr.style.height = newHeight
-				hr.style.width = newHeight
-			})
-			// hexRows.forEach((hr) => (hr.style.height = hr.style.height))
-			// hexs.forEach((hr) => (hr.style.transform = `scale(${this.zoom}`))
 		}
 		const zoomInButton = new Button(this.element, zoomIn.bind(this), {
 			top: getPx(5),
@@ -35,20 +35,21 @@ export default class SettingsModal extends Modal {
 		zoomInButton.initializeIcon('add.svg')
 
 		const zoomOut = () => {
-			const scale = 1 / 1.1 / unit
-			const hexRows = document.querySelectorAll('#hexSection>*') as unknown as HTMLElement[]
-			const hexs = document.querySelectorAll('#hexSection>*>*') as unknown as HTMLElement[]
-			hexRows.forEach((hr) => {
-				hr.style.height = getPx(hr.offsetHeight * scale)
-				if (hr.style.left != '') hr.style.left = getPx(parseFloat(hr.style.left.split('px')[0]) * scale)
+			this.zoom /= 1.1
+			hexagonRows.forEach((hr) => {
+				hr.addStyles({
+					height: getPx(hr.height * this.zoom),
+					left: getPx(hr.left * this.zoom),
+				})
+				hr.hexagons.forEach((hex) => {
+					let newSize = getPx(hex.size * this.zoom)
+					hex.addStyles({
+						backgroundSize: newSize + ' ' + newSize,
+						height: newSize,
+						width: newSize,
+					})
+				})
 			})
-			hexs.forEach((hr) => {
-				let newHeight = getPx(hr.offsetHeight * scale)
-				hr.style.backgroundSize = newHeight + ' ' + newHeight
-				hr.style.height = getPx(hr.offsetHeight * scale)
-				hr.style.width = getPx(hr.offsetHeight * scale)
-			})
-			// hexs.forEach((hr) => (hr.style.transform = `scale(${this.zoom}`))
 		}
 		const zoomOutButton = new Button(this.element, zoomOut.bind(this), {
 			top: getPx(45),

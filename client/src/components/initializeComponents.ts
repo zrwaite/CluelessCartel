@@ -10,13 +10,16 @@ import SettingsModal from './Modals/SettingsModal.js'
 
 export const initializeComponents = (uiElement: HTMLElement, hexElement: HTMLElement) => {
 	let hexModal = new HexModal(uiElement)
-	let settingsModal = new SettingsModal(uiElement)
+	let hexagonRows = []
 	for (let i1 = 0; i1 < 10; i1++) {
 		let newrow = new ClickableGridHexagonRow(i1, hexElement)
 		for (let i2 = 0; i2 < 10; i2++) {
 			newrow.addHexagon(i2, hexModal)
 		}
+		hexagonRows.push(newrow)
 	}
+
+	let settingsModal = new SettingsModal(uiElement, hexagonRows)
 
 	let settingsButton = new OpenModalButton(uiElement, settingsModal, 'settings.svg', {
 		right: getPx(5),

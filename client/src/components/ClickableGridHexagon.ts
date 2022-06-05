@@ -6,16 +6,18 @@ import Modal from './Modals/Modal.js'
 export default class ClickableGridHexagon extends Component {
 	modal: Modal
 	pos: Vector2
-	constructor(pos: Vector2, parentElement: HTMLElement, modal: Modal) {
+	size: number
+	constructor(pos: Vector2, parentElement: HTMLElement, modal: Modal, size: number) {
 		super('div', parentElement)
 		this.pos = pos
 		this.modal = modal
+		this.size = size
 		this.element.classList.add('clickableHexagon')
 		this.addStyles({
-			height: getPx(100),
-			width: getPx(100),
+			height: getPx(size),
+			width: getPx(size),
 			backgroundImage: "url('../../assets/Hexagon.png')",
-			backgroundSize: getPx(100) + ' ' + getPx(100),
+			backgroundSize: getPx(size) + ' ' + getPx(size),
 			transition: 'all .2s ease',
 			position: 'relative',
 			display: 'inline-block',
