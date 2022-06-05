@@ -1,16 +1,12 @@
-import { getPx } from '../index.js'
-import { StyleObject } from '../types/styles.js'
-import Button from './Buttons/Button.js'
-import Component from './Component.js'
+import { getPx } from '../../index.js'
+import { StyleObject } from '../../types/styles.js'
+import Button from '../Buttons/Button.js'
+import Component from '../Component.js'
 
 export default class Modal extends Component {
 	closeButton: Button
-	text: HTMLElement
 	constructor(parentElement: HTMLElement, styles: StyleObject = {}) {
 		super('div', parentElement)
-
-		this.text = document.createElement('p')
-		this.element.appendChild(this.text)
 
 		this.addStyles({
 			display: 'none',
@@ -45,6 +41,5 @@ export default class Modal extends Component {
 	}
 	close() {
 		this.addStyles({ display: 'none' })
-		this.text.innerText = ''
 	}
 }

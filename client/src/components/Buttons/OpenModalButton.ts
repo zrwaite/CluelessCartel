@@ -1,6 +1,6 @@
 import { getPx } from '../../index.js'
 import { StyleObject } from '../../types/styles.js'
-import Modal from '../Modal.js'
+import Modal from '../Modals/Modal.js'
 import Button from './Button.js'
 
 export default class OpenModalButton extends Button {

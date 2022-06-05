@@ -7,7 +7,7 @@ const windowSize = {
 	y: 500,
 	border: 10,
 }
-const unit =
+export const unit =
 	(window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y
 		? (window.innerHeight - windowSize.border * 2) / windowSize.y
 		: (window.innerWidth - windowSize.border * 2) / windowSize.x
@@ -24,7 +24,6 @@ if (!uiElement) throw Error('Element #uiElement does not exist')
 
 let canvasElement = document.getElementById('canvasSection')
 if (!canvasElement) throw Error('Element #canvasSection does not exist')
-
 ;[gameElement, canvasElement, hexElement, uiElement].forEach((element) => {
 	element.style.height = getPx(windowSize.y)
 	element.style.width = getPx(windowSize.x)

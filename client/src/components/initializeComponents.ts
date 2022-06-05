@@ -5,11 +5,12 @@ import AnimatorButton from './Buttons/AnimatorButton.js'
 import Button from './Buttons/Button.js'
 import OpenModalButton from './Buttons/OpenModalButton.js'
 import ClickableGridHexagonRow from './ClickableGridHexagonRow.js'
-import Modal from './Modal.js'
+import HexModal from './Modals/HexModal.js'
+import SettingsModal from './Modals/SettingsModal.js'
 
 export const initializeComponents = (uiElement: HTMLElement, hexElement: HTMLElement) => {
-	let hexModal = new Modal(uiElement)
-	let settingsModal = new Modal(uiElement)
+	let hexModal = new HexModal(uiElement)
+	let settingsModal = new SettingsModal(uiElement)
 	for (let i1 = 0; i1 < 10; i1++) {
 		let newrow = new ClickableGridHexagonRow(i1, hexElement)
 		for (let i2 = 0; i2 < 10; i2++) {

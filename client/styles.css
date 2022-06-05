@@ -1,16 +1,15 @@
-
-body>img {
-	display:none;
+body > img {
+	display: none;
 }
 
-h1{
+h1 {
 	text-align: center;
 }
-#gameSection{
+#gameSection {
 	margin: auto;
 }
 
-.centerPageContainer{
+.centerPageContainer {
 	display: flex;
 	height: 100%;
 	width: 100%;
@@ -19,5 +18,5 @@ h1{
 	justify-content: center;
 }
 button {
-	padding: 0
+	padding: 0;
 }

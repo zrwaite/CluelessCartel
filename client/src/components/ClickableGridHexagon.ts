@@ -1,7 +1,7 @@
 import { getPx } from '../index.js'
 import Vector2 from '../modules/Vector2.js'
 import Component from './Component.js'
-import Modal from './Modal.js'
+import Modal from './Modals/Modal.js'
 
 export default class ClickableGridHexagon extends Component {
 	modal: Modal
