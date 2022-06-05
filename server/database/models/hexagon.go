@@ -12,65 +12,89 @@ var LandMaterial = struct {
 type Hexagon struct {
 	LandMaterial string `bson:"land_material"`
 	Structure    Structure
-	Index        int
+	X            int
 	Owned        bool
+	Buyable      bool
 }
 
 var hexagonsSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"land_material", "structure", "index"},
+	"required": []string{"land_material", "structure", "owned", "buyable"},
 	"properties": bson.M{
 		"land_material": bson.M{"bsonType": "string"},
 		"structure":     structureSchema,
-		"index":         bson.M{"bsonType": "int"},
+		"owned":         bson.M{"bsonType": "bool"},
+		"buyable":       bson.M{"bsonType": "bool"},
 	},
 }
 
 type HexagonRow struct {
-	Index    int
 	Hexagons []Hexagon
+	Y        int
 }
 
 var hexagonRowsSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"index", "hexagons"},
+	"required": []string{"starting_index", "hexagons"},
 	"properties": bson.M{
-		"index": bson.M{"bsonType": "int"},
 		"hexagons": bson.M{
 			"bsonType":    "array",
 			"uniqueItems": false,
 			"items":       hexagonsSchema,
 		},
-		"resource_capacity": resourcesSchema,
 	},
+}
+
+func ValidateHexagonRowsStructure(hexagonRows []HexagonRow) (valid bool) {
+	if len(hexagonRows) < 5 {
+		return false
+	}
+	length := len(hexagonRows[0].Hexagons)
+	if length < 5 {
+		return false
+	}
+	for _, hexagonRow := range hexagonRows {
+		newLength := len(hexagonRow.Hexagons)
+		if length != newLength {
+			return false
+		}
+	}
+	return true
 }
 
 func CreateStartingHexagonRows(landMaterial string) []HexagonRow {
 	var hexagonRows = []HexagonRow{}
-	for i := -2; i <= 2; i++ {
-		var hexagonRow = HexagonRow{Index: i}
-		var startIndex int
-		var endIndex int
-		if i == 2 || i == -2 {
-			startIndex = -1
-			endIndex = 1
-		} else if i == 1 || i == -1 {
-			startIndex = -2
-			endIndex = 1
-		} else {
-			startIndex = -2
-			endIndex = 2
-		}
-		for i2 := startIndex; i2 <= endIndex; i2++ {
-			owned := true
-			if i == -2 || i == 2 || i2 == startIndex || i2 == endIndex {
-				owned = false
+	for i1 := -2; i1 <= 2; i1++ {
+		/* Create hexagon Grid:
+		  ❌ ⬜ ⬜ ⬜ ❌
+		   ⬜ ⬛ ⬛ ⬜ ❌
+		 ⬜ ⬛ ⬛ ⬛ ⬜
+		  ⬜ ⬛ ⬛ ⬜ ❌
+		❌ ⬜ ⬜ ⬜ ❌
+		*/
+		var hexagonRow = HexagonRow{Y: i1}
+		for i2 := -2; i2 <= 2; i2++ {
+			owned := false
+			buyable := true
+			if i1 == -2 || i1 == 2 {
+				if i2 == -2 || i2 == 2 {
+					buyable = false
+				}
+			} else if i1 == -1 || i1 == 1 {
+				if i2 == 2 {
+					buyable = false
+				} else if i2 == -1 || i2 == 0 {
+					owned = true
+				}
+			} else if i2 == -1 || i2 == 0 || i2 == 1 {
+				owned = true
 			}
 			hexagonRow.Hexagons = append(hexagonRow.Hexagons, Hexagon{
 				LandMaterial: landMaterial,
-				Index:        i2,
 				Structure:    EmptyStructure,
 				Owned:        owned,
+				Buyable:      buyable,
+				X:            i2,
 			})
 		}
 		hexagonRows = append(hexagonRows, hexagonRow)

@@ -15,13 +15,14 @@ var Location = struct {
 
 type Base struct {
 	Location    string
+	Index       int
 	Resources   Resources
 	Drugs       Drugs
 	Weapons     Weapons
 	HexagonRows []HexagonRow `bson:"hexagon_rows"`
 }
 
-func CreateStartingBase(location string) (Base, error) {
+func CreateStartingBase(location string, index int) (Base, error) {
 	var base Base
 	var material string
 	switch location {
@@ -38,6 +39,7 @@ func CreateStartingBase(location string) (Base, error) {
 	}
 	base = Base{
 		Location:    location,
+		Index:       index,
 		Resources:   StartingResources,
 		Drugs:       StartingDrugs,
 		Weapons:     StartingWeapons,

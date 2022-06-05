@@ -1,36 +1,33 @@
-package base
+package hexagon
 
 import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
+	"clueless-cartel-server/api/base"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"encoding/json"
 )
 
-type NewBaseParams struct {
-	Username string
-	Location string
+type BuyHexagonParams struct {
+	Username     string
+	BaseLocation string
+	HexagonX     int
+	HexagonY     int
 }
 
-func newBase(body []byte, res *apiModels.Response) {
-	var newBaseParams NewBaseParams
+func buyHexagon(body []byte, res *apiModels.Response) {
+	var buyHexagonParams BuyHexagonParams
 	baseReader := bytes.NewReader(body)
-	err := json.NewDecoder(baseReader).Decode(&newBaseParams)
+	err := json.NewDecoder(baseReader).Decode(&buyHexagonParams)
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(newBaseParams, res)
+		models.ValidateData(buyHexagonParams, res)
 	}
 	if len(res.Errors) == 0 {
 		var user *models.GetUserReturn
-		base, err := models.CreateStartingBase(newBaseParams.Location, len(user.Bases))
-		if err != nil {
-			res.Errors = append(res.Errors, err.Error())
-			return
-		}
-		base.Location = newBaseParams.Location
-		user, res.Status = dbModules.GetUserGameData(newBaseParams.Username)
+		user, res.Status = dbModules.GetUserGameData(buyHexagonParams.Username)
 		if res.Status == 404 {
 			res.Errors = append(res.Errors, "User not found")
 			return
@@ -40,22 +37,28 @@ func newBase(body []byte, res *apiModels.Response) {
 		} else {
 			res.Status = 400
 		}
-		_, baseFound := GetBase(&user.Bases, base.Location)
-		if baseFound {
-			// If location is already in use, a new base can not be created there
-			res.Errors = append(res.Errors, "Location already used!")
+
+		// Make sure base exists at location
+		base, baseExists := base.GetBase(&user.Bases, buyHexagonParams.BaseLocation)
+		if !baseExists {
+			res.Errors = append(res.Errors, "Base doesn't exist at that location")
 			return
 		}
-		//Set new base location
-		//Find the cost for the new base
-		baseCost := GetBaseCost(&user.Bases)
-		if user.Cash < baseCost {
+
+		//Find the cost for the new hexagon
+		hexagonCost := GetHexagonCost(base)
+		if user.Cash < hexagonCost {
 			res.Errors = append(res.Errors, "Not enough cash!")
 			return
 		}
+
 		// Update user cash, and add base
-		user.Cash -= baseCost
-		user.Bases = append(user.Bases, base)
+		user.Cash -= hexagonCost
+
+		// Attempt to buy hexagon, update user on success
+		if !BuyHexagon(&base.HexagonRows, buyHexagonParams.HexagonX, buyHexagonParams.HexagonY, res) {
+			return
+		}
 		if !models.ValidateHexagonRowsStructure(base.HexagonRows) {
 			res.Errors = append(res.Errors, "Failed to create base")
 			return
@@ -69,6 +72,6 @@ func newBase(body []byte, res *apiModels.Response) {
 		res.Status = 200
 		res.Response = user
 	} else {
-		res.Response = newBaseParams
+		res.Response = buyHexagonParams
 	}
 }
