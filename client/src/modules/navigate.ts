@@ -1,3 +1,3 @@
-const forceNavigate = (to:string) => {
-	window.location.href = to;
+export const navigate = (to: string) => {
+	window.location.href = to
 }
