@@ -1,4 +1,5 @@
-import { getPx } from '../index.js'
+import { GameState } from '../game.js'
+import { getPx, windowSize } from '../index.js'
 import { navigate } from '../modules/navigate.js'
 import AnimatedButton from './Buttons/AnimatedButton.js'
 import AnimatorButton from './Buttons/AnimatorButton.js'
@@ -8,7 +9,41 @@ import ClickableGridHexagonRow from './ClickableGridHexagonRow.js'
 import HexModal from './Modals/HexModal.js'
 import SettingsModal from './Modals/SettingsModal.js'
 
-export const initializeComponents = (uiElement: HTMLElement, hexElement: HTMLElement) => {
+const initializeSections = (gameElement: HTMLElement):{uiElement:HTMLElement, canvasElement:HTMLElement, hexElement: HTMLElement} => {
+	let uiElement = document.createElement('div')
+	uiElement.id = 'uiSection'
+	gameElement.appendChild(uiElement)
+	
+	let canvasElement = document.createElement('div')
+	canvasElement.id = 'canvasSection'
+	uiElement.appendChild(canvasElement)
+	
+	let hexElement = document.createElement('div')
+	hexElement.id = 'hexSection'
+	canvasElement.appendChild(hexElement)
+	
+	;[gameElement, canvasElement, hexElement, uiElement].forEach((element) => {
+		element.style.height = getPx(windowSize.y)
+		element.style.width = getPx(windowSize.x)
+		if (element !== gameElement) element.style.position = 'absolute'
+	})
+	return {uiElement, canvasElement, hexElement}
+}
+
+export const initializeStartComponents = (gameElement: HTMLElement, changeState: (newState: GameState) => void) => {
+	let {uiElement} = initializeSections(gameElement)
+	let startButton = new Button(uiElement, () => changeState('playing'), {
+		top: `calc(50% - ${getPx(30)})`,
+		left: `calc(50% - ${getPx(100)})`,
+		// transform: 'translate(-50%, -50%)',
+		height: getPx(60),
+		width: getPx(200),
+	})
+	startButton.element.innerText = 'Start'
+}
+
+export const initializePlayComponents = (gameElement: HTMLElement) => {
+	let {uiElement, hexElement} = initializeSections(gameElement)
 	let hexModal = new HexModal(uiElement)
 	let hexagonRows = []
 	for (let i1 = 0; i1 < 10; i1++) {
@@ -96,4 +131,8 @@ export const initializeComponents = (uiElement: HTMLElement, hexElement: HTMLEle
 		left: getPx(5),
 		bottom: getPx(5),
 	})
+}
+
+export const clearComponents = (gameElement: HTMLElement) => {
+	gameElement.innerHTML = ''
 }

@@ -14,7 +14,7 @@ export default class Button extends Component {
 			borderRadius: getPx(6),
 			border: getPx(3) + ' solid black',
 			position: 'absolute',
-			backgroundColor: 'grey',
+			backgroundColor: 'var(--color1)',
 			cursor: 'pointer',
 			transition: 'all .2s ease',
 			padding: '0',

@@ -18,7 +18,7 @@ export default class Modal extends Component {
 			transform: 'translate(-50%, -50%)',
 			borderRadius: getPx(15),
 			border: getPx(3) + ' solid silver',
-			backgroundColor: '#cca43dcc',
+			backgroundColor: 'var(--color5)',
 			//backgroundcolor: (0,0,0), /* Fallback color */
 			//backgroundcolor: rgba(0,0,0,0.9), /* Black w/ opacity */
 			zIndex: '10000',
