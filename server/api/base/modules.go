@@ -6,10 +6,10 @@ import (
 )
 
 func GetBase(userBases *[]models.Base, location string) (base *models.Base, found bool) {
-	for _, userBase := range *userBases {
+	for i := 0; i < len(*userBases); i++ {
 		// Check all bases for if location is in use
-		if userBase.Location == location {
-			return &userBase, true
+		if (*userBases)[i].Location == location {
+			return &(*userBases)[i], true
 		}
 	}
 	return nil, false
