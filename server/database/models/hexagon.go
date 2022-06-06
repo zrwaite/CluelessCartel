@@ -19,10 +19,11 @@ type Hexagon struct {
 
 var hexagonsSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"land_material", "structure", "owned", "buyable"},
+	"required": []string{"land_material", "structure", "x", "owned", "buyable"},
 	"properties": bson.M{
 		"land_material": bson.M{"bsonType": "string"},
 		"structure":     structureSchema,
+		"x":             bson.M{"bsonType": "int"},
 		"owned":         bson.M{"bsonType": "bool"},
 		"buyable":       bson.M{"bsonType": "bool"},
 	},
@@ -35,8 +36,9 @@ type HexagonRow struct {
 
 var hexagonRowsSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"starting_index", "hexagons"},
+	"required": []string{"y", "hexagons"},
 	"properties": bson.M{
+		"y": bson.M{"bsonType": "int"},
 		"hexagons": bson.M{
 			"bsonType":    "array",
 			"uniqueItems": false,
@@ -45,15 +47,15 @@ var hexagonRowsSchema = bson.M{
 	},
 }
 
-func ValidateHexagonRowsStructure(hexagonRows []HexagonRow) (valid bool) {
-	if len(hexagonRows) < 5 {
+func ValidateHexagonRowsStructure(hexagonRows *[]HexagonRow) (valid bool) {
+	if len(*hexagonRows) < 5 {
 		return false
 	}
-	length := len(hexagonRows[0].Hexagons)
+	length := len((*hexagonRows)[0].Hexagons)
 	if length < 5 {
 		return false
 	}
-	for _, hexagonRow := range hexagonRows {
+	for _, hexagonRow := range *hexagonRows {
 		newLength := len(hexagonRow.Hexagons)
 		if length != newLength {
 			return false

@@ -19,7 +19,7 @@ func HexagonHandler(r *http.Request, data []byte, res *apiModels.Response) {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
 		switch functionStruct.Function {
-		case "new":
+		case "buy":
 			buyHexagon(data, res)
 		default:
 			res.Errors = append(res.Errors, "Invalid function")

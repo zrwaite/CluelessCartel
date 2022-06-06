@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"math/rand"
 
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -22,9 +23,12 @@ type Base struct {
 	HexagonRows []HexagonRow `bson:"hexagon_rows"`
 }
 
-func CreateStartingBase(location string, index int) (Base, error) {
-	var base Base
-	var material string
+func GetRandomLandMaterial() (material string) {
+	materials := []string{"Sand", "Grass", "Dirt", "Pavement"}
+	return materials[rand.Intn(len(materials))]
+}
+
+func GetLandMaterial(location string) (material string) {
 	switch location {
 	case "Nevada":
 		material = "Sand"
@@ -34,9 +38,17 @@ func CreateStartingBase(location string, index int) (Base, error) {
 		material = "Grass"
 	case "New York":
 		material = "Pavement"
-	default:
+	}
+	return
+}
+
+func CreateStartingBase(location string, index int) (Base, error) {
+	var base Base
+	material := GetLandMaterial(location)
+	if material == "" {
 		return base, errors.New("invalid location")
 	}
+
 	base = Base{
 		Location:    location,
 		Index:       index,

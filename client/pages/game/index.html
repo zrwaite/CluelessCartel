@@ -1,49 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles.css">
-	<link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
-	<title>Zac/Luke Game</title>
-	<style>
-		#gameSection {
-			border: 2px solid green;
-			width: 100%;
-			height: auto;
-			background-color: white;
-			position: relative;
-		}
-		#hexSection  {
-			overflow:scroll;
-			white-space:nowrap;
-		}
-		#uiSection {
-			overflow: hidden;
-		}
-		#uiSection>* {
-			z-index: 1000;
-		}
-		body {
-			background-color: black;
-		}
-	</style>
-</head>
-<body>
-	<section class="center">
-		<section id="gameSection">
-			<section id="uiSection">
-				<section id="canvasSection">
-					<section id="hexSection"></section>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../../styles.css" />
+		<link rel="stylesheet" href="./game.css" />
+		<link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
+		<title>Zac/Luke Game</title>
+		<style></style>
+	</head>
+	<body>
+		<section class="center">
+			<section id="gameSection">
+				<section id="uiSection">
+					<section id="canvasSection">
+						<section id="hexSection"></section>
+					</section>
 				</section>
 			</section>
 		</section>
-	</section>
-    <script src="../../build/src/index.js" type="module"></script>
-	<img alt="srcImage" src="../..//assets/Hexagon.png" id="hexagon-image"/>
-	<div>
-		<!-- <img src="/assets/CC.svg"/> -->
-	</div>
-</body>
+		<script src="../../build/src/index.js" type="module"></script>
+		<img alt="srcImage" src="../..//assets/Hexagon.png" id="hexagon-image" />
+		<div>
+			<!-- <img src="/assets/CC.svg"/> -->
+		</div>
+	</body>
 </html>

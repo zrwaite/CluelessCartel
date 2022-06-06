@@ -56,10 +56,10 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 		user.Cash -= hexagonCost
 
 		// Attempt to buy hexagon, update user on success
-		if !BuyHexagon(&base.HexagonRows, buyHexagonParams.HexagonX, buyHexagonParams.HexagonY, res) {
+		if !BuyHexagon(base, buyHexagonParams.HexagonX, buyHexagonParams.HexagonY, res) {
 			return
 		}
-		if !models.ValidateHexagonRowsStructure(base.HexagonRows) {
+		if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
 			res.Errors = append(res.Errors, "Failed to create base")
 			return
 		}
@@ -74,4 +74,51 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 	} else {
 		res.Response = buyHexagonParams
 	}
+}
+
+func BuyHexagon(base *models.Base, HexagonX int, HexagonY int, res *apiModels.Response) (success bool) {
+	if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
+		res.Errors = append(res.Errors, "Base is in corrupted state")
+		return
+	}
+	YIndex := -base.HexagonRows[0].Y + HexagonY
+	XIndex := -base.HexagonRows[0].Hexagons[0].X + HexagonX
+
+	// Validate range
+	if YIndex < 0 || YIndex >= len(base.HexagonRows) {
+		res.Errors = append(res.Errors, "Invalid YIndex")
+		return
+	}
+	if XIndex < 0 || XIndex >= len(base.HexagonRows[0].Hexagons) {
+		res.Errors = append(res.Errors, "Invalid XIndex")
+		return
+	}
+
+	buyingHexagon := &base.HexagonRows[YIndex].Hexagons[XIndex]
+
+	// If user already owns hexagon
+	if buyingHexagon.Owned {
+		res.Errors = append(res.Errors, "Hexagon already owned")
+		return
+	}
+
+	// If hexagon is not purchaseable
+	if !buyingHexagon.Buyable {
+		res.Errors = append(res.Errors, "Hexagon not within purchase range")
+		return
+	}
+
+	// If enemy structures exist, blow em up!
+	if buyingHexagon.Structure.Name != "Empty" {
+		res.Errors = append(res.Errors, "New hexagon structures must be cleared")
+		return
+	}
+
+	if !ReorganizeHexagons(base, HexagonX, HexagonY) {
+		res.Errors = append(res.Errors, "Failed to restructure hexagons")
+		return false
+	}
+	base.HexagonRows[YIndex].Hexagons[XIndex].Owned = true
+
+	return true
 }

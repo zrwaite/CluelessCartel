@@ -24,12 +24,6 @@ func newBase(body []byte, res *apiModels.Response) {
 	}
 	if len(res.Errors) == 0 {
 		var user *models.GetUserReturn
-		base, err := models.CreateStartingBase(newBaseParams.Location, len(user.Bases))
-		if err != nil {
-			res.Errors = append(res.Errors, err.Error())
-			return
-		}
-		base.Location = newBaseParams.Location
 		user, res.Status = dbModules.GetUserGameData(newBaseParams.Username)
 		if res.Status == 404 {
 			res.Errors = append(res.Errors, "User not found")
@@ -40,12 +34,19 @@ func newBase(body []byte, res *apiModels.Response) {
 		} else {
 			res.Status = 400
 		}
+		base, err := models.CreateStartingBase(newBaseParams.Location, len(user.Bases))
+		if err != nil {
+			res.Errors = append(res.Errors, err.Error())
+			return
+		}
+		base.Location = newBaseParams.Location
 		_, baseFound := GetBase(&user.Bases, base.Location)
 		if baseFound {
 			// If location is already in use, a new base can not be created there
 			res.Errors = append(res.Errors, "Location already used!")
 			return
 		}
+
 		//Set new base location
 		//Find the cost for the new base
 		baseCost := GetBaseCost(&user.Bases)
@@ -53,13 +54,15 @@ func newBase(body []byte, res *apiModels.Response) {
 			res.Errors = append(res.Errors, "Not enough cash!")
 			return
 		}
+
 		// Update user cash, and add base
 		user.Cash -= baseCost
 		user.Bases = append(user.Bases, base)
-		if !models.ValidateHexagonRowsStructure(base.HexagonRows) {
+		if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
 			res.Errors = append(res.Errors, "Failed to create base")
 			return
 		}
+
 		success := dbModules.UpdateUser(user)
 		if !success {
 			res.Errors = append(res.Errors, "Failed to update user - "+err.Error())
