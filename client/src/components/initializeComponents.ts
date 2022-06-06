@@ -33,16 +33,23 @@ const initializeSections = (gameElement: HTMLElement):{uiElement:HTMLElement, ca
 export const initializeStartComponents = (gameElement: HTMLElement, changeState: (newState: GameState) => void) => {
 	let {uiElement} = initializeSections(gameElement)
 	let startButton = new Button(uiElement, () => changeState('playing'), {
-		top: `calc(50% - ${getPx(30)})`,
+		top: `calc(50% - ${getPx(80)})`,
 		left: `calc(50% - ${getPx(100)})`,
-		// transform: 'translate(-50%, -50%)',
 		height: getPx(60),
 		width: getPx(200),
 	})
 	startButton.element.innerText = 'Start'
+
+	let exitButton = new Button(uiElement, () =>navigate('/'), {
+		top: `calc(50% + ${getPx(30)})`,
+		left: `calc(50% - ${getPx(100)})`,
+		height: getPx(60),
+		width: getPx(200),
+	})
+	exitButton.element.innerText = 'Exit'
 }
 
-export const initializePlayComponents = (gameElement: HTMLElement) => {
+export const initializePlayComponents = (gameElement: HTMLElement, changeState: (newState: GameState) => void) => {
 	let {uiElement, hexElement} = initializeSections(gameElement)
 	let hexModal = new HexModal(uiElement)
 	let hexagonRows = []
@@ -55,34 +62,21 @@ export const initializePlayComponents = (gameElement: HTMLElement) => {
 	}
 
 	let settingsModal = new SettingsModal(uiElement, hexagonRows)
-
 	let settingsButton = new OpenModalButton(uiElement, settingsModal, 'settings.svg', {
 		right: getPx(5),
 		top: getPx(5),
 	})
 
-	let homeButton = new Button(
-		uiElement,
-		() => {
-			navigate('/')
-		},
-		{
-			left: getPx(5),
-			top: getPx(5),
-		}
-	)
+	let homeButton = new Button(uiElement, () => changeState('start'), {
+		left: getPx(5),
+		top: getPx(5),
+	})
 	homeButton.initializeIcon('home.svg')
 
-	let storageButton = new Button(
-		uiElement,
-		() => {
-			alert('haha:)')
-		},
-		{
-			right: getPx(5),
-			bottom: getPx(5),
-		}
-	)
+	let storageButton = new Button(uiElement, () => alert('haha:)'), {
+		right: getPx(5),
+		bottom: getPx(5),
+	})
 	storageButton.initializeIcon('storage.svg')
 
 	let buildButton = new AnimatedButton(

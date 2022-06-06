@@ -12,7 +12,7 @@ export default class Game {
 		if (this.#state === 'start') {
 			initializeStartComponents(this.element, this.changeState.bind(this))
 		} else if (this.#state === 'playing') {
-			initializePlayComponents(this.element)
+			initializePlayComponents(this.element, this.changeState.bind(this))
 		}
 	}
 	update() {
