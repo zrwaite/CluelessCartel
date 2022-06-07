@@ -1,16 +1,19 @@
 import { getPx } from '../index.js'
 import { Hexagon } from '../types/hexagon.js'
 import Component from './Component.js'
+import HexagonModal from './Modals/HexagonModal.js'
 import Modal from './Modals/Modal.js'
 
 export default class ClickableGridHexagon extends Component {
 	height = 115.5
 	width = 100
 	texture: HTMLImageElement | null = null
-	data: Hexagon
+	hexagon: Hexagon
+	modal: Modal
 	constructor(parentElement: HTMLElement, hexagon: Hexagon) {
 		super('div', parentElement)
-		this.data = hexagon
+		this.hexagon = hexagon
+		this.modal = new HexagonModal(hexagon)
 		this.element.classList.add('clickableHexagon')
 		this.addStyles({
 			height: getPx(this.height),
@@ -35,7 +38,7 @@ export default class ClickableGridHexagon extends Component {
 		}
 	}
 	onClick(e: MouseEvent) {
-		// this.modal.open()
+		this.modal.open()
 	}
 	onHover(e: MouseEvent, mouseIn: boolean) {
 		if (mouseIn) {

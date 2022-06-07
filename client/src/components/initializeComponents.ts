@@ -6,7 +6,6 @@ import AnimatorButton from './Buttons/AnimatorButton.js'
 import Button from './Buttons/Button.js'
 import OpenModalButton from './Buttons/OpenModalButton.js'
 import ClickableGridHexagonRow from './ClickableGridHexagonRow.js'
-import HexModal from './Modals/HexModal.js'
 import SettingsModal from './Modals/SettingsModal.js'
 
 const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement; canvasElement: HTMLElement; hexElement: HTMLElement } => {
@@ -50,7 +49,6 @@ export const initializeStartComponents = (gameElement: HTMLElement, game: Game) 
 
 export const initializePlayComponents = (gameElement: HTMLElement, game: Game) => {
 	let { uiElement, hexElement } = initializeSections(gameElement)
-	let hexModal = new HexModal(uiElement)
 	let hexagonRows: ClickableGridHexagonRow[] = []
 
 	game.data.Bases[0].HexagonRows.forEach((hexagonRow, i1) => {
@@ -59,7 +57,7 @@ export const initializePlayComponents = (gameElement: HTMLElement, game: Game) =
 		hexagonRows.push(newrow)
 	})
 
-	let settingsModal = new SettingsModal(uiElement, hexagonRows)
+	let settingsModal = new SettingsModal(hexagonRows)
 	let settingsButton = new OpenModalButton(uiElement, settingsModal, 'settings.svg', {
 		right: getPx(5),
 		top: getPx(5),

@@ -5,7 +5,9 @@ import Component from '../Component.js'
 
 export default class Modal extends Component {
 	closeButton: Button
-	constructor(parentElement: HTMLElement, styles: StyleObject = {}) {
+	constructor(styles: StyleObject = {}) {
+		const parentElement = document.getElementById('gameSection')
+		if (!parentElement) throw Error('#gameSection not found')
 		super('div', parentElement)
 
 		this.addStyles({

@@ -10,11 +10,11 @@ export default class ClickableGridHexagonRow extends Component {
 	height: number = 86
 	left: number = 0
 	hexagons: ClickableGridHexagon[] = []
-	data: HexagonRow
+	hexagonRow: HexagonRow
 	constructor(index: number, parentElement: HTMLElement, hexagonRow: HexagonRow) {
 		super('div', parentElement)
 		this.index = index
-		this.data = hexagonRow
+		this.hexagonRow = hexagonRow
 		this.element.classList.add('clickableHexagonRow')
 		this.addStyles({
 			position: 'relative',
@@ -26,7 +26,8 @@ export default class ClickableGridHexagonRow extends Component {
 		}
 	}
 	initializeHexagons() {
-		this.data.Hexagons.forEach((hexagon, i) => {
+		this.hexagonRow.Hexagons.forEach((hexagon, i) => {
+			hexagon.Y = this.hexagonRow.Y
 			this.hexagons.push(new ClickableGridHexagon(this.element, hexagon))
 		})
 	}

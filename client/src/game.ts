@@ -11,6 +11,7 @@ export default class Game {
 		this.element = gameElement
 	}
 	start() {
+		clearComponents(this.element)
 		if (this.#state === 'start') {
 			initializeStartComponents(this.element, this)
 		} else if (this.#state === 'playing') {
@@ -25,7 +26,6 @@ export default class Game {
 	}
 	changeState(newState: GameState) {
 		this.#state = newState
-		clearComponents(this.element)
 		this.start()
 	}
 }
