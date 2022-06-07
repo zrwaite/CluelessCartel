@@ -19,11 +19,11 @@ export default class SettingsModal extends Modal {
 					left: getPx(hr.left * this.zoom),
 				})
 				hr.hexagons.forEach((hex) => {
-					let newSize = getPx(hex.size * this.zoom)
+					let newHeight = getPx(hex.height * this.zoom)
+					let newWidth = getPx(hex.width * this.zoom)
 					hex.addStyles({
-						backgroundSize: newSize + ' ' + newSize,
-						height: newSize,
-						width: newSize,
+						height: newHeight,
+						width: newWidth,
 					})
 				})
 			})
@@ -42,11 +42,11 @@ export default class SettingsModal extends Modal {
 					left: getPx(hr.left * this.zoom),
 				})
 				hr.hexagons.forEach((hex) => {
-					let newSize = getPx(hex.size * this.zoom)
+					let newHeight = getPx(hex.height * this.zoom)
+					let newWidth = getPx(hex.width * this.zoom)
 					hex.addStyles({
-						backgroundSize: newSize + ' ' + newSize,
-						height: newSize,
-						width: newSize,
+						height: newHeight,
+						width: newWidth,
 					})
 				})
 			})

@@ -1,4 +1,4 @@
-import { GameState } from '../game.js'
+import Game, { GameState } from '../game.js'
 import { getPx, windowSize } from '../index.js'
 import { navigate } from '../modules/navigate.js'
 import AnimatedButton from './Buttons/AnimatedButton.js'
@@ -9,30 +9,29 @@ import ClickableGridHexagonRow from './ClickableGridHexagonRow.js'
 import HexModal from './Modals/HexModal.js'
 import SettingsModal from './Modals/SettingsModal.js'
 
-const initializeSections = (gameElement: HTMLElement):{uiElement:HTMLElement, canvasElement:HTMLElement, hexElement: HTMLElement} => {
+const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement; canvasElement: HTMLElement; hexElement: HTMLElement } => {
 	let uiElement = document.createElement('div')
 	uiElement.id = 'uiSection'
 	gameElement.appendChild(uiElement)
-	
+
 	let canvasElement = document.createElement('div')
 	canvasElement.id = 'canvasSection'
 	uiElement.appendChild(canvasElement)
-	
+
 	let hexElement = document.createElement('div')
 	hexElement.id = 'hexSection'
 	canvasElement.appendChild(hexElement)
-	
 	;[gameElement, canvasElement, hexElement, uiElement].forEach((element) => {
 		element.style.height = getPx(windowSize.y)
 		element.style.width = getPx(windowSize.x)
 		if (element !== gameElement) element.style.position = 'absolute'
 	})
-	return {uiElement, canvasElement, hexElement}
+	return { uiElement, canvasElement, hexElement }
 }
 
-export const initializeStartComponents = (gameElement: HTMLElement, changeState: (newState: GameState) => void) => {
-	let {uiElement} = initializeSections(gameElement)
-	let startButton = new Button(uiElement, () => changeState('playing'), {
+export const initializeStartComponents = (gameElement: HTMLElement, game: Game) => {
+	let { uiElement } = initializeSections(gameElement)
+	let startButton = new Button(uiElement, () => game.changeState('playing'), {
 		top: `calc(50% - ${getPx(80)})`,
 		left: `calc(50% - ${getPx(100)})`,
 		height: getPx(60),
@@ -40,7 +39,7 @@ export const initializeStartComponents = (gameElement: HTMLElement, changeState:
 	})
 	startButton.element.innerText = 'Start'
 
-	let exitButton = new Button(uiElement, () =>navigate('/'), {
+	let exitButton = new Button(uiElement, () => navigate('/'), {
 		top: `calc(50% + ${getPx(30)})`,
 		left: `calc(50% - ${getPx(100)})`,
 		height: getPx(60),
@@ -49,17 +48,16 @@ export const initializeStartComponents = (gameElement: HTMLElement, changeState:
 	exitButton.element.innerText = 'Exit'
 }
 
-export const initializePlayComponents = (gameElement: HTMLElement, changeState: (newState: GameState) => void) => {
-	let {uiElement, hexElement} = initializeSections(gameElement)
+export const initializePlayComponents = (gameElement: HTMLElement, game: Game) => {
+	let { uiElement, hexElement } = initializeSections(gameElement)
 	let hexModal = new HexModal(uiElement)
-	let hexagonRows = []
-	for (let i1 = 0; i1 < 10; i1++) {
-		let newrow = new ClickableGridHexagonRow(i1, hexElement)
-		for (let i2 = 0; i2 < 10; i2++) {
-			newrow.addHexagon(i2, hexModal)
-		}
+	let hexagonRows: ClickableGridHexagonRow[] = []
+
+	game.data.Bases[0].HexagonRows.forEach((hexagonRow, i1) => {
+		let newrow = new ClickableGridHexagonRow(i1, hexElement, hexagonRow)
+		newrow.initializeHexagons()
 		hexagonRows.push(newrow)
-	}
+	})
 
 	let settingsModal = new SettingsModal(uiElement, hexagonRows)
 	let settingsButton = new OpenModalButton(uiElement, settingsModal, 'settings.svg', {
@@ -67,7 +65,7 @@ export const initializePlayComponents = (gameElement: HTMLElement, changeState: 
 		top: getPx(5),
 	})
 
-	let homeButton = new Button(uiElement, () => changeState('start'), {
+	let homeButton = new Button(uiElement, () => game.changeState('start'), {
 		left: getPx(5),
 		top: getPx(5),
 	})

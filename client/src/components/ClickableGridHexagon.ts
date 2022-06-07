@@ -1,31 +1,41 @@
 import { getPx } from '../index.js'
-import Vector2 from '../modules/Vector2.js'
+import { Hexagon } from '../types/hexagon.js'
 import Component from './Component.js'
 import Modal from './Modals/Modal.js'
 
 export default class ClickableGridHexagon extends Component {
-	modal: Modal
-	pos: Vector2
-	size: number
-	constructor(pos: Vector2, parentElement: HTMLElement, modal: Modal, size: number) {
+	height = 115.5
+	width = 100
+	texture: HTMLImageElement | null = null
+	data: Hexagon
+	constructor(parentElement: HTMLElement, hexagon: Hexagon) {
 		super('div', parentElement)
-		this.pos = pos
-		this.modal = modal
-		this.size = size
+		this.data = hexagon
 		this.element.classList.add('clickableHexagon')
 		this.addStyles({
-			height: getPx(size),
-			width: getPx(size),
-			backgroundImage: "url('../../assets/Hexagon.png')",
-			backgroundSize: getPx(size) + ' ' + getPx(size),
+			height: getPx(this.height),
+			width: getPx(this.width),
 			transition: 'all .2s ease',
 			position: 'relative',
 			display: 'inline-block',
 			cursor: 'pointer',
 		})
+		if (hexagon.Buyable || hexagon.Owned) {
+			this.texture = document.createElement('img') as HTMLImageElement
+			let imageLink
+			if (hexagon.LandMaterial === 'Dirt') imageLink = 'DirtHexagon'
+			if (hexagon.LandMaterial === 'Pavement') imageLink = 'PavementHexagon'
+			if (hexagon.LandMaterial === 'Grass') imageLink = 'GrassHexagon'
+			if (hexagon.LandMaterial === 'Sand') imageLink = 'SandHexagon'
+			this.texture.src = `url('../../../../assets/${imageLink}.png`
+			this.texture.style.height = '100%'
+			this.texture.style.width = '101%'
+			if (!hexagon.Owned) this.texture.style.filter = 'grayscale(70%) brightness(70%)'
+			this.element.appendChild(this.texture)
+		}
 	}
 	onClick(e: MouseEvent) {
-		this.modal.open()
+		// this.modal.open()
 	}
 	onHover(e: MouseEvent, mouseIn: boolean) {
 		if (mouseIn) {
