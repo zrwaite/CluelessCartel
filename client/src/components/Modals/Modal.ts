@@ -1,15 +1,18 @@
-import { getPx } from '../../index.js'
+import { game, getPx } from '../../index.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from '../Buttons/Button.js'
 import Component from '../Component.js'
 
 export default class Modal extends Component {
 	closeButton: Button
-	constructor(styles: StyleObject = {}) {
+	id:string
+	constructor(id:string, styles: StyleObject = {}) {
 		const parentElement = document.getElementById('gameSection')
 		if (!parentElement) throw Error('#gameSection not found')
 		super('div', parentElement)
-
+		this.id = id
+		this.element.id = `modal-${this.id}`
+		this.element.classList.add('modal')
 		this.addStyles({
 			display: 'none',
 			position: 'absolute',
@@ -37,8 +40,10 @@ export default class Modal extends Component {
 			backgroundColor: 'red',
 		})
 		this.closeButton.initializeIcon('close.svg')
+		game.modals.push(this)
 	}
 	open() {
+		game.modals.forEach((modal) => modal.close())
 		this.addStyles({ display: 'block' })
 	}
 	close() {

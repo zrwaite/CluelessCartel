@@ -41,8 +41,7 @@ let dynamicCanvas = document.createElement('canvas')
 canvasElement.appendChild(dynamicCanvas)
 let dynamicCtx = dynamicCanvas.getContext('2d')
 
-let game = new Game(gameElement)
-game.start()
+const game = new Game(gameElement)
 
 let lastTime = 0
 function gameLoop(timestamp: number) {
@@ -54,3 +53,5 @@ function gameLoop(timestamp: number) {
 	requestAnimationFrame(gameLoop)
 }
 requestAnimationFrame(gameLoop)
+
+export {game}

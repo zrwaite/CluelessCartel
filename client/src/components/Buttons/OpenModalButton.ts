@@ -7,5 +7,6 @@ export default class OpenModalButton extends Button {
 	constructor(parentElement: HTMLElement, modal: Modal, icon: string, styles: StyleObject = {}) {
 		super(parentElement, modal.open.bind(modal), styles)
 		this.initializeIcon(icon)
+		this.element.classList.add('modalButton')
 	}
 }

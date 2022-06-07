@@ -1,5 +1,5 @@
 import Game, { GameState } from '../game.js'
-import { getPx, windowSize } from '../index.js'
+import { game, getPx, windowSize } from '../index.js'
 import { navigate } from '../modules/navigate.js'
 import AnimatedButton from './Buttons/AnimatedButton.js'
 import AnimatorButton from './Buttons/AnimatorButton.js'
@@ -28,7 +28,7 @@ const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement;
 	return { uiElement, canvasElement, hexElement }
 }
 
-export const initializeStartComponents = (gameElement: HTMLElement, game: Game) => {
+export const initializeStartComponents = (gameElement: HTMLElement) => {
 	let { uiElement } = initializeSections(gameElement)
 	let startButton = new Button(uiElement, () => game.changeState('playing'), {
 		top: `calc(50% - ${getPx(80)})`,
@@ -47,7 +47,16 @@ export const initializeStartComponents = (gameElement: HTMLElement, game: Game) 
 	exitButton.element.innerText = 'Exit'
 }
 
-export const initializePlayComponents = (gameElement: HTMLElement, game: Game) => {
+export const initializePlayComponents = (gameElement: HTMLElement) => {
+	document.getElementsByTagName('body')[0].onclick = (e:MouseEvent) => {
+		if (e.target) {
+			let element = e.target as HTMLElement
+			if (!element.closest(`.modal`) && !element.closest('.modalButton')){
+				game.modals.forEach((modal) => modal.close())
+			} 
+		}
+	}
+
 	let { uiElement, hexElement } = initializeSections(gameElement)
 	let hexagonRows: ClickableGridHexagonRow[] = []
 

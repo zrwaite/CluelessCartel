@@ -7,13 +7,15 @@ import Modal from './Modals/Modal.js'
 export default class ClickableGridHexagon extends Component {
 	height = 115.5
 	width = 100
-	texture: HTMLImageElement | null = null
+	texture?: HTMLImageElement
 	hexagon: Hexagon
-	modal: Modal
+	modal?: Modal
+	id:string
 	constructor(parentElement: HTMLElement, hexagon: Hexagon) {
 		super('div', parentElement)
 		this.hexagon = hexagon
-		this.modal = new HexagonModal(hexagon)
+		this.id = `button-${hexagon.X}-${hexagon.Y}`
+		this.element.id = this.id
 		this.element.classList.add('clickableHexagon')
 		this.addStyles({
 			height: getPx(this.height),
@@ -24,6 +26,8 @@ export default class ClickableGridHexagon extends Component {
 			cursor: 'pointer',
 		})
 		if (hexagon.Buyable || hexagon.Owned) {
+			this.modal = new HexagonModal(hexagon)
+			this.element.classList.add('modalButton')
 			this.texture = document.createElement('img') as HTMLImageElement
 			let imageLink
 			if (hexagon.LandMaterial === 'Dirt') imageLink = 'DirtHexagon'
@@ -33,12 +37,14 @@ export default class ClickableGridHexagon extends Component {
 			this.texture.src = `url('../../../../assets/${imageLink}.png`
 			this.texture.style.height = '100%'
 			this.texture.style.width = '101%'
-			if (!hexagon.Owned) this.texture.style.filter = 'grayscale(70%) brightness(70%)'
+			if (!hexagon.Owned) {
+				this.texture.style.filter = 'grayscale(70%) brightness(70%)'
+			}
 			this.element.appendChild(this.texture)
 		}
 	}
 	onClick(e: MouseEvent) {
-		this.modal.open()
+		this.modal?.open()
 	}
 	onHover(e: MouseEvent, mouseIn: boolean) {
 		if (mouseIn) {

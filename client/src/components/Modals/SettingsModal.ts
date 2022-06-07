@@ -7,7 +7,7 @@ import Modal from './Modal.js'
 export default class SettingsModal extends Modal {
 	zoom: number = 1
 	constructor(hexagonRows: ClickableGridHexagonRow[], styles: StyleObject = {}) {
-		super(styles)
+		super('settings', styles)
 		// const hexElement = document.getElementById('hexSection')
 		// if (!hexElement) throw Error('hexSection not found')
 
