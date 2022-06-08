@@ -22,10 +22,6 @@ jobs:
           echo ${{ secrets.env_file }} >> server/.env
           cat server/.env
 
-    # Check-out your repository.
-    - name: Checkout
-      uses: actions/checkout@v2
-
     - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
       uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
       with:
