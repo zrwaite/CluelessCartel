@@ -2,18 +2,13 @@ package settings
 
 import (
 	"log"
-
-	"github.com/joho/godotenv"
+	"os"
 )
 
 const DEV = false
 
 func MatchDev() {
-	envs, err := godotenv.Read(".env")
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	envDev := envs["DEV"]
+	envDev := os.Getenv("DEV")
 	if envDev == "" {
 		log.Fatal("Failed to load .env file")
 	}

@@ -4,16 +4,21 @@ import (
 	"clueless-cartel-server/api"
 	"clueless-cartel-server/database"
 	"clueless-cartel-server/settings"
-
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
 	settings.MatchDev()
 	database.ConnectToMongoDB()
-	// database.InitializeDatabase()
+	database.InitializeDatabase()
 	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/", api.APIHandler)
 	http.Handle("/", fileServer)

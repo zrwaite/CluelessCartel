@@ -5,9 +5,9 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -17,15 +17,11 @@ import (
 var MongoDatabase *mongo.Database
 
 func ConnectToMongoDB() {
-	envs, err := godotenv.Read(".env")
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 	var mongoUrl string
 	if settings.DEV {
-		mongoUrl = envs["DEV_MONGO_URL"]
+		mongoUrl = os.Getenv("DEV_MONGO_URL")
 	} else {
-		mongoUrl = envs["PROD_MONGO_URL"]
+		mongoUrl = os.Getenv("PROD_MONGO_URL")
 	}
 	clientOptions := options.Client().ApplyURI(mongoUrl)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)

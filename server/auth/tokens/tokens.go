@@ -2,10 +2,10 @@ package tokens
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/joho/godotenv"
 )
 
 type TokenStruct struct {
@@ -15,12 +15,7 @@ type TokenStruct struct {
 
 func EncodeToken(username string) (tokenString string, success bool) {
 	var err error
-	envs, err := godotenv.Read(".env")
-	if err != nil {
-		fmt.Println("Failed to load .env file at runtime")
-		return "", false
-	}
-	jwtKeyString := envs["JWT_KEY"]
+	jwtKeyString := os.Getenv("JWT_KEY")
 	if jwtKeyString == "" {
 		fmt.Println("JWT_KEY not found")
 		return "", false
@@ -46,12 +41,7 @@ func EncodeToken(username string) (tokenString string, success bool) {
 
 func ValidateToken(token string, username string) bool {
 	var err error
-	envs, err := godotenv.Read(".env")
-	if err != nil {
-		fmt.Println("Failed to load .env file at runtime")
-		return false
-	}
-	jwtKeyString := envs["JWT_KEY"]
+	jwtKeyString := os.Getenv("JWT_KEY")
 	if jwtKeyString == "" {
 		fmt.Println("JWT_KEY not found")
 		return false
