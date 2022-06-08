@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/joho/godotenv"
 )
@@ -19,8 +20,12 @@ func main() {
 	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/", api.APIHandler)
 	http.Handle("/", fileServer)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8004"
+	}
 	fmt.Printf("Starting server at port 8004 with hello\n")
-	if err := http.ListenAndServe(":8004", nil); err != nil {
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		log.Fatal(err)
 	}
 }
