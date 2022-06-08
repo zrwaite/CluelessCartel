@@ -6,7 +6,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const DEV = true
+const DEV = false
 
 func MatchDev() {
 	envs, err := godotenv.Read(".env")

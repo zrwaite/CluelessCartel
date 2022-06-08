@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
+	settings.MatchDev()
 	database.ConnectToMongoDB()
 	// database.InitializeDatabase()
-	settings.MatchDev()
 	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/", api.APIHandler)
 	http.Handle("/", fileServer)
