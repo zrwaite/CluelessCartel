@@ -34,6 +34,9 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 				auth.DevCheck(devStruct.Dev, res)
 			}
 		}
+	} else if r.Method == "OPTIONS" {
+		res.Errors = append(res.Errors, "None")
+		res.Status = 200
 	} else {
 		res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
 		res.Status = 404

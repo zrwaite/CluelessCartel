@@ -20,7 +20,7 @@ export default class ClickableGridHexagon extends Component {
 		this.addStyles({
 			height: getPx(this.height),
 			width: getPx(this.width),
-			transition: 'all .2s ease',
+			transition: 'transform .2s ease',
 			position: 'relative',
 			display: 'inline-block',
 			cursor: 'pointer',

@@ -6,7 +6,6 @@ import Button from '../Buttons/Button.js'
 import Modal from './Modal.js'
 
 export default class HexagonModal extends Modal {
-	zoom: number = 1
 	buyButton?: Button
 	hexagon: Hexagon
 	constructor(hexagon: Hexagon, styles: StyleObject = {}) {
@@ -22,7 +21,7 @@ export default class HexagonModal extends Modal {
 	}
 	async buyHexagon() {
 		const response = await gameAPI('/hexagon', 'POST', {
-			username: "Insomnizac5",
+			username: "Insomnizac",
 			function: "buy",
 			BaseLocation: "New York",
 			HexagonX: this.hexagon.X,
@@ -35,6 +34,7 @@ export default class HexagonModal extends Modal {
 				alert(JSON.stringify(response.Errors))
 			}
 		} else throw Error("Failed to get user!")
+		game.trySaveScroll()
 		game.start()
 	}
 }

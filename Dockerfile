@@ -9,13 +9,13 @@ FROM golang:1.18-alpine as server
 WORKDIR /app
 COPY ./server ./server
 # COPY ./server/.env ./
-# COPY ./server/.env ./server
+COPY ./server/.env ./server
 WORKDIR /app/server
 RUN go mod download
 RUN go build -o ./docker-gs-ping
 
 WORKDIR /app
-COPY --from=client /app/client ./client
+COPY --from=client /app/client /app/client
 # COPY --from=server  ./server ./server
 RUN find . -type f -name "*" ! -path "*/node_modules/*"
 EXPOSE 8004

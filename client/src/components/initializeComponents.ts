@@ -60,8 +60,8 @@ export const initializePlayComponents = (gameElement: HTMLElement) => {
 	let { uiElement, hexElement } = initializeSections(gameElement)
 	let hexagonRows: ClickableGridHexagonRow[] = []
 
-	game.data.Bases[0].HexagonRows.forEach((hexagonRow, i1) => {
-		let newrow = new ClickableGridHexagonRow(i1, hexElement, hexagonRow)
+	game.data.Bases[0].HexagonRows.forEach((hexagonRow) => {
+		let newrow = new ClickableGridHexagonRow(hexElement, hexagonRow)
 		newrow.initializeHexagons()
 		hexagonRows.push(newrow)
 	})
@@ -71,6 +71,9 @@ export const initializePlayComponents = (gameElement: HTMLElement) => {
 		right: getPx(5),
 		top: getPx(5),
 	})
+
+	hexElement.scrollTop = game.scroll.y
+	hexElement.scrollLeft = game.scroll.x
 
 	let homeButton = new Button(uiElement, () => game.changeState('start'), {
 		left: getPx(5),

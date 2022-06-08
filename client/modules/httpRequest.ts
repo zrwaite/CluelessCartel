@@ -1,5 +1,4 @@
-const baseURL = DEV?"http://localhost:8004":"https://swrdataplayground.ca";
-
+const baseURL = DEV?"http://localhost:8004":"https://clueless-cartel.herokuapp.com";
 
 const httpReq = async (url:string, method:string = "GET", params:any = {}) => {
     url = baseURL + url;
@@ -9,7 +8,7 @@ const httpReq = async (url:string, method:string = "GET", params:any = {}) => {
     }
     let headers:any = {}
     if (Cookies.get("token")) headers = {
-        Authorization: "Bearer "+ Cookies.get("token")
+        // Authorization: "Bearer "+ Cookies.get("token")
     }
     try {
         let response;

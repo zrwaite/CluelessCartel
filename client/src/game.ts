@@ -6,6 +6,8 @@ import { gameData } from './types/data.js'
 export type GameState = 'start' | 'playing'
 
 export default class Game {
+	zoom: number = 1
+	scroll: {x:number, y:number} = {x:0,y:0}
 	#state: GameState = 'start'
 	element: HTMLElement
 	data = gameData
@@ -15,9 +17,8 @@ export default class Game {
 		this.initializeData()
 	}
 	async initializeData() {
-		const response:any = await gameAPI('/user?username=Insomnizac5')
+		const response:any = await gameAPI('/user?username=Insomnizac')
 		if (response && response.Success) {
-			console.log(response)
 			this.data = response.Response
 			this.start()
 		} else {
@@ -43,5 +44,12 @@ export default class Game {
 	changeState(newState: GameState) {
 		this.#state = newState
 		this.start()
+	}
+	trySaveScroll() {
+		let hexElement = document.getElementById("hexSection") 
+		if (hexElement) {
+			this.scroll.x = hexElement.scrollLeft
+			this.scroll.y = hexElement.scrollTop
+		}
 	}
 }

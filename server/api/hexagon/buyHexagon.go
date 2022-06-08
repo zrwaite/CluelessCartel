@@ -118,6 +118,8 @@ func BuyHexagon(base *models.Base, HexagonX int, HexagonY int, res *apiModels.Re
 		res.Errors = append(res.Errors, "Failed to restructure hexagons")
 		return false
 	}
+	YIndex = -base.HexagonRows[0].Y + HexagonY
+	XIndex = -base.HexagonRows[0].Hexagons[0].X + HexagonX
 	base.HexagonRows[YIndex].Hexagons[XIndex].Owned = true
 
 	return true
