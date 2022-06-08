@@ -2,6 +2,6 @@ services:
     server:
         env_file: './server/.env'
         build: './'
-        image: 'zrwaite/cluelesscartel:1.3'
+        image: 'zrwaite/cluelesscartel:1.4'
         ports:
             - '8004:8004'
