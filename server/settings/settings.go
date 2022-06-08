@@ -14,6 +14,9 @@ func MatchDev() {
 		log.Fatal("Error loading .env file")
 	}
 	envDev := envs["DEV"]
+	if envDev == "" {
+		log.Fatal("Failed to load .env file")
+	}
 	if DEV && envDev != "true" {
 		log.Fatal("Backend production environment does not match environment")
 	} else if !DEV && envDev != "false" {

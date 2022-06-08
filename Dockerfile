@@ -15,5 +15,6 @@ RUN go mod download
 RUN go build -o ./docker-gs-ping
 
 WORKDIR /app
+RUN find . -type f -name "*" ! -path "*/node_modules/*"
 EXPOSE 8004
 CMD [ "server/docker-gs-ping" ]
