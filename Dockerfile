@@ -8,8 +8,8 @@ RUN npm run compile
 FROM golang:1.18-alpine
 WORKDIR /app
 COPY ./server ./server
-COPY ./server/.env ./
-COPY ./server/.env ./server
+# COPY ./server/.env ./
+# COPY ./server/.env ./server
 WORKDIR /app/server
 RUN go mod download
 RUN go build -o ./docker-gs-ping

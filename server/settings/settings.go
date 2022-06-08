@@ -10,7 +10,7 @@ const DEV = false
 func MatchDev() {
 	envDev := os.Getenv("DEV")
 	if envDev == "" {
-		log.Fatal("Failed to load .env file")
+		log.Fatal("Failed to load environment variables")
 	}
 	if DEV && envDev != "true" {
 		log.Fatal("Backend production environment does not match environment")
