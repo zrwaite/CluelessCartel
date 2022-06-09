@@ -5,8 +5,8 @@ import Component from '../Component.js'
 
 export default class Modal extends Component {
 	closeButton: Button
-	id:string
-	constructor(id:string, styles: StyleObject = {}) {
+	id: string
+	constructor(id: string, styles: StyleObject = {}) {
 		const parentElement = document.getElementById('gameSection')
 		if (!parentElement) throw Error('#gameSection not found')
 		super('div', parentElement)
@@ -24,8 +24,7 @@ export default class Modal extends Component {
 			borderRadius: getPx(15),
 			border: getPx(3) + ' solid silver',
 			backgroundColor: 'var(--color5)',
-			//backgroundcolor: (0,0,0), /* Fallback color */
-			//backgroundcolor: rgba(0,0,0,0.9), /* Black w/ opacity */
+			padding: getPx(8),
 			zIndex: '10000',
 			...styles,
 		})

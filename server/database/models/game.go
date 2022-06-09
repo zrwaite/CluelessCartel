@@ -1,5 +1,7 @@
 package models
 
 type Game struct {
-	Drugs []Drug
+	//All base locations
+	AllDrugs     []Drug
+	AllLocations []string
 }

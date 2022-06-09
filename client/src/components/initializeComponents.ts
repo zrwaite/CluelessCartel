@@ -1,12 +1,15 @@
 import Game, { GameState } from '../game.js'
 import { game, getPx, windowSize } from '../index.js'
+import { gameAPI } from '../modules/gameAPI.js'
 import { navigate } from '../modules/navigate.js'
 import AnimatedButton from './Buttons/AnimatedButton.js'
 import AnimatorButton from './Buttons/AnimatorButton.js'
 import Button from './Buttons/Button.js'
 import OpenModalButton from './Buttons/OpenModalButton.js'
 import ClickableGridHexagonRow from './ClickableGridHexagonRow.js'
+import Modal from './Modals/Modal.js'
 import SettingsModal from './Modals/SettingsModal.js'
+import TextSection from './TextSection.js'
 
 const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement; canvasElement: HTMLElement; hexElement: HTMLElement } => {
 	let uiElement = document.createElement('div')
@@ -30,13 +33,13 @@ const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement;
 
 export const initializeStartComponents = (gameElement: HTMLElement) => {
 	let { uiElement } = initializeSections(gameElement)
-	let startButton = new Button(uiElement, () => game.changeState('playing'), {
+	let startButton = new Button(uiElement, () => game.changeState('bases'), {
 		top: `calc(50% - ${getPx(80)})`,
 		left: `calc(50% - ${getPx(100)})`,
 		height: getPx(60),
 		width: getPx(200),
 	})
-	startButton.element.innerText = 'Start'
+	new TextSection(startButton.element, 30, 'Start')
 
 	let exitButton = new Button(uiElement, () => navigate('/'), {
 		top: `calc(50% + ${getPx(30)})`,
@@ -44,16 +47,46 @@ export const initializeStartComponents = (gameElement: HTMLElement) => {
 		height: getPx(60),
 		width: getPx(200),
 	})
-	exitButton.element.innerText = 'Exit'
+	new TextSection(exitButton.element, 30, 'Exit')
+}
+
+export const initializeBasesComponents = (gameElement: HTMLElement) => {
+	let { uiElement } = initializeSections(gameElement)
+	let y = 0
+	game.data.Bases.forEach((base, i) => {
+		y = Math.round(i / 4)
+		let baseButton = new Button(
+			uiElement,
+			() => {
+				game.base = base
+				game.changeState('playing')
+			},
+			{
+				top: getPx(100 + 60 * y),
+				left: getPx(5 + 90 * i),
+				height: getPx(50),
+				width: getPx(80),
+			}
+		)
+		new TextSection(baseButton.element, 10, base.Location)
+	})
+	let newBaseModal = new Modal('newBase')
+	let newBaseButton = new OpenModalButton(uiElement, newBaseModal, 'add.svg', {
+		top: getPx(100 + 60 * (y + 1)),
+		left: getPx(5),
+		height: getPx(50),
+		width: getPx(80),
+	})
+	new TextSection(newBaseButton.element, 10, 'New Base')
 }
 
 export const initializePlayComponents = (gameElement: HTMLElement) => {
-	document.getElementsByTagName('body')[0].onclick = (e:MouseEvent) => {
+	document.getElementsByTagName('body')[0].onclick = (e: MouseEvent) => {
 		if (e.target) {
 			let element = e.target as HTMLElement
-			if (!element.closest(`.modal`) && !element.closest('.modalButton')){
+			if (!element.closest(`.modal`) && !element.closest('.modalButton')) {
 				game.modals.forEach((modal) => modal.close())
-			} 
+			}
 		}
 	}
 

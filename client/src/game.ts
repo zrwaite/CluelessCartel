@@ -1,9 +1,10 @@
-import { clearComponents, initializePlayComponents, initializeStartComponents } from './components/initializeComponents.js'
+import { clearComponents, initializeBasesComponents, initializePlayComponents, initializeStartComponents } from './components/initializeComponents.js'
 import Modal from './components/Modals/Modal.js'
 import { gameAPI } from './modules/gameAPI.js'
+import { Base } from './types/base.js'
 import { gameData } from './types/data.js'
 
-export type GameState = 'start' | 'playing'
+export type GameState = 'start' | 'playing' | 'bases'
 
 export default class Game {
 	zoom: number = 1
@@ -11,6 +12,7 @@ export default class Game {
 	#state: GameState = 'start'
 	element: HTMLElement
 	data = gameData
+	base?: Base
 	modals: Modal[] = []
 	constructor(gameElement: HTMLElement) {
 		this.element = gameElement
@@ -29,10 +31,18 @@ export default class Game {
 	}
 	start() {
 		clearComponents(this.element)
-		if (this.#state === 'start') {
-			initializeStartComponents(this.element)
-		} else if (this.#state === 'playing') {
-			initializePlayComponents(this.element)
+		switch(this.#state) {
+			case 'start':
+				initializeStartComponents(this.element)
+				break
+			case 'playing':
+				if (this.base) {
+					initializePlayComponents(this.element)
+					break
+				}
+			case 'bases': 
+				initializeBasesComponents(this.element)
+				break;
 		}
 	}
 	update() {

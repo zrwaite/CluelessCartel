@@ -3,6 +3,7 @@ import { gameAPI } from '../../modules/gameAPI.js'
 import { Hexagon } from '../../types/hexagon.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from '../Buttons/Button.js'
+import TextSection from '../TextSection.js'
 import Modal from './Modal.js'
 
 export default class HexagonModal extends Modal {
@@ -13,17 +14,15 @@ export default class HexagonModal extends Modal {
 		this.hexagon = hexagon
 		if (hexagon.Buyable && !hexagon.Owned) {
 			this.buyButton = new Button(this.element, this.buyHexagon.bind(this))
-			this.buyButton.element.innerText = `Buy ${hexagon.X}, ${hexagon.Y}`
+			new TextSection(this.buyButton.element, 15, `Buy ${hexagon.X}, ${hexagon.Y}`)
 		}
-		let text = document.createElement('p')
-		text.innerText = `${hexagon.X}, ${hexagon.Y}`
-		this.element.appendChild(text)
+		new TextSection(this.element, 10, `${hexagon.X}, ${hexagon.Y}`)
 	}
 	async buyHexagon() {
 		const response = await gameAPI('/hexagon', 'POST', {
-			username: "Insomnizac",
-			function: "buy",
-			BaseLocation: "New York",
+			username: 'Insomnizac',
+			function: 'buy',
+			BaseLocation: 'New York',
 			HexagonX: this.hexagon.X,
 			HexagonY: this.hexagon.Y,
 		})
@@ -33,7 +32,7 @@ export default class HexagonModal extends Modal {
 			} else {
 				alert(JSON.stringify(response.Errors))
 			}
-		} else throw Error("Failed to get user!")
+		} else throw Error('Failed to get user!')
 		game.trySaveScroll()
 		game.start()
 	}
