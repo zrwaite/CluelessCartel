@@ -6,11 +6,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<link rel="stylesheet" href="../../styles.css" />
+		<link rel="stylesheet" href="./login.css" />
 		<script src="../../build/modules/constants.js"></script>
 		<script src="../../build/modules/httpRequest.js"></script>
 		<script src="../../build/modules/cookies.js"></script>
 		<script src="../../build/modules/other.js"></script>
 		<script src="../../build/modules/navigation.js"></script>
+		<script src="../../build/modules/account/login.js"></script>
+		<script src="../../build/modules/account/findUser.js"></script>
+		<script>forceMoveUser()</script>
 	</head>
-	<body></body>
+	<body>
+		<h1>Clueless Cartell</h1>
+		<label>Username</label>
+		<input id="usernameInput"placeholder="Username" type="text">
+		<br>
+		<label>Password</label>
+		<input id="passwordInput"placeholder="Password"type="password">
+		<br>
+		<button onclick="tryLogin('usernameInput','passwordInput')">Submit</button>
+	</body>
 </html>
