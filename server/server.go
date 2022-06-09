@@ -17,9 +17,8 @@ func main() {
 	settings.MatchDev()
 	database.ConnectToMongoDB()
 	// database.InitializeDatabase()
-	fileServer := http.FileServer(http.Dir("../client"))
 	http.HandleFunc("/api/", api.APIHandler)
-	http.Handle("/", fileServer)
+	http.Handle("/", http.FileServer(http.Dir("../client")))
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8004"

@@ -1,6 +1,13 @@
 const baseURL = DEV?"http://localhost:8004":"https://clueless-cartel.herokuapp.com";
 
-const httpReq = async (url:string, method:string = "GET", params:any = {}) => {
+interface APIResponse {
+    Status: number,
+    Success: boolean,
+    Errors: string[]
+    Response: any
+}
+
+const httpReq = async (url:string, method:string = "GET", params:any = {}):Promise<APIResponse | false> => {
     url = baseURL + url;
     if (method !== "GET" && method !== "POST" && method !== "PUT" && method !== "DELETE") {
         console.error("invalid method");
@@ -29,11 +36,8 @@ const httpReq = async (url:string, method:string = "GET", params:any = {}) => {
                 body: JSON.stringify({...params, dev:DEV?"true":"false"}) // body data type must match "Content-Type" header
             });
         }
-        const data = await response.json();
-        if (!response.ok) {
-            return Promise.resolve(JSON.stringify(data));
-        }
-        return Promise.resolve(JSON.stringify(data));
+        const data = await response.json() as APIResponse;
+        return Promise.resolve(data);
     } catch (error) {
         console.error(error);
         return Promise.reject(JSON.stringify(error));

@@ -1,11 +1,11 @@
-interface Response {
+interface APIResponse {
     Status: number,
     Success: boolean,
     Errors: string[]
     Response: any
 }
 
-export const gameAPI = async (url:string, method:string = "GET", params:any = {}):Promise<Response | false> => {
+export const gameAPI = async (url:string, method:string = "GET", params:any = {}):Promise<APIResponse | false> => {
     url = baseURL + "/api" + url;
     if (method !== "GET" && method !== "POST" && method !== "PUT" && method !== "DELETE") {
         console.error("invalid method");
@@ -34,7 +34,7 @@ export const gameAPI = async (url:string, method:string = "GET", params:any = {}
                 body: JSON.stringify({...params, dev:DEV?"true":"false"}) // body data type must match "Content-Type" header
             });
         }
-        const data = await response.json() as Response;
+        const data = await response.json() as APIResponse;
         if (!response.ok) {
             return Promise.resolve(data);
         }

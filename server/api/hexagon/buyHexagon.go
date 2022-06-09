@@ -47,6 +47,7 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 
 		//Find the cost for the new hexagon
 		hexagonCost := GetHexagonCost(base)
+		// user.Cash += hexagonCost
 		if user.Cash < hexagonCost {
 			res.Errors = append(res.Errors, "Not enough cash!")
 			return
