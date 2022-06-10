@@ -40,6 +40,8 @@ func SignInHandler(r *http.Request, data []byte, res *apiModels.Response) {
 	} else if res.Status == 400 {
 		res.Errors = append(res.Errors, "Error while finding user")
 		return
+	} else {
+		res.Status = 400
 	}
 	if !auth.CheckPasswordHash(userParams.Password, user.Hash) {
 		res.Errors = append(res.Errors, "Invalid password")
@@ -53,5 +55,7 @@ func SignInHandler(r *http.Request, data []byte, res *apiModels.Response) {
 		res.Errors = append(res.Errors, "Failed to create token")
 		return
 	}
+	res.Status = 200
+	res.Success = true
 	res.Response = token
 }

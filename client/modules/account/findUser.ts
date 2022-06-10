@@ -7,10 +7,11 @@ const findUser = async ():Promise<boolean> => {
 	else return false
 }
 
-const forceMoveUser = async () => {
-	if (await findUser()) {
+const forceMoveUser = async (from: 'login'|'game') => {
+	const userFound = await findUser()
+	if (userFound && from==='login') {
 		forceNavigate('/game')
-	} else {
+	} else if (!userFound && from==='game') {
 		forceNavigate('/login')
 	}
 }

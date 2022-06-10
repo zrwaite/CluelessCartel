@@ -1,1 +1,2 @@
-const DEV = false;
+const DEV = true;
+const PROD = false;

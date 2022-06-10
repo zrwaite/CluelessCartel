@@ -14,7 +14,7 @@
 		<script src="../../build/modules/navigation.js"></script>
 		<script src="../../build/modules/account/login.js"></script>
 		<script src="../../build/modules/account/findUser.js"></script>
-		<script>forceMoveUser()</script>
+		<script>forceMoveUser('login')</script>
 	</head>
 	<body>
 		<h1>Clueless Cartell</h1>
@@ -24,6 +24,7 @@
 		<label>Password</label>
 		<input id="passwordInput"placeholder="Password"type="password">
 		<br>
-		<button onclick="tryLogin('usernameInput','passwordInput')">Submit</button>
+		<button onclick="tryLogin('usernameInput','passwordInput')">Login</button>
+		<button onclick="trySignUp('usernameInput','passwordInput')">Sign Up</button>
 	</body>
 </html>

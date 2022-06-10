@@ -1,4 +1,4 @@
-const baseURL = DEV?"http://localhost:8004":"https://clueless-cartel.herokuapp.com";
+const baseURL = PROD?"https://clueless-cartel.herokuapp.com":"http://localhost:8004"
 
 interface APIResponse {
     Status: number,
