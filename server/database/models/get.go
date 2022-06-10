@@ -7,3 +7,7 @@ var GetIdOpts = struct {
 type GetIdStruct struct {
 	Id string
 }
+
+type GetUsernameStruct struct {
+	Username string
+}
