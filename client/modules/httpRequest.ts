@@ -1,4 +1,5 @@
-const baseURL = PROD?"https://clueless-cartel.herokuapp.com":"http://localhost:8004"
+// const baseURL = PROD?"https://clueless-cartel.herokuapp.com":"http://localhost:8004"
+const baseURL = "https://elephant-brought-fewer-priced.trycloudflare.com";
 
 interface APIResponse {
     Status: number,

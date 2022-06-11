@@ -38,8 +38,14 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 			res.Status = 400
 		}
 
+		location, success := models.GetLocation(buyHexagonParams.BaseLocation)
+		if !success {
+			res.Errors = append(res.Errors, "invalid location")
+			return
+		}
+
 		// Make sure base exists at location
-		base, baseExists := base.GetBase(&user.Bases, buyHexagonParams.BaseLocation)
+		base, baseExists := base.GetBase(&user.Bases, location)
 		if !baseExists {
 			res.Errors = append(res.Errors, "Base doesn't exist at that location")
 			return
@@ -47,7 +53,7 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 
 		//Find the cost for the new hexagon
 		hexagonCost := GetHexagonCost(base)
-		// user.Cash += hexagonCost
+		user.Cash += hexagonCost
 		if user.Cash < hexagonCost {
 			res.Errors = append(res.Errors, "Not enough cash!")
 			return
@@ -64,7 +70,7 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 			res.Errors = append(res.Errors, "Failed to create base")
 			return
 		}
-		success := dbModules.UpdateUser(user)
+		success = dbModules.UpdateUser(user)
 		if !success {
 			res.Errors = append(res.Errors, "Failed to update user - "+err.Error())
 			return

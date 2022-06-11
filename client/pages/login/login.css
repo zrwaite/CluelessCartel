@@ -1,3 +1,9 @@
 h1 {
     text-align:center;
 }
+
+body {
+    background-image: url('https://images4.alphacoders.com/688/688202.png');
+    filter: brightness(0.5);
+    background-size: 100%;
+}

@@ -2,10 +2,12 @@ import { game, getPx } from '../../index.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from '../Buttons/Button.js'
 import Component from '../Component.js'
+import { getImageName } from '../../modules/getImageName.js'
 
 export default class Modal extends Component {
 	closeButton: Button
 	id: string
+	background?: HTMLImageElement
 	constructor(id: string, styles: StyleObject = {}) {
 		const parentElement = document.getElementById('gameSection')
 		if (!parentElement) throw Error('#gameSection not found')
@@ -47,5 +49,13 @@ export default class Modal extends Component {
 	}
 	close() {
 		this.addStyles({ display: 'none' })
+	}
+	initializeBackground(assetFilename: string) {
+		this.addStyles({
+			backgroundImage: getImageName(assetFilename),
+			backgroundSize: "100% 100%",
+			color: "green"
+		})
+		// this.icon = new Icon(this.element, assetFilename)
 	}
 }

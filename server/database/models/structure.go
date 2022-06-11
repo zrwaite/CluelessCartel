@@ -6,8 +6,8 @@ type Structure struct {
 	Moveable         bool
 	Name             string
 	Image            string
-	LandMaterials    []string  `bson:"land_materials"`
-	ResourceCapacity Resources `bson:"resource_capacity"`
+	LandMaterials    []LandMaterial `bson:"land_materials"`
+	ResourceCapacity Resources      `bson:"resource_capacity"`
 }
 
 var structureSchema = bson.M{
@@ -20,7 +20,7 @@ var structureSchema = bson.M{
 		"land_materials": bson.M{
 			"bsonType":    "array",
 			"uniqueItems": true,
-			"items":       bson.M{"bsonType": "string"},
+			"items":       landMaterialScema,
 		},
 		"resource_capacity": resourcesSchema,
 	},
@@ -30,14 +30,14 @@ var EmptyStructure = Structure{
 	Moveable:         true,
 	Name:             "Empty",
 	Image:            "",
-	LandMaterials:    []string{},
+	LandMaterials:    []LandMaterial{},
 	ResourceCapacity: Resources{},
 }
 var RV = Structure{
 	Moveable:      true,
 	Name:          "RV",
 	Image:         "CC.svg",
-	LandMaterials: []string{},
+	LandMaterials: []LandMaterial{},
 	ResourceCapacity: Resources{
 		Metal: 7,
 	},
@@ -46,23 +46,23 @@ var BuriedStorage = Structure{
 	Moveable:      false,
 	Name:          "Buried Storage",
 	Image:         "CC.svg",
-	LandMaterials: []string{LandMaterial.Dirt, LandMaterial.Grass, LandMaterial.Sand},
+	LandMaterials: []LandMaterial{Dirt, Grass, Sand},
 }
 var StorageUnit = Structure{
 	Moveable:      false,
 	Name:          "Storage Unit",
 	Image:         "CC.svg",
-	LandMaterials: []string{LandMaterial.Pavement},
+	LandMaterials: []LandMaterial{Pavement},
 }
 var Shed = Structure{
 	Moveable:      true,
 	Name:          "Shed",
 	Image:         "CC.svg",
-	LandMaterials: []string{},
+	LandMaterials: []LandMaterial{},
 }
 var Armory = Structure{
 	Moveable:      false,
 	Name:          "Armory",
 	Image:         "CC.svg",
-	LandMaterials: []string{LandMaterial.Pavement},
+	LandMaterials: []LandMaterial{Pavement},
 }

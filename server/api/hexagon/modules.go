@@ -109,7 +109,7 @@ func AddEmptyHexagonRow(base *models.Base, start bool) {
 	newHexagonRow := models.HexagonRow{Y: newY}
 	for i := startX; i < newLength+startX; i++ {
 		newHexagonRow.Hexagons = append(newHexagonRow.Hexagons, models.Hexagon{
-			LandMaterial: models.GetLandMaterial(base.Location),
+			LandMaterial: base.Location.LandMaterial,
 			Structure:    models.EmptyStructure,
 			X:            i,
 			Owned:        false,
@@ -134,7 +134,7 @@ func AddEmptyHexagonColumn(base *models.Base, start bool) {
 	}
 	for i := startY; i < newLength+startY; i++ {
 		newHexagon := models.Hexagon{
-			LandMaterial: models.GetLandMaterial(base.Location),
+			LandMaterial: base.Location.LandMaterial,
 			Structure:    models.EmptyStructure,
 			X:            newX,
 			Owned:        false,

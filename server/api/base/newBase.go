@@ -39,7 +39,12 @@ func newBase(body []byte, res *apiModels.Response) {
 			res.Errors = append(res.Errors, err.Error())
 			return
 		}
-		base.Location = newBaseParams.Location
+		var success bool
+		base.Location, success = models.GetLocation(newBaseParams.Location)
+		if !success {
+			res.Errors = append(res.Errors, "invalid location")
+			return
+		}
 		_, baseFound := GetBase(&user.Bases, base.Location)
 		if baseFound {
 			// If location is already in use, a new base can not be created there
@@ -63,7 +68,7 @@ func newBase(body []byte, res *apiModels.Response) {
 			return
 		}
 
-		success := dbModules.UpdateUser(user)
+		success = dbModules.UpdateUser(user)
 		if !success {
 			res.Errors = append(res.Errors, "Failed to update user - "+err.Error())
 			return

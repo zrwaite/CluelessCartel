@@ -1,777 +1,533 @@
 import { User } from './user'
 
 export const gameData: User = {
-	Username: 'Insomnizac',
-	Cash: 250,
-	Bases: [
+	"Username": "Insomnizac",
+	"Cash": 5000,
+	"Bases": [
 		{
-			Location: 'New York',
-			Index: 0,
-			Resources: {
-				Metal: 0,
-				Plants: 10,
-				Chemicals: 10,
+			"Location": {
+				"Name": "New York",
+				"LandMaterial": {
+					"Name": "Pavement"
+				}
 			},
-			Drugs: {
-				Opioids: 10,
-				Weed: 10,
-				Meth: 0,
+			"Index": 0,
+			"Resources": {
+				"Metal": 0,
+				"Plants": 10,
+				"Chemicals": 10
 			},
-			Weapons: {
-				Guns: 1,
-				Explosives: 0,
+			"Drugs": {
+				"Opioids": 10,
+				"Weed": 10,
+				"Meth": 0
 			},
-			HexagonRows: [
+			"Weapons": {
+				"Guns": 1,
+				"Explosives": 0
+			},
+			"HexagonRows": [
 				{
-					Hexagons: [
+					"Hexagons": [
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -2,
-							Owned: false,
-							Buyable: false,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -2,
+							"Owned": false,
+							"Buyable": false
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -1,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -1,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 0,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 0,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 1,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 1,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 2,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
 							},
-							X: 3,
-							Owned: false,
-							Buyable: false,
-						},
+							"X": 2,
+							"Owned": false,
+							"Buyable": false
+						}
 					],
-					Y: -2,
+					"Y": -2
 				},
 				{
-					Hexagons: [
+					"Hexagons": [
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -2,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -2,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -1,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -1,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 0,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 0,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 1,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 1,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 2,
-							Owned: false,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
 							},
-							X: 3,
-							Owned: false,
-							Buyable: false,
-						},
+							"X": 2,
+							"Owned": false,
+							"Buyable": false
+						}
 					],
-					Y: -1,
+					"Y": -1
 				},
 				{
-					Hexagons: [
+					"Hexagons": [
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -2,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -2,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -1,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -1,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 0,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 0,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 1,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 1,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 2,
-							Owned: true,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
 							},
-							X: 3,
-							Owned: false,
-							Buyable: true,
-						},
+							"X": 2,
+							"Owned": false,
+							"Buyable": true
+						}
 					],
-					Y: 0,
+					"Y": 0
 				},
 				{
-					Hexagons: [
+					"Hexagons": [
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -2,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -2,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -1,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -1,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 0,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 0,
+							"Owned": true,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 1,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 1,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 2,
-							Owned: false,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
 							},
-							X: 3,
-							Owned: false,
-							Buyable: false,
-						},
+							"X": 2,
+							"Owned": false,
+							"Buyable": false
+						}
 					],
-					Y: 1,
+					"Y": 1
 				},
 				{
-					Hexagons: [
+					"Hexagons": [
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -2,
-							Owned: false,
-							Buyable: false,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -2,
+							"Owned": false,
+							"Buyable": false
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: -1,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": -1,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 0,
-							Owned: true,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 0,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 1,
-							Owned: false,
-							Buyable: true,
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
+							},
+							"X": 1,
+							"Owned": false,
+							"Buyable": true
 						},
 						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"LandMaterial": {
+								"Name": "Pavement"
 							},
-							X: 2,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
+							"Structure": {
+								"Moveable": true,
+								"Name": "Empty",
+								"Image": "",
+								"LandMaterials": [],
+								"ResourceCapacity": {
+									"Metal": 0,
+									"Plants": 0,
+									"Chemicals": 0
+								}
 							},
-							X: 3,
-							Owned: false,
-							Buyable: false,
-						},
+							"X": 2,
+							"Owned": false,
+							"Buyable": false
+						}
 					],
-					Y: 2,
-				},
-				{
-					Hexagons: [
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: -2,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: -1,
-							Owned: false,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 0,
-							Owned: true,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 1,
-							Owned: false,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 2,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 3,
-							Owned: false,
-							Buyable: false,
-						},
-					],
-					Y: 3,
-				},
-				{
-					Hexagons: [
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: -2,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: -1,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 0,
-							Owned: false,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 1,
-							Owned: false,
-							Buyable: true,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 2,
-							Owned: false,
-							Buyable: false,
-						},
-						{
-							LandMaterial: 'Pavement',
-							Structure: {
-								Moveable: true,
-								Name: 'Empty',
-								Image: '',
-								LandMaterials: [],
-								ResourceCapacity: {
-									Metal: 0,
-									Plants: 0,
-									Chemicals: 0,
-								},
-							},
-							X: 3,
-							Owned: false,
-							Buyable: false,
-						},
-					],
-					Y: 4,
-				},
-			],
-		},
-	],
+					"Y": 2
+				}
+			]
+		}
+	]
 }

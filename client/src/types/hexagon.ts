@@ -1,6 +1,9 @@
 import { Structure } from './structure'
 
-export type LandMaterial = 'Dirt' | 'Sand' | 'Grass' | 'Pavement'
+
+export interface LandMaterial {
+	Name: string
+}
 
 export interface Hexagon {
 	LandMaterial: LandMaterial

@@ -5,10 +5,10 @@ import (
 	"math"
 )
 
-func GetBase(userBases *[]models.Base, location string) (base *models.Base, found bool) {
+func GetBase(userBases *[]models.Base, location models.Location) (base *models.Base, found bool) {
 	for i := 0; i < len(*userBases); i++ {
 		// Check all bases for if location is in use
-		if (*userBases)[i].Location == location {
+		if (*userBases)[i].Location.Name == location.Name {
 			return &(*userBases)[i], true
 		}
 	}

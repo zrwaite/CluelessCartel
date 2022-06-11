@@ -10,6 +10,7 @@ import ClickableGridHexagonRow from './ClickableGridHexagonRow.js'
 import Modal from './Modals/Modal.js'
 import SettingsModal from './Modals/SettingsModal.js'
 import TextSection from './TextSection.js'
+import NewBaseModal from './Modals/NewBaseModal.js'
 
 const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement; canvasElement: HTMLElement; hexElement: HTMLElement } => {
 	let uiElement = document.createElement('div')
@@ -68,9 +69,9 @@ export const initializeBasesComponents = (gameElement: HTMLElement) => {
 				width: getPx(80),
 			}
 		)
-		new TextSection(baseButton.element, 10, base.Location)
+		new TextSection(baseButton.element, 10, base.Location.Name)
 	})
-	let newBaseModal = new Modal('newBase')
+	let newBaseModal = new NewBaseModal('MapOfUSA.svg')
 	let newBaseButton = new OpenModalButton(uiElement, newBaseModal, 'add.svg', {
 		top: getPx(100 + 60 * (y + 1)),
 		left: getPx(5),

@@ -2,15 +2,25 @@ package models
 
 import "go.mongodb.org/mongo-driver/bson"
 
-var LandMaterial = struct {
-	Dirt     string
-	Grass    string
-	Sand     string
-	Pavement string
-}{"Dirt", "Grass", "Sand", "Pavement"}
+type LandMaterial struct {
+	Name string
+}
+
+var landMaterialScema = bson.M{
+	"bsonType": "object",
+	"required": []string{"name"},
+	"properties": bson.M{
+		"name": bson.M{"bsonType": "string"},
+	},
+}
+
+var Grass = LandMaterial{"Grass"}
+var Dirt = LandMaterial{"Dirt"}
+var Sand = LandMaterial{"Sand"}
+var Pavement = LandMaterial{"Pavement"}
 
 type Hexagon struct {
-	LandMaterial string `bson:"land_material"`
+	LandMaterial LandMaterial `bson:"land_material"`
 	Structure    Structure
 	X            int
 	Owned        bool
@@ -21,7 +31,7 @@ var hexagonsSchema = bson.M{
 	"bsonType": "object",
 	"required": []string{"land_material", "structure", "x", "owned", "buyable"},
 	"properties": bson.M{
-		"land_material": bson.M{"bsonType": "string"},
+		"land_material": landMaterialScema,
 		"structure":     structureSchema,
 		"x":             bson.M{"bsonType": "int"},
 		"owned":         bson.M{"bsonType": "bool"},
@@ -64,7 +74,7 @@ func ValidateHexagonRowsStructure(hexagonRows *[]HexagonRow) (valid bool) {
 	return true
 }
 
-func CreateStartingHexagonRows(landMaterial string) []HexagonRow {
+func CreateStartingHexagonRows(location Location) []HexagonRow {
 	var hexagonRows = []HexagonRow{}
 	for i1 := -2; i1 <= 2; i1++ {
 		/* Create hexagon Grid:
@@ -92,7 +102,7 @@ func CreateStartingHexagonRows(landMaterial string) []HexagonRow {
 				owned = true
 			}
 			hexagonRow.Hexagons = append(hexagonRow.Hexagons, Hexagon{
-				LandMaterial: landMaterial,
+				LandMaterial: location.LandMaterial,
 				Structure:    EmptyStructure,
 				Owned:        owned,
 				Buyable:      buyable,
