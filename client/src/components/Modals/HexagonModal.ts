@@ -23,7 +23,7 @@ export default class HexagonModal extends Modal {
 			new TextSection(this.buyButton.element, 15, `Buy ${hexagon.X}, ${hexagon.Y}`)
 		}
 		if (hexagon.Owned) {
-			let structureSection = new StructureSelector(this.element, 5, this.setStructureName.bind(this))
+			let structureSection = new StructureSelector(this.element, hexagon.LandMaterial, 5, this.setStructureName.bind(this))
 			this.buyStructureButton = new Button(this.element, this.buyStructure.bind(this), {
 				top: getPx(100),
 				width: getPx(100)

@@ -5,8 +5,23 @@ import Button from './Button.js'
 export default class AnimatedButton extends Button {
 	start: number
 	end: number
+	clicked: boolean = false
 	constructor(parentElement: HTMLElement, onClick: Function, icon: string, start: number, end: number, styles: StyleObject = {}) {
-		super(parentElement, onClick, {
+		const newOnClick = () => {
+			//all you stuff
+			if(!this.clicked){
+				this.addStyles({
+					border: `solid ${getPx(3)} grey`,
+				})
+			}else{
+				this.addStyles({
+					border: getPx(3) + ' solid black',
+				})
+			}
+			onClick()
+			this.clicked = !this.clicked
+		}
+		super(parentElement, newOnClick, {
 			transition: 'bottom 0.7s',
 			...styles,
 		})

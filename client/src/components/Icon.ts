@@ -9,6 +9,7 @@ export default class Icon extends Component {
 		this.addStyles({
 			height: '100%',
 			width: '100%',
+			...styles
 		})
 		parentElement.appendChild(this.element)
 	}
