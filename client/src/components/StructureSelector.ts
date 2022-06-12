@@ -10,6 +10,7 @@ export class StructureSelector extends Component {
 		super('div', parentElement)
 		let rows = 0;
 		let allStructures = game.data.AllStructures.filter(structure => {
+			if (structure.Name === "Empty" || structure.Natural) return false
 			if (structure.LandMaterials.length ===0) return true
 			for (let i=0; i<structure.LandMaterials.length; i++) {
 				if (structure.LandMaterials[i].Name === hexagonMaterial.Name) {

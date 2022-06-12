@@ -117,8 +117,8 @@ func BuyHexagon(base *models.Base, HexagonX int, HexagonY int, res *apiModels.Re
 	}
 
 	// If enemy structures exist, blow em up!
-	if buyingHexagon.Structure.Name != "Empty" {
-		res.Errors = append(res.Errors, "New hexagon structures must be cleared")
+	if buyingHexagon.Structure.Enemy {
+		res.Errors = append(res.Errors, "Enemy hexagon structures must be cleared")
 		return
 	}
 

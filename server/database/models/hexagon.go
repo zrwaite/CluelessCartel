@@ -1,6 +1,10 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson"
+import (
+	"math/rand"
+
+	"go.mongodb.org/mongo-driver/bson"
+)
 
 type LandMaterial struct {
 	Name string
@@ -24,6 +28,7 @@ var AllLandMaterials = []LandMaterial{Grass, Dirt, Sand, Pavement, Water}
 type Hexagon struct {
 	LandMaterial LandMaterial `bson:"land_material"`
 	Structure    Structure
+	Rotation     int
 	X            int
 	Owned        bool
 	Buyable      bool
@@ -31,11 +36,12 @@ type Hexagon struct {
 
 var hexagonsSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"land_material", "structure", "x", "owned", "buyable"},
+	"required": []string{"land_material", "rotation", "structure", "x", "owned", "buyable"},
 	"properties": bson.M{
 		"land_material": landMaterialScema,
 		"structure":     structureSchema,
 		"x":             bson.M{"bsonType": "int"},
+		"rotation":      bson.M{"bsonType": "int"},
 		"owned":         bson.M{"bsonType": "bool"},
 		"buyable":       bson.M{"bsonType": "bool"},
 	},
@@ -107,6 +113,7 @@ func CreateStartingHexagonRows(location Location) []HexagonRow {
 				LandMaterial: location.LandMaterial,
 				Structure:    EmptyStructure,
 				Owned:        owned,
+				Rotation:     rand.Intn(6),
 				Buyable:      buyable,
 				X:            i2,
 			})

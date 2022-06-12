@@ -114,6 +114,16 @@ func BuyStructure(hexagon *models.Hexagon, structure models.Structure, res *apiM
 		return
 	}
 
+	if structure.Natural {
+		res.Errors = append(res.Errors, "Can not buy natural structure")
+		return
+	}
+
+	if structure.Name == "Empty" {
+		res.Errors = append(res.Errors, "Can not buy empty structure")
+		return
+	}
+
 	validLandMaterial := false
 	if len(structure.LandMaterials) == 0 {
 		validLandMaterial = true

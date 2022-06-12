@@ -4,4 +4,5 @@ export interface User {
 	Username: string
 	Cash: number
 	Bases: Base[]
+	NewBasePrice: number
 }

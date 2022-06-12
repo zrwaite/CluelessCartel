@@ -8,6 +8,7 @@ export interface LandMaterial {
 export interface Hexagon {
 	LandMaterial: LandMaterial
 	Structure: Structure
+	Rotation: number
 	X: number
 	Y?: number
 	Owned: boolean

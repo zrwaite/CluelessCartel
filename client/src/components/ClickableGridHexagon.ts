@@ -37,12 +37,11 @@ export default class ClickableGridHexagon extends Component {
 			if (hexagon.LandMaterial.Name === 'Grass') imageLink = 'GrassHexagon'
 			if (hexagon.LandMaterial.Name === 'Sand') imageLink = 'SandHexagon'
 			if (hexagon.LandMaterial.Name === 'Water') imageLink = 'WaterHexagon'
-			let degrees = Math.round(Math.random()*6) * 60
 			this.texture = new Icon(this.element, `${imageLink}.png`, {
 				position: 'absolute',
 				height: '100%',
 				width: '101%',
-				transform: `rotate(${degrees}deg)`,
+				transform: `rotate(${hexagon.Rotation*60}deg)`,
 				left: '0',
 				top: '0'
 			})
@@ -53,15 +52,18 @@ export default class ClickableGridHexagon extends Component {
 			} 
 			let {filename, found} = getStructureImage(hexagon.Structure.Name)
 			if (found) {
-				let degrees = Math.round(Math.random()*6) * 60
 				let structureImage = new Icon(this.element, filename, {
 					position: 'absolute',
 					width: getPx(50),
 					height: getPx(50),
 					left: getPx(25),
 					top: getPx(32),
-					transform: `rotate(${degrees}deg)`,
 				})
+				if (!hexagon.Owned) {
+					structureImage.addStyles({
+						filter: 'grayscale(70%) brightness(70%)'
+					})
+				} 
 			} else {
 				if (hexagon.Structure.Name !== "Empty") {
 					let structure = new TextSection(this.element, 20, hexagon.Structure.Name)

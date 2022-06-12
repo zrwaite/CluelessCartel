@@ -1,4 +1,3 @@
-import Game, { GameState } from '../game.js'
 import { game, getPx, windowSize } from '../index.js'
 import { navigate } from '../modules/navigate.js'
 import AnimatedButton from './Buttons/AnimatedButton.js'
@@ -11,6 +10,7 @@ import SettingsModal from './Modals/SettingsModal.js'
 import TextSection from './TextSection.js'
 import NewBaseModal from './Modals/NewBaseModal.js'
 import StorageButton from './Buttons/StorageButton.js'
+import StatusBar from './StatusBar.js'
 
 const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement; canvasElement: HTMLElement; hexElement: HTMLElement } => {
 	let uiElement = document.createElement('div')
@@ -93,6 +93,8 @@ export const initializePlayComponents = (gameElement: HTMLElement) => {
 
 	let { uiElement, hexElement } = initializeSections(gameElement)
 	let hexagonRows: ClickableGridHexagonRow[] = []
+
+	let statusBar = new StatusBar(uiElement)
 
 	let base = game.user.Bases.find(thisBase => thisBase.Location.Name === game.base?.Location.Name)
 	if (!base) {

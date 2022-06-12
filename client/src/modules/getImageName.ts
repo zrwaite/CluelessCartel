@@ -15,6 +15,12 @@ export const getStructureImage = (structureName: string): {filename: string, fou
         case "RV": 
             filename = 'truck.png'
             break
+        case "Rocks":
+            filename = 'rock.png'
+            break
+        case "Trees":
+            filename = 'tree.png'
+            break
         default: 
             found = false;
     }
