@@ -1,6 +1,5 @@
 import Game, { GameState } from '../game.js'
 import { game, getPx, windowSize } from '../index.js'
-import { gameAPI } from '../modules/gameAPI.js'
 import { navigate } from '../modules/navigate.js'
 import AnimatedButton from './Buttons/AnimatedButton.js'
 import AnimatorButton from './Buttons/AnimatorButton.js'
@@ -54,7 +53,7 @@ export const initializeStartComponents = (gameElement: HTMLElement) => {
 export const initializeBasesComponents = (gameElement: HTMLElement) => {
 	let { uiElement } = initializeSections(gameElement)
 	let y = 0
-	game.data.Bases.forEach((base, i) => {
+	game.user.Bases.forEach((base, i) => {
 		y = Math.round(i / 4)
 		let baseButton = new Button(
 			uiElement,
@@ -94,7 +93,13 @@ export const initializePlayComponents = (gameElement: HTMLElement) => {
 	let { uiElement, hexElement } = initializeSections(gameElement)
 	let hexagonRows: ClickableGridHexagonRow[] = []
 
-	game.data.Bases[0].HexagonRows.forEach((hexagonRow) => {
+	let base = game.user.Bases.find(thisBase => thisBase.Location.Name === game.base?.Location.Name)
+	if (!base) {
+		alert("Base not found")
+		throw Error("Base not found")
+	}
+
+	base.HexagonRows.forEach((hexagonRow) => {
 		let newrow = new ClickableGridHexagonRow(hexElement, hexagonRow)
 		newrow.initializeHexagons()
 		hexagonRows.push(newrow)

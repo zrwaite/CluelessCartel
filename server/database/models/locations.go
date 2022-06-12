@@ -7,7 +7,7 @@ type Location struct {
 
 var Nevada = Location{"Nevada", Sand}
 var Florida = Location{"Florida", Sand}
-var CanadianBorder = Location{"Canadian Border", Grass}
+var Minnesota = Location{"Minnesota", Grass}
 var NewYork = Location{"New York", Pavement}
 
 func GetLocation(locationName string) (location Location, success bool) {
@@ -17,8 +17,8 @@ func GetLocation(locationName string) (location Location, success bool) {
 		location = Nevada
 	case "Florida":
 		location = Florida
-	case "Canadian Border":
-		location = CanadianBorder
+	case "Minnesota":
+		location = Minnesota
 	case "New York":
 		location = NewYork
 	default:

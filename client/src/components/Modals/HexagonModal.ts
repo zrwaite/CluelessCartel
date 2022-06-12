@@ -20,15 +20,15 @@ export default class HexagonModal extends Modal {
 	}
 	async buyHexagon() {
 		const response = await gameAPI('/hexagon', 'POST', {
-			username: 'Insomnizac',
+			username: game.user.Username,
 			function: 'buy',
-			BaseLocation: 'New York',
+			BaseLocation: game.base?.Location.Name,
 			HexagonX: this.hexagon.X,
 			HexagonY: this.hexagon.Y,
 		})
 		if (response) {
 			if (response.Success) {
-				game.data = response.Response
+				game.user = response.Response
 			} else {
 				alert(JSON.stringify(response.Errors))
 			}

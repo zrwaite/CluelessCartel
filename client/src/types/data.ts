@@ -1,6 +1,7 @@
+import { GameData } from './game'
 import { User } from './user'
 
-export const gameData: User = {
+export const defaultUserData: User = {
 	"Username": "Insomnizac",
 	"Cash": 5000,
 	"Bases": [
@@ -530,4 +531,10 @@ export const gameData: User = {
 			]
 		}
 	]
+}
+
+export const defaultGameData:GameData = {
+	AllDrugs:     [],
+	AllLocations: [],
+	AllResources: [],
 }

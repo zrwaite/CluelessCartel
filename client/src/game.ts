@@ -2,7 +2,9 @@ import { clearComponents, initializeBasesComponents, initializePlayComponents, i
 import Modal from './components/Modals/Modal.js'
 import { gameAPI } from './modules/gameAPI.js'
 import { Base } from './types/base.js'
-import { gameData } from './types/data.js'
+import { defaultUserData, defaultGameData } from './types/data.js'
+import { GameData } from './types/game.js'
+import { User } from './types/user.js'
 
 export type GameState = 'start' | 'playing' | 'bases'
 
@@ -11,22 +13,29 @@ export default class Game {
 	scroll: {x:number, y:number} = {x:0,y:0}
 	#state: GameState = 'start'
 	element: HTMLElement
-	data = gameData
+	user:User = defaultUserData
+	data: GameData = defaultGameData
 	base?: Base
 	modals: Modal[] = []
 	constructor(gameElement: HTMLElement) {
 		this.element = gameElement
 		this.initializeData()
 	}
-	async initializeData() {
-		const response:any = await gameAPI('/user?username=Insomnizac')
-		if (response && response.Success) {
-			this.data = response.Response
-			this.start()
+	async initializeData() {	
+		const username = Cookies.get("username")
+		const userResponse:any = await gameAPI('/user?username=' + username )
+		if (userResponse && userResponse.Success) {
+			this.user = userResponse.Response
+			const dataResponse:any = await gameAPI('/game' )
+			if (dataResponse && dataResponse.Success) {
+				this.data = dataResponse.Response
+				this.start()
+			} else {
+				throw Error("Failed to get data")
+			}
 		} else {
-			this.start()
-			console.error("Not in true game mode")
-			// throw Error("Failed to get user!")
+			logout()
+			forceMoveUser('game')
 		}
 	}
 	start() {

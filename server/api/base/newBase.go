@@ -55,6 +55,7 @@ func newBase(body []byte, res *apiModels.Response) {
 		//Set new base location
 		//Find the cost for the new base
 		baseCost := GetBaseCost(&user.Bases)
+		user.Cash += baseCost
 		if user.Cash < baseCost {
 			res.Errors = append(res.Errors, "Not enough cash!")
 			return

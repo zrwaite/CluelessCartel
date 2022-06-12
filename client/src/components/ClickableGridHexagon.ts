@@ -43,6 +43,8 @@ export default class ClickableGridHexagon extends Component {
 				this.texture.style.filter = 'grayscale(70%) brightness(70%)'
 			}
 			this.element.appendChild(this.texture)
+			let degrees = Math.round(Math.random()*6) * 60
+			this.texture.style.transform = `rotate(${degrees}deg)`
 		}
 	}
 	onClick(e: MouseEvent) {

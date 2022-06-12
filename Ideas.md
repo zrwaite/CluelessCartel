@@ -9,14 +9,18 @@
 * Canadian (Marijuana)
 * Johnson & Johnson (Opioids)
 
-* Names
-	* Clueless Cartel(s)
-	* Creamy Cartel(s)
-	* Cursed Cartel(s)
-	* Curious Cartel(s)
-
 * Resources
 	* Gas
 	* Metal
 	* Wood
 	* Water?	
+
+
+
+* Natural Disasters
+* Drive Bys
+* Structures
+	* Production
+	* Transportation
+	*
+* Enemy Structures can exist, must be destoyed

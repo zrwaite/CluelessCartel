@@ -52,9 +52,8 @@ export default class Modal extends Component {
 	}
 	initializeBackground(assetFilename: string) {
 		this.addStyles({
-			backgroundImage: getImageName(assetFilename),
+			backgroundImage: `url(${getImageName(assetFilename)})`,
 			backgroundSize: "100% 100%",
-			color: "green"
 		})
 		// this.icon = new Icon(this.element, assetFilename)
 	}

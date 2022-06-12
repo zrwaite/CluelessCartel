@@ -14,9 +14,10 @@ var GetUserOpts = struct {
 }{1, 1, 1}
 
 type GetUserReturn struct {
-	Username string
-	Cash     int
-	Bases    []Base
+	Username     string
+	Cash         int
+	Bases        []Base
+	NewBasePrice int
 }
 
 var GetUserAuthOpts = struct {
