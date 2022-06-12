@@ -6,6 +6,7 @@ import (
 	"clueless-cartel-server/api/base"
 	"clueless-cartel-server/api/gameData"
 	"clueless-cartel-server/api/hexagon"
+	"clueless-cartel-server/api/reset"
 	"clueless-cartel-server/api/signin"
 	"clueless-cartel-server/api/structure"
 	"clueless-cartel-server/api/user"
@@ -21,7 +22,7 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 	var data []byte
 	if r.Method == "GET" {
 		auth.DevCheck(auth.GetDevParam(r), res)
-	} else if r.Method == "POST" {
+	} else if r.Method == "POST" || r.Method == "DELETE" {
 		var err error
 		data, err = ioutil.ReadAll(r.Body)
 		if err != nil {
@@ -57,6 +58,8 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 			gameData.GameDataHandler(r, data, res)
 		case "/api/structure":
 			structure.StructureHandler(r, data, res)
+		case "/api/reset":
+			reset.ResetHandler(r, data, res)
 		default:
 			res.Errors = append(res.Errors, "Endpoint not found")
 			res.Status = 404
