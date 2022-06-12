@@ -1,13 +1,19 @@
 import { game, getPx, unit } from '../../index.js'
+import { buyHexagon } from '../../modules/api/buyHexagon.js'
+import { buyStructure } from '../../modules/api/buyStructure.js'
 import { gameAPI } from '../../modules/gameAPI.js'
 import { Hexagon } from '../../types/hexagon.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from '../Buttons/Button.js'
+import { StructureSelector } from '../StructureSelector.js'
 import TextSection from '../TextSection.js'
 import Modal from './Modal.js'
 
 export default class HexagonModal extends Modal {
 	buyButton?: Button
+	buyStructureButton?: Button
+	buyStructureButtonText?: TextSection
+	structureName?: string
 	hexagon: Hexagon
 	constructor(hexagon: Hexagon, styles: StyleObject = {}) {
 		super(`${hexagon.X}-${hexagon.Y}`, styles)
@@ -16,24 +22,28 @@ export default class HexagonModal extends Modal {
 			this.buyButton = new Button(this.element, this.buyHexagon.bind(this))
 			new TextSection(this.buyButton.element, 15, `Buy ${hexagon.X}, ${hexagon.Y}`)
 		}
+		if (hexagon.Owned) {
+			let structureSection = new StructureSelector(this.element, 5, this.setStructureName.bind(this))
+			this.buyStructureButton = new Button(this.element, this.buyStructure.bind(this), {
+				top: getPx(100),
+				width: getPx(100)
+			})
+			this.buyStructureButtonText = new TextSection(this.buyStructureButton.element, 15, 'Select Structure')
+		}
 		new TextSection(this.element, 10, `${hexagon.X}, ${hexagon.Y}`)
 	}
-	async buyHexagon() {
-		const response = await gameAPI('/hexagon', 'POST', {
-			username: game.user.Username,
-			function: 'buy',
-			BaseLocation: game.base?.Location.Name,
-			HexagonX: this.hexagon.X,
-			HexagonY: this.hexagon.Y,
-		})
-		if (response) {
-			if (response.Success) {
-				game.user = response.Response
-			} else {
-				alert(JSON.stringify(response.Errors))
-			}
-		} else throw Error('Failed to get user!')
-		game.trySaveScroll()
-		game.start()
+	setStructureName(name: string) {
+		this.structureName = name
+		this.buyStructureButtonText?.setText('Buy ' + name)
+	}
+	buyHexagon() {
+		buyHexagon(this.hexagon.X, this.hexagon.Y)
+	}
+	buyStructure() {
+		if (!this.structureName) {
+			alert("structure not selected")
+			return
+		}
+		buyStructure(this.hexagon.X, this.hexagon.Y, this.structureName)	
 	}
 }

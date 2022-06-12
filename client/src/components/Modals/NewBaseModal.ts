@@ -1,7 +1,7 @@
 import { game, getPx, unit } from '../../index.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from '../Buttons/Button.js'
-import ExpandButton from '../Buttons/ExpandButton.js'
+import ExpandButton from '../Buttons/BuyBaseButton.js'
 import ClickableGridHexagonRow from '../ClickableGridHexagonRow.js'
 import Modal from './Modal.js'
 

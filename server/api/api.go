@@ -7,6 +7,7 @@ import (
 	"clueless-cartel-server/api/gameData"
 	"clueless-cartel-server/api/hexagon"
 	"clueless-cartel-server/api/signin"
+	"clueless-cartel-server/api/structure"
 	"clueless-cartel-server/api/user"
 	"clueless-cartel-server/auth"
 	"encoding/json"
@@ -54,6 +55,8 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 			hexagon.HexagonHandler(r, data, res)
 		case "/api/game":
 			gameData.GameDataHandler(r, data, res)
+		case "/api/structure":
+			structure.StructureHandler(r, data, res)
 		default:
 			res.Errors = append(res.Errors, "Endpoint not found")
 			res.Status = 404

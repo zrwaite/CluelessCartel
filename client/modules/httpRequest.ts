@@ -1,5 +1,5 @@
 // const baseURL = PROD?"https://clueless-cartel.herokuapp.com":"http://localhost:8004"
-const baseURL = "https://princess-needed-stability-concepts.trycloudflare.com";
+const baseURL = "https://dietary-vietnam-star-lib.trycloudflare.com";
 
 interface APIResponse {
     Status: number,

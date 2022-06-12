@@ -3,6 +3,7 @@ import { Hexagon } from '../types/hexagon.js'
 import Component from './Component.js'
 import HexagonModal from './Modals/HexagonModal.js'
 import Modal from './Modals/Modal.js'
+import TextSection from './TextSection.js'
 
 export default class ClickableGridHexagon extends Component {
 	height = 115.5
@@ -20,7 +21,7 @@ export default class ClickableGridHexagon extends Component {
 		this.addStyles({
 			height: getPx(this.height),
 			width: getPx(this.width),
-			transition: 'transform .2s ease',
+			transition: 'scale .2s ease',
 			position: 'relative',
 			display: 'inline-block',
 			cursor: 'pointer',
@@ -45,6 +46,12 @@ export default class ClickableGridHexagon extends Component {
 			this.element.appendChild(this.texture)
 			let degrees = Math.round(Math.random()*6) * 60
 			this.texture.style.transform = `rotate(${degrees}deg)`
+			let structure = new TextSection(this.element, 20, hexagon.Structure.Name)
+			structure.addStyles({
+				position: 'absolute',
+				top: getPx(25),
+				left: getPx(25)
+			})
 		}
 	}
 	onClick(e: MouseEvent) {
@@ -53,12 +60,12 @@ export default class ClickableGridHexagon extends Component {
 	onHover(e: MouseEvent, mouseIn: boolean) {
 		if (mouseIn) {
 			this.addStyles({
-				transform: 'scale(1.2)',
+				scale: '1.2',
 				zIndex: '5',
 			})
 		} else {
 			this.addStyles({
-				transform: 'scale(1)',
+				scale: '1',
 				zIndex: '1',
 			})
 		}

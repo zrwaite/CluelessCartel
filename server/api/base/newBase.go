@@ -52,17 +52,18 @@ func newBase(body []byte, res *apiModels.Response) {
 			return
 		}
 
-		//Set new base location
-		//Find the cost for the new base
-		baseCost := GetBaseCost(&user.Bases)
-		user.Cash += baseCost
-		if user.Cash < baseCost {
-			res.Errors = append(res.Errors, "Not enough cash!")
-			return
-		}
+		/*
+			//Find the cost for the new base
+			baseCost := GetBaseCost(&user.Bases)
+			if user.Cash < baseCost {
+				res.Errors = append(res.Errors, "Not enough cash!")
+				return
+			}
 
-		// Update user cash, and add base
-		user.Cash -= baseCost
+			// Update user cash, and add base
+			user.Cash -= baseCost
+		*/
+
 		user.Bases = append(user.Bases, base)
 		if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
 			res.Errors = append(res.Errors, "Failed to create base")

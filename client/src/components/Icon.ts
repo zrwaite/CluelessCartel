@@ -1,7 +1,8 @@
 import Component from './Component.js'
+import { StyleObject } from '../types/styles.js'
 export default class Icon extends Component {
 	element: HTMLImageElement
-	constructor(parentElement: HTMLElement, assetFilename: string) {
+	constructor(parentElement: HTMLElement, assetFilename: string, styles: StyleObject = {}) {
 		super('div', parentElement)
 		this.element = new Image()
 		this.element.src = '../../assets/' + assetFilename

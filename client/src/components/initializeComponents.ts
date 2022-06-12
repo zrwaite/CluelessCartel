@@ -10,6 +10,7 @@ import Modal from './Modals/Modal.js'
 import SettingsModal from './Modals/SettingsModal.js'
 import TextSection from './TextSection.js'
 import NewBaseModal from './Modals/NewBaseModal.js'
+import StorageButton from './Buttons/StorageButton.js'
 
 const initializeSections = (gameElement: HTMLElement): { uiElement: HTMLElement; canvasElement: HTMLElement; hexElement: HTMLElement } => {
 	let uiElement = document.createElement('div')
@@ -120,11 +121,7 @@ export const initializePlayComponents = (gameElement: HTMLElement) => {
 	})
 	homeButton.initializeIcon('home.svg')
 
-	let storageButton = new Button(uiElement, () => alert('haha:)'), {
-		right: getPx(5),
-		bottom: getPx(5),
-	})
-	storageButton.initializeIcon('storage.svg')
+	let storageButton = new StorageButton(uiElement, )
 
 	let buildButton = new AnimatedButton(
 		uiElement,

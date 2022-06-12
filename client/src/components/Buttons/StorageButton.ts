@@ -2,57 +2,58 @@ import { game, getPx } from '../../index.js'
 import { StyleObject } from '../../types/styles.js'
 import Button from './Button.js'
 import TextSection from '../TextSection.js'
+import Icon from '../Icon.js'
 import { gameAPI } from '../../modules/gameAPI.js'
 
-export default class ExpandButton extends Button {
+export default class StorageButton extends Button {
 	buttonContent: HTMLElement
 	expandContent: HTMLElement
 	expanded = false
-	title: TextSection
-	name: string
 	
-	
-	constructor(parentElement: HTMLElement, name: string, styles: StyleObject = {}) {
+	constructor(parentElement: HTMLElement, styles: StyleObject = {}) {
 		super(parentElement, () => {}, {
 			transition: 'all 0.7s',
-			borderRadius: getPx(7.5),
-			backgroundColor: "rgba(255, 0, 0, 0.5)",
-			height: getPx(11),
-			width: getPx(11),
-			border: "solid 1px red",
+            right: getPx(5),
+		    bottom: getPx(5),
+            height: getPx(40),
+			width: getPx(50),
+			borderRadius: getPx(6),
+			border: getPx(3) + ' solid black',
+			position: 'absolute',
+			backgroundColor: 'var(--color1)',
+			cursor: 'pointer',
+			padding: '0',
 			...styles,
-		})
-		this.name = name
-
-		this.title = new TextSection(this.element, 15, name)
-		this.title.addStyles({
-			paddingLeft: getPx(11),
-			transition: 'all 0.7s',
 		})
 
 		this.buttonContent = document.createElement("div")
 		this.expandContent = document.createElement("div")
 		this.expandContent.style.display = "none"
-		;[this.buttonContent, this.expandContent].forEach(element => {
+        ;[this.buttonContent, this.expandContent].forEach(element => {
 			element.style.height = "100%"
 			element.style.width = "100%"
 			element.style.transition = 'all 0.7s',
 			this.element.appendChild(element)
 		})
         
-		this.initializeButtonContent(name)	
+		this.initializeButtonContent()	
 		this.initializeExpandedContent()
 		this.element.onmouseenter = (e) => this.onHover(e, true)
 		this.element.onmouseleave = (e) => this.onHover(e, false)
 	}
 
-	initializeButtonContent(text:string) {
+	initializeButtonContent() {
+		let storageIcon = new Icon(this.buttonContent, 'storage.svg', {
+			height: getPx(40),
+			width: getPx(40),
+			transition: 'all 0.7s'
+		})
 	}
 	async buyBase() {
 		const response = await gameAPI('/base', 'POST', {
 			username: game.user.Username,
 			function: 'new',
-			location: this.name,
+	
 		})
 		if (response) {
 			if (response.Success) {
@@ -65,13 +66,20 @@ export default class ExpandButton extends Button {
 		game.start()
 	}
 	initializeExpandedContent() {
-		let BuyButton = new Button(this.expandContent, this.buyBase.bind(this), )
-		BuyButton.addStyles({
-			top: getPx(52),
-			left: getPx(52),
-		})
-        let BuyButtonText = new TextSection(BuyButton.element, 17, "Buy")
-        
+		let metalText = new TextSection(this.expandContent, 15, "Metal: " + game.base?.Resources.Metal)
+		let plantsText = new TextSection(this.expandContent, 15, "Plants: " + game.base?.Resources.Plants)
+		let chemText = new TextSection(this.expandContent, 15, "Chemicals: " + game.base?.Resources.Chemicals)
+
+		let MethText = new TextSection(this.expandContent, 15, "Meth: " + game.base?.Drugs.Meth)
+		let opiodsText = new TextSection(this.expandContent, 15, "Opiods: " + game.base?.Drugs.Opioids)
+		let weedText = new TextSection(this.expandContent, 15, "Weed: " + game.base?.Drugs.Weed)
+
+		let gunsText = new TextSection(this.expandContent, 15, "Guns: " + game.base?.Weapons.Guns)
+		let explosivesText = new TextSection(this.expandContent, 15, "Explosives: " + game.base?.Weapons.Explosives)
+		
+		console.log(game.base?.Resources)
+		console.log(game.base?.Drugs)
+		console.log(game.base?.Weapons)
 	}
 	animate(animateIn: boolean) {
 		if (animateIn) {
@@ -82,25 +90,25 @@ export default class ExpandButton extends Button {
 					this.expandContent.style.opacity = "1"
 				}
 			}, 700)
-			this.title.addStyles({paddingLeft: getPx(0)})
 			this.addStyles({
-				height: getPx(100),
-				width: getPx(150),
+				height: getPx(170),
+				width: getPx(120),
 				border: `solid ${getPx(3)} grey`,
 			})
+			this.buttonContent.style.filter = 'opacity(0)'
 		} else {
 			this.expandContent.style.display = "none"
 			this.expandContent.style.opacity = "0"
 			setTimeout(() => {
 				if (!this.expanded) {
 					this.buttonContent.style.display = "block"
+					this.buttonContent.style.filter = 'opacity(1)'
 				}
 			}, 700)
-			this.title.addStyles({paddingLeft: getPx(11)})
 			this.addStyles({
-				height: getPx(11),
-				width: getPx(11),
-				border: `solid ${getPx(1)} red`,
+				height: getPx(40),
+				width: getPx(50),
+				border: getPx(3) + ' solid black',
 			})
 		}
 		this.expanded = !this.expanded

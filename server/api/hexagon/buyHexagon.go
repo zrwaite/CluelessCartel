@@ -51,16 +51,17 @@ func buyHexagon(body []byte, res *apiModels.Response) {
 			return
 		}
 
-		//Find the cost for the new hexagon
-		hexagonCost := GetHexagonCost(base)
-		user.Cash += hexagonCost
-		if user.Cash < hexagonCost {
-			res.Errors = append(res.Errors, "Not enough cash!")
-			return
-		}
+		/*
+			//Find the cost for the new hexagon
+			hexagonCost := GetHexagonCost(base)
+			if user.Cash < hexagonCost {
+				res.Errors = append(res.Errors, "Not enough cash!")
+				return
+			}
 
-		// Update user cash, and add base
-		user.Cash -= hexagonCost
+			// Update user cash, and add base
+			user.Cash -= hexagonCost
+		*/
 
 		// Attempt to buy hexagon, update user on success
 		if !BuyHexagon(base, buyHexagonParams.HexagonX, buyHexagonParams.HexagonY, res) {

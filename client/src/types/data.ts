@@ -37,7 +37,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -56,7 +55,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -75,7 +73,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -94,7 +91,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -113,7 +109,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -137,7 +132,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -156,7 +150,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -175,7 +168,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -194,7 +186,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -213,7 +204,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -237,7 +227,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -256,7 +245,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -275,7 +263,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -294,7 +281,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -313,7 +299,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -337,7 +322,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -356,7 +340,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -375,7 +358,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -394,7 +376,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -413,7 +394,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -437,7 +417,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -456,7 +435,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -475,7 +453,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -494,7 +471,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -513,7 +489,6 @@ export const defaultUserData: User = {
 							"Structure": {
 								"Moveable": true,
 								"Name": "Empty",
-								"Image": "",
 								"LandMaterials": [],
 								"ResourceCapacity": {
 									"Metal": 0,
@@ -537,4 +512,5 @@ export const defaultGameData:GameData = {
 	AllDrugs:     [],
 	AllLocations: [],
 	AllResources: [],
+	AllStructures: []
 }
