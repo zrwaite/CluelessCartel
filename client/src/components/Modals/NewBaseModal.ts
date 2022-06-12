@@ -8,9 +8,6 @@ import Modal from './Modal.js'
 export default class NewBaseModal extends Modal {
 	constructor(backGround: string, styles: StyleObject = {}) {
 		super('settings', styles)
-
-		const locations = game.data.AllLocations
-		console.log(locations)
 		
         this.initializeBackground(backGround)
 		let FlordiaButton = new ExpandButton(this.element, 'Florida')

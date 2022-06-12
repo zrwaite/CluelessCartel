@@ -57,3 +57,6 @@
 	* Rivers
 
 * Enemy Structures can exist, must be destoyed
+
+
+Use hexagon array with update function in class when game reloaded

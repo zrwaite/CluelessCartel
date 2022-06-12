@@ -15,4 +15,7 @@ export default class TextSection extends Component {
 	setText(text: string) {
 		this.element.innerText = text
 	}
+	getText() {
+		return this.element.innerText
+	}
 }

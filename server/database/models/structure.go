@@ -58,6 +58,12 @@ var Shed = Structure{
 	Name:          "Shed",
 	LandMaterials: []LandMaterial{Dirt, Grass, Sand, Pavement},
 }
+
+var Farm = Structure{
+	Name:          "Farm",
+	LandMaterials: []LandMaterial{Dirt},
+}
+
 var Armory = Structure{
 	Name:          "Armory",
 	LandMaterials: []LandMaterial{Pavement},
@@ -81,9 +87,10 @@ var Garbage = Structure{
 	Natural:       true,
 }
 
-var NaturalStructure = []Structure{Trees, Rocks, Garbage}
+var NaturalStructures = []Structure{Trees, Rocks, Garbage}
+var ManMadeStructures = []Structure{RV, BuriedStorage, StorageUnit, Shed, Armory, Farm}
 
-var AllStructures = append([]Structure{EmptyStructure, RV, BuriedStorage, StorageUnit, Shed, Armory}, NaturalStructure...)
+var AllStructures = append(append(ManMadeStructures, NaturalStructures...), EmptyStructure)
 
 func GetStructure(structureName string) (structure Structure, success bool) {
 	for _, structure := range AllStructures {
@@ -95,17 +102,25 @@ func GetStructure(structureName string) (structure Structure, success bool) {
 	return
 }
 
-func GetSemiRandomStructure(landMaterial LandMaterial) (structure Structure) {
+func GetSemiRandomStructure(landMaterial LandMaterial, enemyCamp bool) (structure Structure) {
 	structure = EmptyStructure
-	probability := rand.Intn(5)
-	if probability != 0 {
-		return
-	}
 	var referenceStructures []Structure
-	if probability == 1 {
-		referenceStructures = AllStructures
+	probability := rand.Intn(40)
+	if enemyCamp {
+		if probability < 20 {
+			return
+		} else {
+			referenceStructures = ManMadeStructures
+		}
 	} else {
-		referenceStructures = NaturalStructure
+		if probability < 30 {
+			return
+		}
+		if probability < 31 {
+			referenceStructures = ManMadeStructures
+		} else {
+			referenceStructures = NaturalStructures
+		}
 	}
 
 	structureList := []Structure{}

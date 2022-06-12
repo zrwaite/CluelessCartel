@@ -54,10 +54,10 @@ export default class ClickableGridHexagon extends Component {
 			if (found) {
 				let structureImage = new Icon(this.element, filename, {
 					position: 'absolute',
-					width: getPx(50),
-					height: getPx(50),
-					left: getPx(25),
-					top: getPx(32),
+					width: '70%',
+					height: '70%',
+					left: '15%',
+					top: '15%',
 				})
 				if (!hexagon.Owned) {
 					structureImage.addStyles({
@@ -69,8 +69,8 @@ export default class ClickableGridHexagon extends Component {
 					let structure = new TextSection(this.element, 20, hexagon.Structure.Name)
 					structure.addStyles({
 						position: 'absolute',
-						top: getPx(25),
-						left: getPx(25)
+						top: '20%',
+						left: '20%'
 					})
 				}
 			}

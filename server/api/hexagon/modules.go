@@ -110,10 +110,16 @@ func AddEmptyHexagonRow(base *models.Base, start bool) {
 	newHexagonRow := models.HexagonRow{Y: newY}
 	for i := startX; i < newLength+startX; i++ {
 		surroundingHexagons := GetSurroundingHexagons(base, startX, newY)
+		enemyCamp := false
+		for _, hex := range surroundingHexagons {
+			if hex.Structure.Enemy {
+				enemyCamp = true
+			}
+		}
 		landMaterial := models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
 		newHexagonRow.Hexagons = append(newHexagonRow.Hexagons, models.Hexagon{
 			LandMaterial: landMaterial,
-			Structure:    models.GetSemiRandomStructure(landMaterial),
+			Structure:    models.GetSemiRandomStructure(landMaterial, enemyCamp),
 			Rotation:     rand.Intn(6),
 			X:            i,
 			Owned:        false,
@@ -138,10 +144,16 @@ func AddEmptyHexagonColumn(base *models.Base, start bool) {
 	}
 	for i := startY; i < newLength+startY; i++ {
 		surroundingHexagons := GetSurroundingHexagons(base, newX, startY)
+		enemyCamp := false
+		for _, hex := range surroundingHexagons {
+			if hex.Structure.Enemy {
+				enemyCamp = true
+			}
+		}
 		landMaterial := models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
 		newHexagon := models.Hexagon{
 			LandMaterial: landMaterial,
-			Structure:    models.GetSemiRandomStructure(landMaterial),
+			Structure:    models.GetSemiRandomStructure(landMaterial, enemyCamp),
 			Rotation:     rand.Intn(6),
 			X:            newX,
 			Owned:        false,

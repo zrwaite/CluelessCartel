@@ -13,13 +13,22 @@ export const getStructureImage = (structureName: string): {filename: string, fou
             filename = 'storage.jpg'
             break
         case "RV": 
-            filename = 'truck.png'
+            filename = 'rv.png'
             break
         case "Rocks":
             filename = 'rock.png'
             break
         case "Trees":
             filename = 'tree.png'
+            break
+        case "Garbage":
+            filename = 'garbage.png'
+            break
+        case "Buried Storage":
+            filename = 'buriedStorage.png'
+            break
+        case "Farm":
+            filename = 'farm.jpg'
             break
         default: 
             found = false;

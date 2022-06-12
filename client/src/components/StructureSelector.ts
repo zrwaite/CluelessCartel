@@ -4,10 +4,12 @@ import Component from "./Component.js";
 import TextSection from "./TextSection.js";
 import {Structure} from "../types/structure"
 import { LandMaterial } from "../types/hexagon.js";
+import { StyleObject } from "../types/styles.js";
 
 export class StructureSelector extends Component {
-	constructor(parentElement: HTMLElement,	hexagonMaterial: LandMaterial, rowSize: number, setSection: (sectionName:string) => void) {
+	constructor(parentElement: HTMLElement,	hexagonMaterial: LandMaterial, rowSize: number, setSection: (sectionName:string) => void, styles:StyleObject = {}) {
 		super('div', parentElement)
+		this.addStyles({...styles})
 		let rows = 0;
 		let allStructures = game.data.AllStructures.filter(structure => {
 			if (structure.Name === "Empty" || structure.Natural) return false

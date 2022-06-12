@@ -76,10 +76,6 @@ export default class StorageButton extends Button {
 
 		let gunsText = new TextSection(this.expandContent, 15, "Guns: " + game.base?.Weapons.Guns)
 		let explosivesText = new TextSection(this.expandContent, 15, "Explosives: " + game.base?.Weapons.Explosives)
-		
-		console.log(game.base?.Resources)
-		console.log(game.base?.Drugs)
-		console.log(game.base?.Weapons)
 	}
 	animate(animateIn: boolean) {
 		if (animateIn) {

@@ -21,6 +21,8 @@ func StructureHandler(r *http.Request, data []byte, res *apiModels.Response) {
 		switch functionStruct.Function {
 		case "buy":
 			buyStructure(data, res)
+		case "remove":
+			removeStructure(data, res)
 		default:
 			res.Errors = append(res.Errors, "Invalid function")
 		}

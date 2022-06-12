@@ -1,5 +1,5 @@
 // const baseURL = PROD?"https://clueless-cartel.herokuapp.com":"http://localhost:8004"
-const baseURL = "https://tab-meat-messenger-hawaiian.trycloudflare.com";
+const baseURL = "http://10.0.0.249:8004";
 
 interface APIResponse {
     Status: number,
