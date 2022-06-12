@@ -18,6 +18,8 @@ var Grass = LandMaterial{"Grass"}
 var Dirt = LandMaterial{"Dirt"}
 var Sand = LandMaterial{"Sand"}
 var Pavement = LandMaterial{"Pavement"}
+var Water = LandMaterial{"Water"}
+var AllLandMaterials = []LandMaterial{Grass, Dirt, Sand, Pavement, Water}
 
 type Hexagon struct {
 	LandMaterial LandMaterial `bson:"land_material"`

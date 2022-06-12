@@ -1,5 +1,7 @@
 package models
 
+import "math/rand"
+
 type Location struct {
 	Name         string
 	LandMaterial LandMaterial
@@ -20,4 +22,15 @@ func GetLocation(locationName string) (location Location, success bool) {
 	}
 	success = false
 	return
+}
+
+func GetSemiRandomLandMaterial(location Location, surroundingHexagons []Hexagon) LandMaterial {
+	probType := rand.Intn(4)
+	if probType == 0 {
+		index := rand.Intn(len(AllLandMaterials))
+		return AllLandMaterials[index]
+	} else {
+		index := rand.Intn(len(surroundingHexagons))
+		return surroundingHexagons[index].LandMaterial
+	}
 }

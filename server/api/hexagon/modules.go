@@ -108,8 +108,9 @@ func AddEmptyHexagonRow(base *models.Base, start bool) {
 	}
 	newHexagonRow := models.HexagonRow{Y: newY}
 	for i := startX; i < newLength+startX; i++ {
+		surroundingHexagons := GetSurroundingHexagons(base, startX, newY)
 		newHexagonRow.Hexagons = append(newHexagonRow.Hexagons, models.Hexagon{
-			LandMaterial: base.Location.LandMaterial,
+			LandMaterial: models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons),
 			Structure:    models.EmptyStructure,
 			X:            i,
 			Owned:        false,
@@ -133,8 +134,9 @@ func AddEmptyHexagonColumn(base *models.Base, start bool) {
 		newX = base.HexagonRows[0].Hexagons[len(base.HexagonRows[0].Hexagons)-1].X + 1
 	}
 	for i := startY; i < newLength+startY; i++ {
+		surroundingHexagons := GetSurroundingHexagons(base, newX, startY)
 		newHexagon := models.Hexagon{
-			LandMaterial: base.Location.LandMaterial,
+			LandMaterial: models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons),
 			Structure:    models.EmptyStructure,
 			X:            newX,
 			Owned:        false,
@@ -146,4 +148,61 @@ func AddEmptyHexagonColumn(base *models.Base, start bool) {
 			base.HexagonRows[i-startY].Hexagons = append(base.HexagonRows[i-startY].Hexagons, newHexagon)
 		}
 	}
+}
+
+func GetSurroundingHexagons(base *models.Base, x int, y int) (hexagons []models.Hexagon) {
+	yIndex := -base.HexagonRows[0].Y + y
+	xIndex := -base.HexagonRows[0].Hexagons[0].X + x
+	var newX int
+	var newY int
+	// Hexagon Above:
+	newX = xIndex
+	newY = yIndex - 1
+	if ValidHexIndex(base, newX, newY) {
+		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+	}
+
+	//Hexagon left:
+	newX = xIndex - 1
+	newY = yIndex
+	if ValidHexIndex(base, newX, newY) {
+		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+	}
+
+	//Hexagon right:
+	newX = xIndex + 1
+	newY = yIndex
+	if ValidHexIndex(base, newX, newY) {
+		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+	}
+
+	//Hexagon down:
+	newX = xIndex
+	newY = yIndex + 1
+	if ValidHexIndex(base, newX, newY) {
+		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+	}
+
+	//Diagonals:
+	if y%2 == 0 {
+		newX = xIndex - 1
+	} else {
+		newX = xIndex + 1
+	}
+
+	//Top diagonal
+	newY = yIndex + 1
+	if ValidHexIndex(base, newX, newY) {
+		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+	}
+	//Bottom diagonal
+	newY = yIndex - 1
+	if ValidHexIndex(base, newX, newY) {
+		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+	}
+	return
+}
+
+func ValidHexIndex(base *models.Base, xIndex int, yIndex int) (valid bool) {
+	return !(xIndex < 0 || yIndex < 0 || yIndex >= len(base.HexagonRows) || xIndex >= len(base.HexagonRows[yIndex].Hexagons))
 }

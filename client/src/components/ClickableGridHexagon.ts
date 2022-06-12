@@ -32,12 +32,11 @@ export default class ClickableGridHexagon extends Component {
 			this.modal = new HexagonModal(hexagon)
 			this.element.classList.add('modalButton')
 			let imageLink
-			// if (hexagon.LandMaterial === 'Dirt') imageLink = 'DirtHexagon'
-			// if (hexagon.LandMaterial === 'Pavement') imageLink = 'PavementHexagon'
-			// if (hexagon.LandMaterial === 'Grass') imageLink = 'GrassHexagon'
-			// if (hexagon.LandMaterial === 'Sand') imageLink = 'SandHexagon'
-			if (hexagon.X > 0 && hexagon.Y && hexagon.Y > 0) imageLink = 'WaterHexagon'
-			else imageLink = 'SandHexagon' 
+			if (hexagon.LandMaterial.Name === 'Dirt') imageLink = 'DirtHexagon'
+			if (hexagon.LandMaterial.Name === 'Pavement') imageLink = 'PavementHexagon'
+			if (hexagon.LandMaterial.Name === 'Grass') imageLink = 'GrassHexagon'
+			if (hexagon.LandMaterial.Name === 'Sand') imageLink = 'SandHexagon'
+			if (hexagon.LandMaterial.Name === 'Water') imageLink = 'WaterHexagon'
 			let degrees = Math.round(Math.random()*6) * 60
 			this.texture = new Icon(this.element, `${imageLink}.png`, {
 				position: 'absolute',

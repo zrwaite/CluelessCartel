@@ -7,21 +7,21 @@ export default class AnimatedButton extends Button {
 	end: number
 	clicked: boolean = false
 	constructor(parentElement: HTMLElement, onClick: Function, icon: string, start: number, end: number, styles: StyleObject = {}) {
-		const newOnClick = () => {
-			//all you stuff
-			if(!this.clicked){
-				this.addStyles({
-					border: `solid ${getPx(3)} grey`,
-				})
-			}else{
-				this.addStyles({
-					border: getPx(3) + ' solid black',
-				})
-			}
-			onClick()
-			this.clicked = !this.clicked
-		}
-		super(parentElement, newOnClick, {
+		// const newOnClick = () => {
+		// 	//all you stuff
+		// 	if(!this.clicked){
+		// 		this.addStyles({
+		// 			border: `solid ${getPx(3)} grey`,
+		// 		})
+		// 	}else{
+		// 		this.addStyles({
+		// 			border: getPx(3) + ' solid black',
+		// 		})
+		// 	}
+		// 	onClick()
+		// 	this.clicked = !this.clicked
+		// }
+		super(parentElement, onClick, {
 			transition: 'bottom 0.7s',
 			...styles,
 		})
