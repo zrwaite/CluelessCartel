@@ -2,6 +2,7 @@
 
 Install project: 
 * `npm i`
+* `go install`
 
 To code projct: 
 * `npm run dev`
