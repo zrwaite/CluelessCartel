@@ -1,4 +1,4 @@
-const baseURL = '/'
+const baseURL = ''
 
 interface APIResponse {
     Status: number,
