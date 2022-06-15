@@ -20,7 +20,7 @@ func BaseHandler(r *http.Request, data []byte, res *apiModels.Response) {
 	} else {
 		switch functionStruct.Function {
 		case "new":
-			newBase(data, res)
+			handleNewBase(data, res)
 		default:
 			res.Errors = append(res.Errors, "Invalid function")
 		}

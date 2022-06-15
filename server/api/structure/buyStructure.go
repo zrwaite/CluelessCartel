@@ -6,6 +6,7 @@ import (
 	"clueless-cartel-server/api/base"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
+	"clueless-cartel-server/modules"
 	"encoding/json"
 )
 
@@ -17,7 +18,7 @@ type BuyStructureParams struct {
 	HexagonY      int
 }
 
-func buyStructure(body []byte, res *apiModels.Response) {
+func handleBuyStructure(body []byte, res *apiModels.Response) {
 	var buyStructureParams BuyStructureParams
 	baseReader := bytes.NewReader(body)
 	err := json.NewDecoder(baseReader).Decode(&buyStructureParams)
@@ -61,16 +62,8 @@ func buyStructure(body []byte, res *apiModels.Response) {
 		return
 	}
 
-	YIndex := -base.HexagonRows[0].Y + buyStructureParams.HexagonY
-	XIndex := -base.HexagonRows[0].Hexagons[0].X + buyStructureParams.HexagonX
-
-	// Validate range
-	if YIndex < 0 || YIndex >= len(base.HexagonRows) {
-		res.Errors = append(res.Errors, "Invalid YIndex")
-		return
-	}
-	if XIndex < 0 || XIndex >= len(base.HexagonRows[0].Hexagons) {
-		res.Errors = append(res.Errors, "Invalid XIndex")
+	XIndex, YIndex := modules.GetIndexes(base, res, buyStructureParams.HexagonX, buyStructureParams.HexagonY)
+	if len(res.Errors) != 0 {
 		return
 	}
 
@@ -88,7 +81,7 @@ func buyStructure(body []byte, res *apiModels.Response) {
 		// Update user cash, and add base
 		user.Cash -= hexagonCost
 	*/
-	if !BuyStructure(hexagon, structure, res) {
+	if !buyStructure(hexagon, structure, res) {
 		return
 	}
 	success = dbModules.UpdateUser(user)
@@ -101,7 +94,7 @@ func buyStructure(body []byte, res *apiModels.Response) {
 	res.Response = user
 }
 
-func BuyStructure(hexagon *models.Hexagon, structure models.Structure, res *apiModels.Response) (success bool) {
+func buyStructure(hexagon *models.Hexagon, structure models.Structure, res *apiModels.Response) (success bool) {
 	success = false
 	// If user already owns hexagon
 	if !hexagon.Owned {

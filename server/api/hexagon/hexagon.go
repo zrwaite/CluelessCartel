@@ -20,7 +20,7 @@ func HexagonHandler(r *http.Request, data []byte, res *apiModels.Response) {
 	} else {
 		switch functionStruct.Function {
 		case "buy":
-			buyHexagon(data, res)
+			handleBuyHexagon(data, res)
 		default:
 			res.Errors = append(res.Errors, "Invalid function")
 		}
