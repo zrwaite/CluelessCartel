@@ -11,10 +11,10 @@ COPY ./server ./server
 # COPY ./server/.env ./server 
 WORKDIR /app/server
 RUN go mod download
-RUN go build -o ./docker-gs-ping
+RUN go build -o ./clueless-cartel-server
 
 WORKDIR /app/server
 COPY --from=client /app/client /app/client
 EXPOSE 8004
 
-CMD [ "./docker-gs-ping" ]
+CMD [ "./clueless-cartel-server" ]

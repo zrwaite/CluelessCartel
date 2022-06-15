@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const DEV = true
+const DEV = false
 
 func MatchDev() {
 	envDev := os.Getenv("DEV")

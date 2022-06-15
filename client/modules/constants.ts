@@ -1,2 +1,2 @@
-const DEV = true;
-const PROD = false;
+const DEV = false;
+const PROD = true;
