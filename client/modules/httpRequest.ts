@@ -1,6 +1,4 @@
-const baseURL = PROD?
-    "https://clueless-cartel.herokuapp.com":
-    "http://localhost:8004"
+const baseURL = '/'
 
 interface APIResponse {
     Status: number,
@@ -22,7 +20,7 @@ const httpReq = async (url:string, method:string = "GET", params:any = {}):Promi
     try {
         let response;
         if (method === "GET") {
-            response = await fetch(addQueryParam(url, 'dev', DEV?"true":"false"), {
+            response = await fetch(url, {
                 cache: 'no-cache',
                 headers: headers
             });
@@ -35,7 +33,7 @@ const httpReq = async (url:string, method:string = "GET", params:any = {}):Promi
                     ...headers,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({...params, dev:DEV?"true":"false"}) // body data type must match "Content-Type" header
+                body: JSON.stringify(params) // body data type must match "Content-Type" header
             });
         }
         const data = await response.json() as APIResponse;
