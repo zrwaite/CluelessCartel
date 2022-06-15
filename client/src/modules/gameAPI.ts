@@ -18,7 +18,7 @@ export const gameAPI = async (url:string, method:string = "GET", params:any = {}
     try {
         let response;
         if (method === "GET") {
-            response = await fetch(addQueryParam(url, 'dev', DEV?"true":"false"), {
+            response = await fetch(url, {
                 cache: 'no-cache',
                 headers: headers
             });
@@ -31,7 +31,7 @@ export const gameAPI = async (url:string, method:string = "GET", params:any = {}
                     ...headers,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({...params, dev:DEV?"true":"false"}) // body data type must match "Content-Type" header
+                body: JSON.stringify(params) // body data type must match "Content-Type" header
             });
         }
         const data = await response.json() as APIResponse;
