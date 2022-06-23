@@ -25,6 +25,8 @@ func StructureHandler(r *http.Request, data []byte, res *apiModels.Response) {
 			handleRemoveStructure(data, res)
 		case "explode":
 			handleExplodeStructure(data, res)
+		case "driveby":
+			handleDriveByStructure(data, res)
 		default:
 			res.Errors = append(res.Errors, "Invalid function")
 		}
