@@ -17,7 +17,7 @@ var landMaterialScema = bson.M{
 		"name": bson.M{"bsonType": "string"},
 	},
 }
-
+var DeadLand = LandMaterial{Name: "Dead"}
 var Grass = LandMaterial{"Grass"}
 var Dirt = LandMaterial{"Dirt"}
 var Sand = LandMaterial{"Sand"}

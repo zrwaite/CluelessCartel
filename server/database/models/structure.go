@@ -107,14 +107,18 @@ func GetSemiRandomStructure(landMaterial LandMaterial, enemyCamp bool, forest bo
 	var referenceStructures []Structure
 	probability := rand.Intn(40)
 	if enemyCamp {
-		if probability < 5 {
+		if probability < 25 {
 			return
+		} else if probability > 25 && probability < 30 {
+			referenceStructures = NaturalStructures
 		} else {
 			referenceStructures = ManMadeStructures
 		}
 	} else if forest {
 		if probability < 3 {
 			return
+		} else if probability == 36 || probability == 37 {
+			referenceStructures = ManMadeStructures
 		} else if probability > 37 {
 			referenceStructures = NaturalStructures
 		} else {
@@ -124,10 +128,10 @@ func GetSemiRandomStructure(landMaterial LandMaterial, enemyCamp bool, forest bo
 		if probability < 30 {
 			return
 		}
-		if probability < 31 {
+		if probability < 32 {
 			referenceStructures = ManMadeStructures
 		} else {
-			referenceStructures = append(NaturalStructures, []Structure{Trees, Trees, Trees}...)
+			referenceStructures = append(NaturalStructures, []Structure{Trees, Trees}...)
 		}
 	}
 
