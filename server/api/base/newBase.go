@@ -13,7 +13,7 @@ type NewBaseParams struct {
 	Location string
 }
 
-func newBase(body []byte, res *apiModels.Response) {
+func handleNewBase(body []byte, res *apiModels.Response) {
 	var newBaseParams NewBaseParams
 	baseReader := bytes.NewReader(body)
 	err := json.NewDecoder(baseReader).Decode(&newBaseParams)

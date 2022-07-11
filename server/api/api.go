@@ -1,7 +1,6 @@
 package api
 
 import (
-	"bytes"
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/api/base"
 	"clueless-cartel-server/api/gameData"
@@ -10,7 +9,6 @@ import (
 	"clueless-cartel-server/api/signin"
 	"clueless-cartel-server/api/structure"
 	"clueless-cartel-server/api/user"
-	"clueless-cartel-server/auth"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -20,27 +18,17 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	res := new(apiModels.Response).Init()
 	var data []byte
-	if r.Method == "GET" {
-		auth.DevCheck(auth.GetDevParam(r), res)
-	} else if r.Method == "POST" || r.Method == "DELETE" {
+
+	if r.Method == "POST" || r.Method == "DELETE" {
 		var err error
 		data, err = ioutil.ReadAll(r.Body)
 		if err != nil {
 			res.Errors = append(res.Errors, "Invalid body - "+err.Error())
-		} else {
-			var devStruct auth.DevStruct
-			devReader := bytes.NewReader(data)
-			err := json.NewDecoder(devReader).Decode(&devStruct)
-			if err != nil {
-				res.Errors = append(res.Errors, "Invalid json - "+err.Error())
-			} else {
-				auth.DevCheck(devStruct.Dev, res)
-			}
 		}
 	} else if r.Method == "OPTIONS" {
 		res.Errors = append(res.Errors, "None")
 		res.Status = 200
-	} else {
+	} else if r.Method != "GET" {
 		res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
 		res.Status = 404
 	}

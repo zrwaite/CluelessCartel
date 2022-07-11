@@ -94,7 +94,27 @@ func AddBuyableHexagon(base *models.Base, x int, y int) (success bool) {
 		fmt.Println("Invalid indexing while adding buyable hexagon")
 		return false
 	}
-	base.HexagonRows[yIndex].Hexagons[xIndex].Buyable = true
+	hexagon := &base.HexagonRows[yIndex].Hexagons[xIndex]
+
+	if !hexagon.Buyable {
+		hexagon.Buyable = true
+		surroundingHexagons := GetSurroundingHexagons(base, x, y)
+		enemyCamp := false
+		forest := false
+		for _, hex := range surroundingHexagons {
+			if hex.Structure.Enemy {
+				enemyCamp = true
+			}
+			if hex.Structure.Name == "Trees" {
+				forest = true
+			}
+		}
+		landMaterial := models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
+
+		hexagon.Structure = models.GetSemiRandomStructure(landMaterial, enemyCamp, forest)
+		hexagon.LandMaterial = landMaterial
+	}
+
 	return true
 }
 
@@ -109,21 +129,9 @@ func AddEmptyHexagonRow(base *models.Base, start bool) {
 	}
 	newHexagonRow := models.HexagonRow{Y: newY}
 	for i := startX; i < newLength+startX; i++ {
-		surroundingHexagons := GetSurroundingHexagons(base, startX, newY)
-		enemyCamp := false
-		forest := false
-		for _, hex := range surroundingHexagons {
-			if hex.Structure.Enemy {
-				enemyCamp = true
-			}
-			if hex.Structure.Name == "Trees" {
-				forest = true
-			}
-		}
-		landMaterial := models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
 		newHexagonRow.Hexagons = append(newHexagonRow.Hexagons, models.Hexagon{
-			LandMaterial: landMaterial,
-			Structure:    models.GetSemiRandomStructure(landMaterial, enemyCamp, forest),
+			Structure:    models.EmptyStructure,
+			LandMaterial: models.DeadLand,
 			Rotation:     rand.Intn(6),
 			X:            i,
 			Owned:        false,
@@ -147,21 +155,9 @@ func AddEmptyHexagonColumn(base *models.Base, start bool) {
 		newX = base.HexagonRows[0].Hexagons[len(base.HexagonRows[0].Hexagons)-1].X + 1
 	}
 	for i := startY; i < newLength+startY; i++ {
-		surroundingHexagons := GetSurroundingHexagons(base, newX, startY)
-		enemyCamp := false
-		forest := false
-		for _, hex := range surroundingHexagons {
-			if hex.Structure.Enemy {
-				enemyCamp = true
-			}
-			if hex.Structure.Name == "Trees" {
-				forest = true
-			}
-		}
-		landMaterial := models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
 		newHexagon := models.Hexagon{
-			LandMaterial: landMaterial,
-			Structure:    models.GetSemiRandomStructure(landMaterial, enemyCamp, forest),
+			Structure:    models.EmptyStructure,
+			LandMaterial: models.DeadLand,
 			Rotation:     rand.Intn(6),
 			X:            newX,
 			Owned:        false,
@@ -184,28 +180,40 @@ func GetSurroundingHexagons(base *models.Base, x int, y int) (hexagons []models.
 	newX = xIndex
 	newY = yIndex - 1
 	if ValidHexIndex(base, newX, newY) {
-		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+		newHex := base.HexagonRows[newY].Hexagons[newX]
+		if newHex.Buyable {
+			hexagons = append(hexagons, newHex)
+		}
 	}
 
 	//Hexagon left:
 	newX = xIndex - 1
 	newY = yIndex
 	if ValidHexIndex(base, newX, newY) {
-		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+		newHex := base.HexagonRows[newY].Hexagons[newX]
+		if newHex.Buyable {
+			hexagons = append(hexagons, newHex)
+		}
 	}
 
 	//Hexagon right:
 	newX = xIndex + 1
 	newY = yIndex
 	if ValidHexIndex(base, newX, newY) {
-		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+		newHex := base.HexagonRows[newY].Hexagons[newX]
+		if newHex.Buyable {
+			hexagons = append(hexagons, newHex)
+		}
 	}
 
 	//Hexagon down:
 	newX = xIndex
 	newY = yIndex + 1
 	if ValidHexIndex(base, newX, newY) {
-		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+		newHex := base.HexagonRows[newY].Hexagons[newX]
+		if newHex.Buyable {
+			hexagons = append(hexagons, newHex)
+		}
 	}
 
 	//Diagonals:
@@ -218,12 +226,18 @@ func GetSurroundingHexagons(base *models.Base, x int, y int) (hexagons []models.
 	//Top diagonal
 	newY = yIndex + 1
 	if ValidHexIndex(base, newX, newY) {
-		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+		newHex := base.HexagonRows[newY].Hexagons[newX]
+		if newHex.Buyable {
+			hexagons = append(hexagons, newHex)
+		}
 	}
 	//Bottom diagonal
 	newY = yIndex - 1
 	if ValidHexIndex(base, newX, newY) {
-		hexagons = append(hexagons, base.HexagonRows[newY].Hexagons[newX])
+		newHex := base.HexagonRows[newY].Hexagons[newX]
+		if newHex.Buyable {
+			hexagons = append(hexagons, newHex)
+		}
 	}
 	return
 }

@@ -20,9 +20,13 @@ func StructureHandler(r *http.Request, data []byte, res *apiModels.Response) {
 	} else {
 		switch functionStruct.Function {
 		case "buy":
-			buyStructure(data, res)
+			handleBuyStructure(data, res)
 		case "remove":
-			removeStructure(data, res)
+			handleRemoveStructure(data, res)
+		case "explode":
+			handleExplodeStructure(data, res)
+		case "driveby":
+			handleDriveByStructure(data, res)
 		default:
 			res.Errors = append(res.Errors, "Invalid function")
 		}

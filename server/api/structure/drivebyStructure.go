@@ -10,28 +10,28 @@ import (
 	"encoding/json"
 )
 
-type RemoveStructureParams struct {
+type DriveByStructureParams struct {
 	Username     string
 	BaseLocation string
 	HexagonX     int
 	HexagonY     int
 }
 
-func handleRemoveStructure(body []byte, res *apiModels.Response) {
-	var removeStructureParams RemoveStructureParams
+func handleDriveByStructure(body []byte, res *apiModels.Response) {
+	var driveByStructureParams DriveByStructureParams
 	baseReader := bytes.NewReader(body)
-	err := json.NewDecoder(baseReader).Decode(&removeStructureParams)
+	err := json.NewDecoder(baseReader).Decode(&driveByStructureParams)
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(removeStructureParams, res)
+		models.ValidateData(driveByStructureParams, res)
 	}
 	if len(res.Errors) != 0 {
-		res.Response = removeStructureParams
+		res.Response = driveByStructureParams
 		return
 	}
 	var user *models.GetUserReturn
-	user, res.Status = dbModules.GetUserGameData(removeStructureParams.Username)
+	user, res.Status = dbModules.GetUserGameData(driveByStructureParams.Username)
 	if res.Status == 404 {
 		res.Errors = append(res.Errors, "User not found")
 		return
@@ -42,7 +42,7 @@ func handleRemoveStructure(body []byte, res *apiModels.Response) {
 		res.Status = 400
 	}
 
-	location, success := models.GetLocation(removeStructureParams.BaseLocation)
+	location, success := models.GetLocation(driveByStructureParams.BaseLocation)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return
@@ -55,26 +55,14 @@ func handleRemoveStructure(body []byte, res *apiModels.Response) {
 		return
 	}
 
-	XIndex, YIndex := modules.GetIndexes(base, res, removeStructureParams.HexagonX, removeStructureParams.HexagonY)
+	XIndex, YIndex := modules.GetIndexes(base, res, driveByStructureParams.HexagonX, driveByStructureParams.HexagonY)
 	if len(res.Errors) != 0 {
 		return
 	}
 
 	hexagon := &base.HexagonRows[YIndex].Hexagons[XIndex]
 
-	/*
-		//Find the cost for the new structure
-		structureCost := GetStructureCost(base)
-		user.Cash += hexagonCost
-		if user.Cash < hexagonCost {
-			res.Errors = append(res.Errors, "Not enough cash!")
-			return
-		}
-
-		// Update user cash, and add base
-		user.Cash -= hexagonCost
-	*/
-	if !removeStructure(hexagon, res) {
+	if !driveByStructure(base, hexagon, res) {
 		return
 	}
 	success = dbModules.UpdateUser(user)
@@ -87,16 +75,22 @@ func handleRemoveStructure(body []byte, res *apiModels.Response) {
 	res.Response = user
 }
 
-func removeStructure(hexagon *models.Hexagon, res *apiModels.Response) (success bool) {
+func getDriveByCost() int {
+	return 1
+}
+
+func driveByStructure(base *models.Base, hexagon *models.Hexagon, res *apiModels.Response) (success bool) {
 	success = false
-	if !hexagon.Owned {
-		res.Errors = append(res.Errors, "Hexagon not owned")
-		return
-	}
 	if hexagon.Structure.Name == "Empty" {
-		res.Errors = append(res.Errors, "Nothing to clear")
+		res.Errors = append(res.Errors, "Nobody to shoot up")
 		return
 	}
-	hexagon.Structure = models.EmptyStructure
+	driveByCost := getDriveByCost()
+	if base.Weapons.Guns < driveByCost {
+		res.Errors = append(res.Errors, "Not enough ammunition")
+		return
+	}
+	base.Weapons.Guns -= driveByCost
+	hexagon.Structure.Enemy = false
 	return true
 }

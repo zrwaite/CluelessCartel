@@ -10,28 +10,28 @@ import (
 	"encoding/json"
 )
 
-type RemoveStructureParams struct {
+type ExplodeStructureParams struct {
 	Username     string
 	BaseLocation string
 	HexagonX     int
 	HexagonY     int
 }
 
-func handleRemoveStructure(body []byte, res *apiModels.Response) {
-	var removeStructureParams RemoveStructureParams
+func handleExplodeStructure(body []byte, res *apiModels.Response) {
+	var explodeStructureParams ExplodeStructureParams
 	baseReader := bytes.NewReader(body)
-	err := json.NewDecoder(baseReader).Decode(&removeStructureParams)
+	err := json.NewDecoder(baseReader).Decode(&explodeStructureParams)
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(removeStructureParams, res)
+		models.ValidateData(explodeStructureParams, res)
 	}
 	if len(res.Errors) != 0 {
-		res.Response = removeStructureParams
+		res.Response = explodeStructureParams
 		return
 	}
 	var user *models.GetUserReturn
-	user, res.Status = dbModules.GetUserGameData(removeStructureParams.Username)
+	user, res.Status = dbModules.GetUserGameData(explodeStructureParams.Username)
 	if res.Status == 404 {
 		res.Errors = append(res.Errors, "User not found")
 		return
@@ -42,7 +42,7 @@ func handleRemoveStructure(body []byte, res *apiModels.Response) {
 		res.Status = 400
 	}
 
-	location, success := models.GetLocation(removeStructureParams.BaseLocation)
+	location, success := models.GetLocation(explodeStructureParams.BaseLocation)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return
@@ -55,26 +55,14 @@ func handleRemoveStructure(body []byte, res *apiModels.Response) {
 		return
 	}
 
-	XIndex, YIndex := modules.GetIndexes(base, res, removeStructureParams.HexagonX, removeStructureParams.HexagonY)
+	XIndex, YIndex := modules.GetIndexes(base, res, explodeStructureParams.HexagonX, explodeStructureParams.HexagonY)
 	if len(res.Errors) != 0 {
 		return
 	}
 
 	hexagon := &base.HexagonRows[YIndex].Hexagons[XIndex]
 
-	/*
-		//Find the cost for the new structure
-		structureCost := GetStructureCost(base)
-		user.Cash += hexagonCost
-		if user.Cash < hexagonCost {
-			res.Errors = append(res.Errors, "Not enough cash!")
-			return
-		}
-
-		// Update user cash, and add base
-		user.Cash -= hexagonCost
-	*/
-	if !removeStructure(hexagon, res) {
+	if !explodeStructure(base, hexagon, res) {
 		return
 	}
 	success = dbModules.UpdateUser(user)
@@ -87,16 +75,22 @@ func handleRemoveStructure(body []byte, res *apiModels.Response) {
 	res.Response = user
 }
 
-func removeStructure(hexagon *models.Hexagon, res *apiModels.Response) (success bool) {
+func getExplosionCost() int {
+	return 1
+}
+
+func explodeStructure(base *models.Base, hexagon *models.Hexagon, res *apiModels.Response) (success bool) {
 	success = false
-	if !hexagon.Owned {
-		res.Errors = append(res.Errors, "Hexagon not owned")
-		return
-	}
 	if hexagon.Structure.Name == "Empty" {
 		res.Errors = append(res.Errors, "Nothing to clear")
 		return
 	}
+	explodeCost := getExplosionCost()
+	if base.Weapons.Explosives < explodeCost {
+		res.Errors = append(res.Errors, "Not enough explosives")
+		return
+	}
+	base.Weapons.Explosives -= explodeCost
 	hexagon.Structure = models.EmptyStructure
 	return true
 }

@@ -13,7 +13,7 @@ export default class ClickableGridHexagon extends Component {
 	texture?: Icon
 	hexagon: Hexagon
 	modal?: Modal
-	id:string
+	id: string
 	constructor(parentElement: HTMLElement, hexagon: Hexagon) {
 		super('div', parentElement)
 		this.hexagon = hexagon
@@ -33,24 +33,26 @@ export default class ClickableGridHexagon extends Component {
 			this.element.classList.add('modalButton')
 			let imageLink
 			if (hexagon.LandMaterial.Name === 'Dirt') imageLink = 'DirtHexagon'
-			if (hexagon.LandMaterial.Name === 'Pavement') imageLink = 'PavementHexagon'
-			if (hexagon.LandMaterial.Name === 'Grass') imageLink = 'GrassHexagon'
-			if (hexagon.LandMaterial.Name === 'Sand') imageLink = 'SandHexagon'
-			if (hexagon.LandMaterial.Name === 'Water') imageLink = 'WaterHexagon'
+			else if (hexagon.LandMaterial.Name === 'Pavement') imageLink = 'PavementHexagon'
+			else if (hexagon.LandMaterial.Name === 'Grass') imageLink = 'GrassHexagon'
+			else if (hexagon.LandMaterial.Name === 'Sand') imageLink = 'SandHexagon'
+			else if (hexagon.LandMaterial.Name === 'Water') imageLink = 'WaterHexagon'
+			else throw Error('Invalid land material: <' + hexagon.LandMaterial.Name + '>')
+
 			this.texture = new Icon(this.element, `${imageLink}.png`, {
 				position: 'absolute',
 				height: '100%',
 				width: '101%',
-				transform: `rotate(${hexagon.Rotation*60}deg)`,
+				transform: `rotate(${hexagon.Rotation * 60}deg)`,
 				left: '0',
-				top: '0'
+				top: '0',
 			})
 			if (!hexagon.Owned) {
 				this.texture.addStyles({
-					filter: 'grayscale(70%) brightness(70%)'
+					filter: 'grayscale(70%) brightness(70%)',
 				})
-			} 
-			let {filename, found} = getStructureImage(hexagon.Structure.Name)
+			}
+			let { filename, found } = getStructureImage(hexagon.Structure.Name)
 			if (found) {
 				let structureImage = new Icon(this.element, filename, {
 					position: 'absolute',
@@ -61,16 +63,16 @@ export default class ClickableGridHexagon extends Component {
 				})
 				if (!hexagon.Owned) {
 					structureImage.addStyles({
-						filter: 'grayscale(70%) brightness(70%)'
+						filter: 'grayscale(70%) brightness(70%)',
 					})
-				} 
+				}
 			} else {
-				if (hexagon.Structure.Name !== "Empty") {
+				if (hexagon.Structure.Name !== 'Empty') {
 					let structure = new TextSection(this.element, 20, hexagon.Structure.Name)
 					structure.addStyles({
 						position: 'absolute',
 						top: '20%',
-						left: '20%'
+						left: '20%',
 					})
 				}
 			}
