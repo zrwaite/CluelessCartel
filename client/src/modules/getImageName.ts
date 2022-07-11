@@ -27,6 +27,9 @@ export const getStructureImage = (structureName: string): {filename: string, fou
         case "Buried Storage":
             filename = 'buriedStorage.png'
             break
+        case "Armory":
+            filename = 'armory.png'
+            break
         case "Farm":
             filename = 'farm.jpg'
             break
