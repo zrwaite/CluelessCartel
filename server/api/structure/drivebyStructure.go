@@ -85,12 +85,14 @@ func driveByStructure(base *models.Base, hexagon *models.Hexagon, res *apiModels
 		res.Errors = append(res.Errors, "Nobody to shoot up")
 		return
 	}
-	driveByCost := getDriveByCost()
-	if base.Weapons.Guns < driveByCost {
-		res.Errors = append(res.Errors, "Not enough ammunition")
-		return
-	}
-	base.Weapons.Guns -= driveByCost
+	/*
+		driveByCost := getDriveByCost()
+		if base.Weapons.Guns < driveByCost {
+			res.Errors = append(res.Errors, "Not enough ammunition")
+			return
+		}
+		base.Weapons.Guns -= driveByCost
+	*/
 	hexagon.Structure.Enemy = false
 	return true
 }

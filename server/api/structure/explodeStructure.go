@@ -85,12 +85,14 @@ func explodeStructure(base *models.Base, hexagon *models.Hexagon, res *apiModels
 		res.Errors = append(res.Errors, "Nothing to clear")
 		return
 	}
-	explodeCost := getExplosionCost()
-	if base.Weapons.Explosives < explodeCost {
-		res.Errors = append(res.Errors, "Not enough explosives")
-		return
-	}
-	base.Weapons.Explosives -= explodeCost
+	/*
+		explodeCost := getExplosionCost()
+		if base.Weapons.Explosives < explodeCost {
+			res.Errors = append(res.Errors, "Not enough explosives")
+			return
+		}
+		base.Weapons.Explosives -= explodeCost
+	*/
 	hexagon.Structure = models.EmptyStructure
 	return true
 }

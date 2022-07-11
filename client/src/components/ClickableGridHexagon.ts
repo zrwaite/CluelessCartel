@@ -52,6 +52,7 @@ export default class ClickableGridHexagon extends Component {
 					filter: 'grayscale(70%) brightness(70%)',
 				})
 			}
+			
 			let { filename, found } = getStructureImage(hexagon.Structure.Name)
 			if (found) {
 				let structureImage = new Icon(this.element, filename, {
