@@ -3,6 +3,7 @@ package base
 import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"encoding/json"
@@ -20,7 +21,7 @@ func handleNewBase(body []byte, res *apiModels.Response) {
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(newBaseParams, res)
+		data.ValidateData(newBaseParams, res)
 	}
 	if len(res.Errors) == 0 {
 		var user *models.GetUserReturn
@@ -34,13 +35,13 @@ func handleNewBase(body []byte, res *apiModels.Response) {
 		} else {
 			res.Status = 400
 		}
-		base, err := models.CreateStartingBase(newBaseParams.Location, len(user.Bases))
+		base, err := data.CreateStartingBase(newBaseParams.Location, len(user.Bases))
 		if err != nil {
 			res.Errors = append(res.Errors, err.Error())
 			return
 		}
 		var success bool
-		base.Location, success = models.GetLocation(newBaseParams.Location)
+		base.Location, success = data.GetLocation(newBaseParams.Location)
 		if !success {
 			res.Errors = append(res.Errors, "invalid location")
 			return
@@ -65,7 +66,7 @@ func handleNewBase(body []byte, res *apiModels.Response) {
 		*/
 
 		user.Bases = append(user.Bases, base)
-		if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
+		if !data.ValidateHexagonRowsStructure(&base.HexagonRows) {
 			res.Errors = append(res.Errors, "Failed to create base")
 			return
 		}

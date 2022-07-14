@@ -3,24 +3,25 @@ package reset
 import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"encoding/json"
 	"net/http"
 )
 
-func ResetHandler(r *http.Request, data []byte, res *apiModels.Response) {
+func ResetHandler(r *http.Request, body []byte, res *apiModels.Response) {
 	if r.Method != "DELETE" {
 		res.Errors = append(res.Errors, "Method "+r.Method+" is not supported")
 		return
 	}
 	var userParams models.GetUsernameStruct
-	userReader := bytes.NewReader(data)
+	userReader := bytes.NewReader(body)
 	err := json.NewDecoder(userReader).Decode(&userParams)
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(userParams, res)
+		data.ValidateData(userParams, res)
 	}
 	if len(res.Errors) != 0 {
 		return

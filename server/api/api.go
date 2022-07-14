@@ -17,11 +17,11 @@ import (
 func APIHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	res := new(apiModels.Response).Init()
-	var data []byte
+	var body []byte
 
 	if r.Method == "POST" || r.Method == "DELETE" {
 		var err error
-		data, err = ioutil.ReadAll(r.Body)
+		body, err = ioutil.ReadAll(r.Body)
 		if err != nil {
 			res.Errors = append(res.Errors, "Invalid body - "+err.Error())
 		}
@@ -35,19 +35,19 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 	if len(res.Errors) == 0 {
 		switch r.URL.Path {
 		case "/api/user":
-			user.UserHandler(r, data, res)
+			user.UserHandler(r, body, res)
 		case "/api/base":
-			base.BaseHandler(r, data, res)
+			base.BaseHandler(r, body, res)
 		case "/api/signin":
-			signin.SignInHandler(r, data, res)
+			signin.SignInHandler(r, body, res)
 		case "/api/hexagon":
-			hexagon.HexagonHandler(r, data, res)
+			hexagon.HexagonHandler(r, body, res)
 		case "/api/game":
-			gameData.GameDataHandler(r, data, res)
+			gameData.GameDataHandler(r, body, res)
 		case "/api/structure":
-			structure.StructureHandler(r, data, res)
+			structure.StructureHandler(r, body, res)
 		case "/api/reset":
-			reset.ResetHandler(r, data, res)
+			reset.ResetHandler(r, body, res)
 		default:
 			res.Errors = append(res.Errors, "Endpoint not found")
 			res.Status = 404

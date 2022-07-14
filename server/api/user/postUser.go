@@ -5,6 +5,7 @@ import (
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/auth/tokens"
 	"clueless-cartel-server/database"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/models"
 	"context"
 	"encoding/json"
@@ -17,7 +18,7 @@ func postUser(body []byte, res *apiModels.Response) {
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(userParams, res)
+		data.ValidateData(userParams, res)
 		if UsernameUsed(userParams.Username) {
 			res.Errors = append(res.Errors, "Username in use")
 		}

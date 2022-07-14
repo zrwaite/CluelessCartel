@@ -6,9 +6,9 @@ import (
 	"net/http"
 )
 
-func UserHandler(r *http.Request, data []byte, res *apiModels.Response) {
+func UserHandler(r *http.Request, body []byte, res *apiModels.Response) {
 	if r.Method == "POST" {
-		postUser(data, res)
+		postUser(body, res)
 	} else {
 		getUser(r, res)
 	}

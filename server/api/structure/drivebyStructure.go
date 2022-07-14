@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/api/base"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"clueless-cartel-server/modules"
@@ -24,7 +25,7 @@ func handleDriveByStructure(body []byte, res *apiModels.Response) {
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(driveByStructureParams, res)
+		data.ValidateData(driveByStructureParams, res)
 	}
 	if len(res.Errors) != 0 {
 		res.Response = driveByStructureParams
@@ -42,7 +43,7 @@ func handleDriveByStructure(body []byte, res *apiModels.Response) {
 		res.Status = 400
 	}
 
-	location, success := models.GetLocation(driveByStructureParams.BaseLocation)
+	location, success := data.GetLocation(driveByStructureParams.BaseLocation)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return

@@ -1,6 +1,7 @@
 package hexagon
 
 import (
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/models"
 	"fmt"
 	"math"
@@ -109,9 +110,9 @@ func AddBuyableHexagon(base *models.Base, x int, y int) (success bool) {
 				forest = true
 			}
 		}
-		landMaterial := models.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
+		landMaterial := data.GetSemiRandomLandMaterial(base.Location, surroundingHexagons)
 
-		hexagon.Structure = models.GetSemiRandomStructure(landMaterial, enemyCamp, forest)
+		hexagon.Structure = data.GetSemiRandomStructure(landMaterial, enemyCamp, forest)
 		hexagon.LandMaterial = landMaterial
 	}
 
@@ -130,8 +131,8 @@ func AddEmptyHexagonRow(base *models.Base, start bool) {
 	newHexagonRow := models.HexagonRow{Y: newY}
 	for i := startX; i < newLength+startX; i++ {
 		newHexagonRow.Hexagons = append(newHexagonRow.Hexagons, models.Hexagon{
-			Structure:    models.EmptyStructure,
-			LandMaterial: models.DeadLand,
+			Structure:    data.EmptyStructure,
+			LandMaterial: data.DeadLand,
 			Rotation:     rand.Intn(6),
 			X:            i,
 			Owned:        false,
@@ -156,8 +157,8 @@ func AddEmptyHexagonColumn(base *models.Base, start bool) {
 	}
 	for i := startY; i < newLength+startY; i++ {
 		newHexagon := models.Hexagon{
-			Structure:    models.EmptyStructure,
-			LandMaterial: models.DeadLand,
+			Structure:    data.EmptyStructure,
+			LandMaterial: data.DeadLand,
 			Rotation:     rand.Intn(6),
 			X:            newX,
 			Owned:        false,

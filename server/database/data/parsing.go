@@ -1,4 +1,4 @@
-package models
+package data
 
 import (
 	"clueless-cartel-server/api/apiModels"

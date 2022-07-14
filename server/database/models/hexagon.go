@@ -1,8 +1,6 @@
 package models
 
 import (
-	"math/rand"
-
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -17,13 +15,6 @@ var landMaterialScema = bson.M{
 		"name": bson.M{"bsonType": "string"},
 	},
 }
-var DeadLand = LandMaterial{Name: "Dead"}
-var Grass = LandMaterial{"Grass"}
-var Dirt = LandMaterial{"Dirt"}
-var Sand = LandMaterial{"Sand"}
-var Pavement = LandMaterial{"Pavement"}
-var Water = LandMaterial{"Water"}
-var AllLandMaterials = []LandMaterial{Grass, Dirt, Sand, Pavement, Water}
 
 type Hexagon struct {
 	LandMaterial LandMaterial `bson:"land_material"`
@@ -63,62 +54,4 @@ var hexagonRowsSchema = bson.M{
 			"items":       hexagonsSchema,
 		},
 	},
-}
-
-func ValidateHexagonRowsStructure(hexagonRows *[]HexagonRow) (valid bool) {
-	if len(*hexagonRows) < 5 {
-		return false
-	}
-	length := len((*hexagonRows)[0].Hexagons)
-	if length < 5 {
-		return false
-	}
-	for _, hexagonRow := range *hexagonRows {
-		newLength := len(hexagonRow.Hexagons)
-		if length != newLength {
-			return false
-		}
-	}
-	return true
-}
-
-func CreateStartingHexagonRows(location Location) []HexagonRow {
-	var hexagonRows = []HexagonRow{}
-	for i1 := -2; i1 <= 2; i1++ {
-		/* Create hexagon Grid:
-		  ❌ ⬜ ⬜ ⬜ ❌
-		   ⬜ ⬛ ⬛ ⬜ ❌
-		 ⬜ ⬛ ⬛ ⬛ ⬜
-		  ⬜ ⬛ ⬛ ⬜ ❌
-		❌ ⬜ ⬜ ⬜ ❌
-		*/
-		var hexagonRow = HexagonRow{Y: i1}
-		for i2 := -2; i2 <= 2; i2++ {
-			owned := false
-			buyable := true
-			if i1 == -2 || i1 == 2 {
-				if i2 == -2 || i2 == 2 {
-					buyable = false
-				}
-			} else if i1 == -1 || i1 == 1 {
-				if i2 == 2 {
-					buyable = false
-				} else if i2 == -1 || i2 == 0 {
-					owned = true
-				}
-			} else if i2 == -1 || i2 == 0 || i2 == 1 {
-				owned = true
-			}
-			hexagonRow.Hexagons = append(hexagonRow.Hexagons, Hexagon{
-				LandMaterial: location.LandMaterial,
-				Structure:    EmptyStructure,
-				Owned:        owned,
-				Rotation:     rand.Intn(6),
-				Buyable:      buyable,
-				X:            i2,
-			})
-		}
-		hexagonRows = append(hexagonRows, hexagonRow)
-	}
-	return hexagonRows
 }

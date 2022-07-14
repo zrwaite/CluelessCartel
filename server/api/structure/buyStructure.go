@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/api/base"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"clueless-cartel-server/modules"
@@ -25,7 +26,7 @@ func handleBuyStructure(body []byte, res *apiModels.Response) {
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(buyStructureParams, res)
+		data.ValidateData(buyStructureParams, res)
 	}
 	if len(res.Errors) != 0 {
 		res.Response = buyStructureParams
@@ -43,7 +44,7 @@ func handleBuyStructure(body []byte, res *apiModels.Response) {
 		res.Status = 400
 	}
 
-	location, success := models.GetLocation(buyStructureParams.BaseLocation)
+	location, success := data.GetLocation(buyStructureParams.BaseLocation)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return
@@ -56,7 +57,7 @@ func handleBuyStructure(body []byte, res *apiModels.Response) {
 		return
 	}
 
-	structure, success := models.GetStructure(buyStructureParams.StructureName)
+	structure, success := data.GetStructure(buyStructureParams.StructureName)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return

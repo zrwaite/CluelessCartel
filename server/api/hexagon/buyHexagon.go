@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/api/base"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"clueless-cartel-server/modules"
@@ -24,7 +25,7 @@ func handleBuyHexagon(body []byte, res *apiModels.Response) {
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(buyHexagonParams, res)
+		data.ValidateData(buyHexagonParams, res)
 	}
 	if len(res.Errors) != 0 {
 		res.Response = buyHexagonParams
@@ -42,7 +43,7 @@ func handleBuyHexagon(body []byte, res *apiModels.Response) {
 		res.Status = 400
 	}
 
-	location, success := models.GetLocation(buyHexagonParams.BaseLocation)
+	location, success := data.GetLocation(buyHexagonParams.BaseLocation)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return
@@ -71,7 +72,7 @@ func handleBuyHexagon(body []byte, res *apiModels.Response) {
 	if !buyHexagon(base, buyHexagonParams.HexagonX, buyHexagonParams.HexagonY, res) {
 		return
 	}
-	if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
+	if !data.ValidateHexagonRowsStructure(&base.HexagonRows) {
 		res.Errors = append(res.Errors, "Failed to create base")
 		return
 	}
@@ -86,7 +87,7 @@ func handleBuyHexagon(body []byte, res *apiModels.Response) {
 }
 
 func buyHexagon(base *models.Base, HexagonX int, HexagonY int, res *apiModels.Response) (success bool) {
-	if !models.ValidateHexagonRowsStructure(&base.HexagonRows) {
+	if !data.ValidateHexagonRowsStructure(&base.HexagonRows) {
 		res.Errors = append(res.Errors, "Base is in corrupted state")
 		return
 	}

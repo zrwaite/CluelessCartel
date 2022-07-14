@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"clueless-cartel-server/api/apiModels"
 	"clueless-cartel-server/api/base"
+	"clueless-cartel-server/database/data"
 	"clueless-cartel-server/database/dbModules"
 	"clueless-cartel-server/database/models"
 	"clueless-cartel-server/modules"
@@ -24,7 +25,7 @@ func handleExplodeStructure(body []byte, res *apiModels.Response) {
 	if err != nil {
 		res.Errors = append(res.Errors, "Invalid json - "+err.Error())
 	} else {
-		models.ValidateData(explodeStructureParams, res)
+		data.ValidateData(explodeStructureParams, res)
 	}
 	if len(res.Errors) != 0 {
 		res.Response = explodeStructureParams
@@ -42,7 +43,7 @@ func handleExplodeStructure(body []byte, res *apiModels.Response) {
 		res.Status = 400
 	}
 
-	location, success := models.GetLocation(explodeStructureParams.BaseLocation)
+	location, success := data.GetLocation(explodeStructureParams.BaseLocation)
 	if !success {
 		res.Errors = append(res.Errors, "invalid location")
 		return
@@ -93,6 +94,6 @@ func explodeStructure(base *models.Base, hexagon *models.Hexagon, res *apiModels
 		}
 		base.Weapons.Explosives -= explodeCost
 	*/
-	hexagon.Structure = models.EmptyStructure
+	hexagon.Structure = data.EmptyStructure
 	return true
 }

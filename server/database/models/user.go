@@ -42,8 +42,6 @@ type PostUser struct {
 	Bases    []Base
 }
 
-const STARTING_USER_CASH = 15000
-
 var userSchema = bson.M{
 	"bsonType": "object",
 	"required": []string{"username", "hash", "cash", "bases"},
@@ -58,6 +56,8 @@ var userSchema = bson.M{
 		},
 	},
 }
+
+const STARTING_USER_CASH = 15000
 
 func (user *PostUser) InitData(userParams *PostUserParams) {
 	copier.Copy(user, userParams)

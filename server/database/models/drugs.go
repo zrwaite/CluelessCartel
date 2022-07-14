@@ -8,38 +8,16 @@ type Drug struct {
 	UnitPrice   int
 }
 
-var Opioids = Drug{
-	Cost:        []ResourceCost{{Plants, 5}, {Chemicals, 5}},
-	BatchAmount: 20,
-	UnitPrice:   50,
+type DrugAmount struct {
+	DrugName string
+	Amount   int
 }
 
-var Weed = Drug{
-	Cost:        []ResourceCost{{Plants, 10}},
-	BatchAmount: 50,
-	UnitPrice:   16,
-}
-
-var Meth = Drug{
-	Cost:        []ResourceCost{{Chemicals, 10}},
-	BatchAmount: 40,
-	UnitPrice:   20,
-}
-
-type Drugs struct {
-	Opioids int
-	Weed    int
-	Meth    int
-}
-
-var drugsSchema = bson.M{
+var drugAmountSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"opioids", "weed", "meth"},
+	"required": []string{"drug_name", "amount"},
 	"properties": bson.M{
-		"opioids": bson.M{"bsonType": "int"},
-		"weed":    bson.M{"bsonType": "int"},
-		"meth":    bson.M{"bsonType": "int"},
+		"drug_name": bson.M{"bsonType": "string"},
+		"amount":    bson.M{"bsonType": "int"},
 	},
 }
-
-var StartingDrugs = Drugs{10, 10, 0}

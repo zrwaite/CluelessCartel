@@ -2,41 +2,25 @@ package models
 
 import "go.mongodb.org/mongo-driver/bson"
 
-type ResourceCost struct {
-	Resource Resource
-	Cost     int
-}
-
 type Resource struct {
 	Name string
 }
 
-var Metal = Resource{
-	Name: "Metal",
+type ResourcesAmount struct {
+	ResourceName string
+	Amount       int
 }
 
-var Plants = Resource{
-	Name: "Plants",
+type ResourceCost struct {
+	ResourceName string
+	Cost         int
 }
 
-var Chemicals = Resource{
-	Name: "Chemicals",
-}
-
-type Resources struct {
-	Metal     int
-	Plants    int
-	Chemicals int
-}
-
-var resourcesSchema = bson.M{
+var resourcesAmountSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"metal", "plants", "chemicals"},
+	"required": []string{"resource_name", "amount"},
 	"properties": bson.M{
-		"metal":     bson.M{"bsonType": "int"},
-		"plants":    bson.M{"bsonType": "int"},
-		"chemicals": bson.M{"bsonType": "int"},
+		"resource_name": bson.M{"bsonType": "string"},
+		"amount":        bson.M{"bsonType": "int"},
 	},
 }
-
-var StartingResources = Resources{0, 10, 10}
