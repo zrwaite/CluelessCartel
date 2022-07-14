@@ -20,7 +20,7 @@ func CreateStartingBase(locationName string, index int) (models.Base, error) {
 	base = models.Base{
 		Location:    location,
 		Index:       index,
-		Resources:   StartingResources,
+		Resources:   StartingResourceAmounts,
 		Drugs:       StartingDrugs,
 		Weapons:     StartingWeapons,
 		HexagonRows: CreateStartingHexagonRows(location),

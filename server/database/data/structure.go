@@ -60,10 +60,16 @@ var Garbage = models.Structure{
 	Natural:       true,
 }
 
+var Road = models.Structure{
+	Name:          "Road",
+	LandMaterials: []models.LandMaterial{Dirt, Pavement, Grass, Sand},
+	Natural:       true,
+}
+
 var NaturalStructures = []models.Structure{Trees, Rocks, Garbage}
 var ManMadeStructures = []models.Structure{RV, BuriedStorage, StorageUnit, Shed, Armory, Farm}
 
-var AllStructures = append(append(ManMadeStructures, NaturalStructures...), EmptyStructure)
+var AllStructures = append(append(ManMadeStructures, NaturalStructures...), Road, EmptyStructure)
 
 func GetStructure(structureName string) (structure models.Structure, success bool) {
 	for _, structure := range AllStructures {

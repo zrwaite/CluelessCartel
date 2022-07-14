@@ -3,7 +3,11 @@ package models
 import "go.mongodb.org/mongo-driver/bson"
 
 type Resource struct {
-	Name string
+	Name               string
+	SynthesizationCost []ResourcesAmount
+	SynthesizationTime int // in minutes
+	BatchAmount        int
+	StartingUnitPrice  int
 }
 
 type ResourcesAmount struct {
@@ -11,16 +15,11 @@ type ResourcesAmount struct {
 	Amount       int
 }
 
-type ResourceCost struct {
-	ResourceName string
-	Cost         int
-}
-
 var resourcesAmountSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"resource_name", "amount"},
+	"required": []string{"name", "amount"},
 	"properties": bson.M{
-		"resource_name": bson.M{"bsonType": "string"},
-		"amount":        bson.M{"bsonType": "int"},
+		"name":   bson.M{"bsonType": "string"},
+		"amount": bson.M{"bsonType": "int"},
 	},
 }

@@ -8,7 +8,7 @@ type Base struct {
 	Location    Location
 	Index       int
 	Resources   []ResourcesAmount
-	Drugs       []DrugAmount
+	Drugs       []ResourcesAmount
 	Weapons     Weapons
 	HexagonRows []HexagonRow `bson:"hexagon_rows"`
 }
@@ -25,7 +25,7 @@ var baseSchema = bson.M{
 		"drugs": bson.M{
 			"bsonType":    "array",
 			"uniqueItems": false,
-			"items":       drugAmountSchema,
+			"items":       resourcesAmountSchema,
 		},
 		"weapons": weaponsStruct,
 		"hexagon_rows": bson.M{

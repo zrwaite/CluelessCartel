@@ -2,28 +2,38 @@ package data
 
 import "clueless-cartel-server/database/models"
 
-var Opioids = models.Drug{
-	Cost:        []models.ResourceCost{{"Plants", 5}, {"Chemicals", 5}},
-	BatchAmount: 20,
-	UnitPrice:   50,
+var Weed = makeRawResource("Weed", 16)
+
+var Fentanyl = models.Resource{
+	Name: "Fentanyl",
+	SynthesizationCost: []models.ResourcesAmount{
+		{NitricAcid.Name, 2},
+		{Piperine.Name, 2},
+	},
+	BatchAmount:        20,
+	StartingUnitPrice:  50,
+	SynthesizationTime: 45,
 }
 
-var Weed = models.Drug{
-	Cost:        []models.ResourceCost{{"Plants", 10}},
-	BatchAmount: 50,
-	UnitPrice:   16,
+var Meth = models.Resource{
+	Name: "Meth",
+	SynthesizationCost: []models.ResourcesAmount{
+		{ColdMedecine.Name, 6},
+		{Sulfur.Name, 4},
+		{RedPhosphorus.Name, 4},
+		{Acetone.Name, 5},
+		{Lithium.Name, 3},
+		{HydrochloricAcid.Name, 5},
+	},
+	BatchAmount:        40,
+	StartingUnitPrice:  20,
+	SynthesizationTime: 60,
 }
 
-var Meth = models.Drug{
-	Cost:        []models.ResourceCost{{"Chemicals", 10}},
-	BatchAmount: 40,
-	UnitPrice:   20,
-}
+var AllDrugs = []models.Resource{Weed, Fentanyl, Meth}
 
-var AllDrugs = []models.Drug{Opioids, Weed, Meth}
-
-var StartingDrugs = []models.DrugAmount{
-	{"Opioids", 10},
-	{"Weed", 10},
-	{"Meth", 10},
+var StartingDrugs = []models.ResourcesAmount{
+	{Weed.Name, 10},
+	{Fentanyl.Name, 10},
+	{Meth.Name, 10},
 }

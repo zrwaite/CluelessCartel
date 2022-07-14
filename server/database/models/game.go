@@ -2,7 +2,7 @@ package models
 
 type Game struct {
 	//All base locations
-	AllDrugs         []Drug
+	AllDrugs         []Resource
 	AllLocations     []Location
 	AllResources     []Resource
 	AllStructures    []Structure
