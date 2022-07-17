@@ -4,76 +4,91 @@ import (
 	"clueless-cartel-server/database/models"
 )
 
+var Liquid = models.ResourceType{Name: "Liquid"}
+var Solid = models.ResourceType{Name: "Solid"}
+var Powder = models.ResourceType{Name: "Powder"}
+
 // Raw resources
-var ColdMedecine = makeRawResource("Cold Medecine", 20)
-var HydrochloricAcid = makeRawResource("Hydrochloric Acid", 5)
-var NitricAcid = makeRawResource("Nitric Acid", 4)
-var Lithium = makeRawResource("Lithium", 5)
-var Aluminium = makeRawResource("Aluminium", 3)
-var Pepper = makeRawResource("Pepper", 1)
-var Metal = makeRawResource("Metal", 6)
-var Wood = makeRawResource("Wood", 2)
-var Nitrate = makeRawResource("Nitrate", 1)
-var Sulfur = makeRawResource("Sulfur", 2)
-var RedPhosphorus = makeRawResource("Red Phosphorus", 2)
-var Acetone = makeRawResource("Acetone", 2)
-var Ethanol = makeRawResource("Ethanol", 2)
+var ColdMedecine = makeRawResource("Cold Medecine", 20, Liquid)
+var HydrochloricAcid = makeRawResource("Hydrochloric Acid", 5, Liquid)
+var NitricAcid = makeRawResource("Nitric Acid", 4, Liquid)
+var Lithium = makeRawResource("Lithium", 5, Solid)
+var Aluminium = makeRawResource("Aluminium", 3, Solid)
+var Pepper = makeRawResource("Pepper", 1, Powder)
+var Steel = makeRawResource("Steel", 6, Solid)
+var Brass = makeRawResource("Brass", 6, Solid)
+var Wood = makeRawResource("Wood", 2, Solid)
+var Nitrate = makeRawResource("Nitrate", 1, Powder)
+var Sulfur = makeRawResource("Sulfur", 2, Powder)
+var RedPhosphorus = makeRawResource("Red Phosphorus", 2, Powder)
+var Acetone = makeRawResource("Acetone", 2, Liquid)
+var Ethanol = makeRawResource("Ethanol", 2, Liquid)
 
 var Piperine = models.Resource{
 	Name:              "Piperine",
 	StartingUnitPrice: 10,
-	SynthesizationCost: []models.ResourcesAmount{
+	SynthesizationCost: []models.ResourceAmount{
 		makeResourceAmount(Ethanol, 1),
 		makeResourceAmount(Charcoal, 1),
 		makeResourceAmount(Pepper, 1),
 		makeResourceAmount(Aluminium, 1),
 	},
 	SynthesizationTime: 30,
+	Type:               Powder,
 }
 
 var Charcoal = models.Resource{
-	Name:               "Charcoal",
-	SynthesizationCost: []models.ResourcesAmount{
+	Name: "Charcoal",
+	SynthesizationCost: []models.ResourceAmount{
 		makeResourceAmount(Wood, 1),
 	},
 	BatchAmount:        1,
 	StartingUnitPrice:  1,
 	SynthesizationTime: 10,
+	Type:               Powder,
 }
 
 var GunPowder = models.Resource{
-	Name:               "Gun Powder",
-	SynthesizationCost: []models.ResourcesAmount{
+	Name: "Gun Powder",
+	SynthesizationCost: []models.ResourceAmount{
 		makeResourceAmount(Nitrate, 15),
 		makeResourceAmount(Charcoal, 3),
 		makeResourceAmount(Sulfur, 2),
 	},
 	StartingUnitPrice:  25,
 	SynthesizationTime: 5,
+	Type:               Powder,
 }
 
-func makeRawResource(name string, price int) models.Resource {
+func makeRawResource(name string, price int, resourceType models.ResourceType) models.Resource {
 	return models.Resource{
 		Name:              name,
 		StartingUnitPrice: price,
+		Type:              resourceType,
 	}
 }
 
-func makeResourceAmount(resource models.Resource, amount int) models.ResourcesAmount {
-	return models.ResourcesAmount {
-		ResourceName: resource.Name,
-		Amount:      amount,
+func makeResourceAmount(resource models.Resource, amount int) models.ResourceAmount {
+	return models.ResourceAmount{
+		Name:    resource.Name,
+		Amount:  amount,
 		Quality: 100,
 	}
 }
 
-var StartingResourceAmounts = []models.ResourcesAmount{
-	{ResourceName: Metal.Name, Amount: 10},
-	{ResourceName: "", Amount: 10},
+func makeResourceTypeCapacity(resourceType models.ResourceType, amount int) models.ResourceTypeCapacity {
+	return models.ResourceTypeCapacity{
+		Name:     resourceType.Name,
+		Capacity: amount,
+	}
+}
+
+var StartingResourceAmounts = []models.ResourceAmount{
+	{Name: Steel.Name, Amount: 10},
+	{Name: "", Amount: 10},
 }
 
 var AllResources = []models.Resource{
-	Metal,
 	Nitrate,
 	GunPowder,
 	Wood,
@@ -88,4 +103,6 @@ var AllResources = []models.Resource{
 	Pepper,
 	Piperine,
 	Ethanol,
+	Steel,
+	Brass,
 }

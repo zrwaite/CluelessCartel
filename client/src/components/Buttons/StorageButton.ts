@@ -66,9 +66,11 @@ export default class StorageButton extends Button {
 		game.start()
 	}
 	initializeExpandedContent() {
-		let metalText = new TextSection(this.expandContent, 15, "Metal: " + game.base?.Resources.Metal)
-		let plantsText = new TextSection(this.expandContent, 15, "Plants: " + game.base?.Resources.Plants)
-		let chemText = new TextSection(this.expandContent, 15, "Chemicals: " + game.base?.Resources.Chemicals)
+		game.base?.Resources.forEach(resource => {
+			let resourceText = new TextSection(this.expandContent, 15, resource.ResourceName + ": " + resource.Amount)
+		})
+
+		
 
 		let MethText = new TextSection(this.expandContent, 15, "Meth: " + game.base?.Drugs.Meth)
 		let opiodsText = new TextSection(this.expandContent, 15, "Opiods: " + game.base?.Drugs.Opioids)

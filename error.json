@@ -1,5 +1,5 @@
 {
-	"failingDocumentId": { "$oid": "62d33ebe7200ba0259e90e92" },
+	"failingDocumentId": { "$oid": "62d3835b09c5469876eb49d9" },
 	"details": {
 		"operatorName": "$jsonSchema",
 		"schemaRulesNotSatisfied": [
@@ -17,10 +17,6 @@
 									{
 										"operatorName": "properties",
 										"propertiesNotSatisfied": [
-											{
-												"propertyName": "location",
-												"details": [{ "operatorName": "required", "specifiedAs": { "required": ["name", "land_matieral"] }, "missingProperties": ["land_matieral"] }]
-											},
 											{
 												"propertyName": "hexagon_rows",
 												"details": [
@@ -50,7 +46,31 @@
 																										"operatorName": "properties",
 																										"propertiesNotSatisfied": [
 																											{
-																												"propertyName": "resource_capacity",
+																												"propertyName": "resources",
+																												"details": [
+																													{
+																														"operatorName": "bsonType",
+																														"specifiedAs": { "bsonType": "array" },
+																														"reason": "type did not match",
+																														"consideredValue": null,
+																														"consideredType": "null"
+																													}
+																												]
+																											},
+																											{
+																												"propertyName": "weapons",
+																												"details": [
+																													{
+																														"operatorName": "bsonType",
+																														"specifiedAs": { "bsonType": "array" },
+																														"reason": "type did not match",
+																														"consideredValue": null,
+																														"consideredType": "null"
+																													}
+																												]
+																											},
+																											{
+																												"propertyName": "drugs",
 																												"details": [
 																													{
 																														"operatorName": "bsonType",

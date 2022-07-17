@@ -2,7 +2,7 @@ import { GameData } from './game'
 import { User } from './user'
 
 export const defaultUserData: User = {
-	"Username": "Insomnizac",
+	"Username": "Example",
 	"Cash": 15000,
 	"Bases": [
 		{
@@ -13,19 +13,34 @@ export const defaultUserData: User = {
 				}
 			},
 			"Index": 0,
-			"Resources": {
-				"Metal": 0,
-				"Plants": 10,
-				"Chemicals": 10
-			},
-			"Drugs": {
-				"Opioids": 10,
-				"Weed": 10,
-				"Meth": 0
-			},
+			"Resources": [
+				{
+					"ResourceName": "Metal",
+					"Amount": 10
+				},
+				{
+					"ResourceName": "",
+					"Amount": 10
+				}
+			],
+			"Drugs": [
+				{
+					"ResourceName": "Weed",
+					"Amount": 10
+				},
+				{
+					"ResourceName": "Fentanyl",
+					"Amount": 10
+				},
+				{
+					"ResourceName": "Meth",
+					"Amount": 10
+				}
+			],
 			"Weapons": {
 				"Guns": 1,
-				"Explosives": 0
+				"Explosives": 1,
+				"Ammunition": 10
 			},
 			"HexagonRows": [
 				{
@@ -40,11 +55,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": -2,
@@ -61,11 +72,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 3,
 							"X": -1,
@@ -82,11 +89,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": 0,
@@ -103,11 +106,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": 1,
@@ -124,11 +123,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 1,
 							"X": 2,
@@ -150,11 +145,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 0,
 							"X": -2,
@@ -171,11 +162,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 1,
 							"X": -1,
@@ -192,11 +179,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 2,
 							"X": 0,
@@ -213,11 +196,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 4,
 							"X": 1,
@@ -234,11 +213,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 0,
 							"X": 2,
@@ -260,11 +235,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 2,
 							"X": -2,
@@ -281,11 +252,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 1,
 							"X": -1,
@@ -302,11 +269,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 0,
 							"X": 0,
@@ -323,11 +286,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": 1,
@@ -344,11 +303,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 4,
 							"X": 2,
@@ -370,11 +325,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 2,
 							"X": -2,
@@ -391,11 +342,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 3,
 							"X": -1,
@@ -412,11 +359,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": 0,
@@ -433,11 +376,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": 1,
@@ -454,11 +393,7 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 2,
 							"X": 2,
@@ -480,16 +415,12 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 5,
 							"X": -2,
 							"Owned": false,
-							"Buyable": true
+							"Buyable": false
 						},
 						{
 							"LandMaterial": {
@@ -501,15 +432,11 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 0,
 							"X": -1,
-							"Owned": true,
+							"Owned": false,
 							"Buyable": true
 						},
 						{
@@ -522,15 +449,11 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 2,
 							"X": 0,
-							"Owned": true,
+							"Owned": false,
 							"Buyable": true
 						},
 						{
@@ -543,15 +466,11 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 4,
 							"X": 1,
-							"Owned": true,
+							"Owned": false,
 							"Buyable": true
 						},
 						{
@@ -564,459 +483,15 @@ export const defaultUserData: User = {
 								"Natural": false,
 								"Name": "Empty",
 								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
+								"ResourceCapacity": []
 							},
 							"Rotation": 3,
 							"X": 2,
 							"Owned": false,
-							"Buyable": true
+							"Buyable": false
 						}
 					],
 					"Y": 2
-				},
-				{
-					"Hexagons": [
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 4,
-							"X": -2,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 1,
-							"X": -1,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 5,
-							"X": 0,
-							"Owned": true,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 3,
-							"X": 1,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 0,
-							"X": 2,
-							"Owned": false,
-							"Buyable": false
-						}
-					],
-					"Y": 3
-				},
-				{
-					"Hexagons": [
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 4,
-							"X": -2,
-							"Owned": false,
-							"Buyable": false
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 3,
-							"X": -1,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 1,
-							"X": 0,
-							"Owned": true,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 1,
-							"X": 1,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 4,
-							"X": 2,
-							"Owned": false,
-							"Buyable": false
-						}
-					],
-					"Y": 4
-				},
-				{
-					"Hexagons": [
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 0,
-							"X": -2,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 5,
-							"X": -1,
-							"Owned": true,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 0,
-							"X": 0,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 5,
-							"X": 1,
-							"Owned": false,
-							"Buyable": false
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 2,
-							"X": 2,
-							"Owned": false,
-							"Buyable": false
-						}
-					],
-					"Y": 5
-				},
-				{
-					"Hexagons": [
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 2,
-							"X": -2,
-							"Owned": false,
-							"Buyable": false
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 0,
-							"X": -1,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 4,
-							"X": 0,
-							"Owned": false,
-							"Buyable": true
-						},
-						{
-							"LandMaterial": {
-								"Name": "Pavement"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 3,
-							"X": 1,
-							"Owned": false,
-							"Buyable": false
-						},
-						{
-							"LandMaterial": {
-								"Name": "Sand"
-							},
-							"Structure": {
-								"Moveable": true,
-								"Enemy": false,
-								"Natural": false,
-								"Name": "Empty",
-								"LandMaterials": [],
-								"ResourceCapacity": {
-									"Metal": 0,
-									"Plants": 0,
-									"Chemicals": 0
-								}
-							},
-							"Rotation": 5,
-							"X": 2,
-							"Owned": false,
-							"Buyable": false
-						}
-					],
-					"Y": 6
 				}
 			]
 		}
@@ -1028,5 +503,6 @@ export const defaultGameData:GameData = {
 	AllDrugs:     [],
 	AllLocations: [],
 	AllResources: [],
-	AllStructures: []
+	AllStructures: [],
+	AllLandMaterials: [],
 }

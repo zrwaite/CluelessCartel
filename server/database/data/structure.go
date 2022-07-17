@@ -5,81 +5,128 @@ import (
 	"math/rand"
 )
 
-var EmptyStructure = models.Structure{
-	Moveable:         true,
-	Name:             "Empty",
-	LandMaterials:    []models.LandMaterial{},
-	ResourceCapacity: []models.ResourcesAmount{},
-}
-var RV = models.Structure{
-	Moveable: true,
-	Name:     "RV",
-	ResourceCapacity: []models.ResourcesAmount{
-		{ResourceName: "Metal", Amount: 1},
+var EmptyStructure = createStructure(
+	"Empty",
+	[]models.LandMaterial{},
+	[]models.ResourceTypeCapacity{},
+	false,
+)
+var RV = createStructure(
+	"RV",
+	[]models.LandMaterial{Sand, Grass, Dirt, Pavement},
+	[]models.ResourceTypeCapacity{
+		makeResourceTypeCapacity(Liquid, 10),
+		makeResourceTypeCapacity(Solid, 10),
+		makeResourceTypeCapacity(Powder, 10),
 	},
-	LandMaterials: []models.LandMaterial{Dirt, Grass, Sand, Pavement},
-}
-var BuriedStorage = models.Structure{
-	Name:             "Buried Storage",
-	LandMaterials:    []models.LandMaterial{Dirt, Grass, Sand},
-	ResourceCapacity: []models.ResourcesAmount{},
-}
-var StorageUnit = models.Structure{
-	Name:             "Storage Unit",
-	LandMaterials:    []models.LandMaterial{Pavement},
-	ResourceCapacity: []models.ResourcesAmount{},
-}
-var Shed = models.Structure{
-	Moveable:         true,
-	Name:             "Shed",
-	LandMaterials:    []models.LandMaterial{Dirt, Grass, Sand, Pavement},
-	ResourceCapacity: []models.ResourcesAmount{},
-}
+	true,
+)
+var BuriedStorage = createStructure(
+	"Buried Storage",
+	[]models.LandMaterial{Sand, Grass, Dirt},
+	[]models.ResourceTypeCapacity{
+		makeResourceTypeCapacity(Liquid, 100),
+		makeResourceTypeCapacity(Solid, 5),
+		makeResourceTypeCapacity(Powder, 10),
+	},
+	false,
+)
+var StorageUnit = createStructure(
+	"Storage Unit",
+	[]models.LandMaterial{Pavement},
+	[]models.ResourceTypeCapacity{
+		makeResourceTypeCapacity(Liquid, 20),
+		makeResourceTypeCapacity(Solid, 60),
+		makeResourceTypeCapacity(Powder, 30),
+	},
+	false,
+)
+var Shed = createStructure(
+	"Shed",
+	[]models.LandMaterial{Sand, Grass, Dirt, Pavement},
+	[]models.ResourceTypeCapacity{
+		makeResourceTypeCapacity(Liquid, 30),
+		makeResourceTypeCapacity(Solid, 30),
+		makeResourceTypeCapacity(Powder, 30),
+	},
+	true,
+)
 
-var Farm = models.Structure{
-	Name:             "Farm",
-	LandMaterials:    []models.LandMaterial{Dirt},
-	ResourceCapacity: []models.ResourcesAmount{},
-}
+var Farm = createStructure(
+	"Farm",
+	[]models.LandMaterial{Dirt},
+	[]models.ResourceTypeCapacity{
+		makeResourceTypeCapacity(Liquid, 10),
+		makeResourceTypeCapacity(Solid, 20),
+		makeResourceTypeCapacity(Powder, 15),
+	},
+	false,
+)
 
-var Armory = models.Structure{
-	Name:             "Armory",
-	LandMaterials:    []models.LandMaterial{Pavement},
-	ResourceCapacity: []models.ResourcesAmount{},
-}
+var Armory = createStructure(
+	"Armory",
+	[]models.LandMaterial{Pavement},
+	[]models.ResourceTypeCapacity{
+		makeResourceTypeCapacity(Solid, 40),
+	},
+	false,
+)
 
-var Trees = models.Structure{
-	Name:             "Trees",
-	LandMaterials:    []models.LandMaterial{Dirt, Grass},
-	ResourceCapacity: []models.ResourcesAmount{},
-	Natural:          true,
-}
+var Trees = createNaturalStructure(
+	"Trees",
+	[]models.LandMaterial{Dirt, Grass},
+	false,
+)
 
-var Rocks = models.Structure{
-	Name:             "Rocks",
-	LandMaterials:    []models.LandMaterial{Dirt, Grass, Sand},
-	ResourceCapacity: []models.ResourcesAmount{},
-	Natural:          true,
-}
+var Rocks = createNaturalStructure(
+	"Rocks",
+	[]models.LandMaterial{Sand, Dirt, Grass},
+	false,
+)
 
-var Garbage = models.Structure{
-	Name:             "Garbage",
-	LandMaterials:    []models.LandMaterial{Dirt, Pavement, Water},
-	ResourceCapacity: []models.ResourcesAmount{},
-	Natural:          true,
-}
+var Garbage = createNaturalStructure(
+	"Garbage",
+	[]models.LandMaterial{Pavement, Dirt, Water},
+	false,
+)
 
-var Road = models.Structure{
-	Name:             "Road",
-	LandMaterials:    []models.LandMaterial{Dirt, Pavement, Grass, Sand},
-	ResourceCapacity: []models.ResourcesAmount{},
-	Natural:          true,
-}
-
+var Road = createNaturalStructure(
+	"Road",
+	[]models.LandMaterial{Dirt, Pavement, Grass, Sand},
+	false,
+)
 var NaturalStructures = []models.Structure{Trees, Rocks, Garbage}
 var ManMadeStructures = []models.Structure{RV, BuriedStorage, StorageUnit, Shed, Armory, Farm}
 
 var AllStructures = append(append(ManMadeStructures, NaturalStructures...), Road, EmptyStructure)
+
+func createStructure(name string, landMaterials []models.LandMaterial, capacities []models.ResourceTypeCapacity, moveable bool) models.Structure {
+	return models.Structure{
+		Name:          name,
+		LandMaterials: landMaterials,
+		Capacities:    capacities,
+		Moveable:      moveable,
+		Natural:       false,
+		Enemy:         false,
+		Resources:     []models.ResourceAmount{},
+		Drugs:         []models.ResourceAmount{},
+		Weapons:       []models.ResourceAmount{},
+	}
+}
+
+func createNaturalStructure(name string, landMaterials []models.LandMaterial, moveable bool) models.Structure {
+	return models.Structure{
+		Name:          name,
+		LandMaterials: landMaterials,
+		Capacities:    []models.ResourceTypeCapacity{},
+		Moveable:      moveable,
+		Natural:       true,
+		Enemy:         false,
+		Resources:     []models.ResourceAmount{},
+		Drugs:         []models.ResourceAmount{},
+		Weapons:       []models.ResourceAmount{},
+	}
+}
 
 func GetStructure(structureName string) (structure models.Structure, success bool) {
 	for _, structure := range AllStructures {
