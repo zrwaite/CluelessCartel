@@ -16,7 +16,7 @@ func main() {
 	godotenv.Load(".env")
 	settings.MatchDev()
 	database.ConnectToMongoDB()
-	database.InitializeDatabase()
+	// database.InitializeDatabase()
 	http.HandleFunc("/api/", api.APIHandler)
 	http.Handle("/", http.FileServer(http.Dir("../client")))
 	port := os.Getenv("PORT")

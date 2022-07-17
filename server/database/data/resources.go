@@ -1,6 +1,8 @@
 package data
 
-import "clueless-cartel-server/database/models"
+import (
+	"clueless-cartel-server/database/models"
+)
 
 // Raw resources
 var ColdMedecine = makeRawResource("Cold Medecine", 20)
@@ -21,25 +23,31 @@ var Piperine = models.Resource{
 	Name:              "Piperine",
 	StartingUnitPrice: 10,
 	SynthesizationCost: []models.ResourcesAmount{
-		{Ethanol.Name, 1},
-		{Charcoal.Name, 1},
-		{Pepper.Name, 1},
-		{Aluminium.Name, 1},
+		makeResourceAmount(Ethanol, 1),
+		makeResourceAmount(Charcoal, 1),
+		makeResourceAmount(Pepper, 1),
+		makeResourceAmount(Aluminium, 1),
 	},
 	SynthesizationTime: 30,
 }
 
 var Charcoal = models.Resource{
 	Name:               "Charcoal",
-	SynthesizationCost: []models.ResourcesAmount{{Wood.Name, 1}},
+	SynthesizationCost: []models.ResourcesAmount{
+		makeResourceAmount(Wood, 1),
+	},
 	BatchAmount:        1,
 	StartingUnitPrice:  1,
 	SynthesizationTime: 10,
 }
 
 var GunPowder = models.Resource{
-	Name:               "GunPowder",
-	SynthesizationCost: []models.ResourcesAmount{{Nitrate.Name, 15}, {Charcoal.Name, 3}, {Sulfur.Name, 2}},
+	Name:               "Gun Powder",
+	SynthesizationCost: []models.ResourcesAmount{
+		makeResourceAmount(Nitrate, 15),
+		makeResourceAmount(Charcoal, 3),
+		makeResourceAmount(Sulfur, 2),
+	},
 	StartingUnitPrice:  25,
 	SynthesizationTime: 5,
 }
@@ -48,6 +56,14 @@ func makeRawResource(name string, price int) models.Resource {
 	return models.Resource{
 		Name:              name,
 		StartingUnitPrice: price,
+	}
+}
+
+func makeResourceAmount(resource models.Resource, amount int) models.ResourcesAmount {
+	return models.ResourcesAmount {
+		ResourceName: resource.Name,
+		Amount:      amount,
+		Quality: 100,
 	}
 }
 

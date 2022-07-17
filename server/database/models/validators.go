@@ -9,6 +9,7 @@ var UsersValidator = bson.M{
 var bsonInt = bson.M{"bsonType": "int"}
 var bsonBoolean = bson.M{"bsonType": "bool"}
 var bsonString = bson.M{"bsonType": "string"}
+var bsonDouble = bson.M{"bsonType": "double"}
 
 func bsonArray(items bson.M) bson.M {
 	return bson.M{

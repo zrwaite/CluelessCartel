@@ -6,9 +6,10 @@ import (
 )
 
 var EmptyStructure = models.Structure{
-	Moveable:      true,
-	Name:          "Empty",
-	LandMaterials: []models.LandMaterial{},
+	Moveable:         true,
+	Name:             "Empty",
+	LandMaterials:    []models.LandMaterial{},
+	ResourceCapacity: []models.ResourcesAmount{},
 }
 var RV = models.Structure{
 	Moveable: true,
@@ -19,51 +20,60 @@ var RV = models.Structure{
 	LandMaterials: []models.LandMaterial{Dirt, Grass, Sand, Pavement},
 }
 var BuriedStorage = models.Structure{
-	Name:          "Buried Storage",
-	LandMaterials: []models.LandMaterial{Dirt, Grass, Sand},
+	Name:             "Buried Storage",
+	LandMaterials:    []models.LandMaterial{Dirt, Grass, Sand},
+	ResourceCapacity: []models.ResourcesAmount{},
 }
 var StorageUnit = models.Structure{
-	Name:          "Storage Unit",
-	LandMaterials: []models.LandMaterial{Pavement},
+	Name:             "Storage Unit",
+	LandMaterials:    []models.LandMaterial{Pavement},
+	ResourceCapacity: []models.ResourcesAmount{},
 }
 var Shed = models.Structure{
-	Moveable:      true,
-	Name:          "Shed",
-	LandMaterials: []models.LandMaterial{Dirt, Grass, Sand, Pavement},
+	Moveable:         true,
+	Name:             "Shed",
+	LandMaterials:    []models.LandMaterial{Dirt, Grass, Sand, Pavement},
+	ResourceCapacity: []models.ResourcesAmount{},
 }
 
 var Farm = models.Structure{
-	Name:          "Farm",
-	LandMaterials: []models.LandMaterial{Dirt},
+	Name:             "Farm",
+	LandMaterials:    []models.LandMaterial{Dirt},
+	ResourceCapacity: []models.ResourcesAmount{},
 }
 
 var Armory = models.Structure{
-	Name:          "Armory",
-	LandMaterials: []models.LandMaterial{Pavement},
+	Name:             "Armory",
+	LandMaterials:    []models.LandMaterial{Pavement},
+	ResourceCapacity: []models.ResourcesAmount{},
 }
 
 var Trees = models.Structure{
-	Name:          "Trees",
-	LandMaterials: []models.LandMaterial{Dirt, Grass},
-	Natural:       true,
+	Name:             "Trees",
+	LandMaterials:    []models.LandMaterial{Dirt, Grass},
+	ResourceCapacity: []models.ResourcesAmount{},
+	Natural:          true,
 }
 
 var Rocks = models.Structure{
-	Name:          "Rocks",
-	LandMaterials: []models.LandMaterial{Dirt, Grass, Sand},
-	Natural:       true,
+	Name:             "Rocks",
+	LandMaterials:    []models.LandMaterial{Dirt, Grass, Sand},
+	ResourceCapacity: []models.ResourcesAmount{},
+	Natural:          true,
 }
 
 var Garbage = models.Structure{
-	Name:          "Garbage",
-	LandMaterials: []models.LandMaterial{Dirt, Pavement, Water},
-	Natural:       true,
+	Name:             "Garbage",
+	LandMaterials:    []models.LandMaterial{Dirt, Pavement, Water},
+	ResourceCapacity: []models.ResourcesAmount{},
+	Natural:          true,
 }
 
 var Road = models.Structure{
-	Name:          "Road",
-	LandMaterials: []models.LandMaterial{Dirt, Pavement, Grass, Sand},
-	Natural:       true,
+	Name:             "Road",
+	LandMaterials:    []models.LandMaterial{Dirt, Pavement, Grass, Sand},
+	ResourceCapacity: []models.ResourcesAmount{},
+	Natural:          true,
 }
 
 var NaturalStructures = []models.Structure{Trees, Rocks, Garbage}
