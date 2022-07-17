@@ -15,23 +15,13 @@ type Base struct {
 
 var baseSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"resources", "drugs", "weapons", "hexagon_rows"},
+	"required": []string{"location", "index", "resources", "drugs", "weapons", "hexagon_rows"},
 	"properties": bson.M{
-		"resources": bson.M{
-			"bsonType":    "array",
-			"uniqueItems": false,
-			"items":       resourcesAmountSchema,
-		},
-		"drugs": bson.M{
-			"bsonType":    "array",
-			"uniqueItems": false,
-			"items":       resourcesAmountSchema,
-		},
-		"weapons": weaponsStruct,
-		"hexagon_rows": bson.M{
-			"bsonType":    "array",
-			"uniqueItems": false,
-			"items":       hexagonRowsSchema,
-		},
+		"location":     locationSchema,
+		"index":        bsonInt,
+		"resources":    bsonArray(resourcesAmountSchema),
+		"drugs":        bsonArray(resourcesAmountSchema),
+		"weapons":      weaponsStruct,
+		"hexagon_rows": bsonArray(hexagonRowsSchema),
 	},
 }

@@ -1,5 +1,5 @@
 import { LandMaterial } from './hexagon'
-import { Resources } from './resources'
+import { ResourcesAmount } from './resources'
 
 export interface Structure {
 	Moveable: boolean
@@ -7,5 +7,5 @@ export interface Structure {
 	Enemy: boolean,
 	Natural: boolean,
 	LandMaterials: LandMaterial[]
-	ResourceCapacity: Resources
+	ResourceCapacity: ResourcesAmount[]
 }

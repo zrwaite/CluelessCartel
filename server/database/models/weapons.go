@@ -12,8 +12,8 @@ var weaponsStruct = bson.M{
 	"bsonType": "object",
 	"required": []string{"guns", "explosives", "ammunition"},
 	"properties": bson.M{
-		"guns":       bson.M{"bsonType": "int"},
-		"explosives": bson.M{"bsonType": "int"},
-		"ammunition": bson.M{"bsonType": "int"},
+		"guns":       bsonInt,
+		"explosives": bsonInt,
+		"ammunition": bsonInt,
 	},
 }

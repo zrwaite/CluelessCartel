@@ -1,11 +1,12 @@
-import { Drug } from "./drugs";
-import {Location} from "./locations";
+
+import { LandMaterial } from "./hexagon";
 import { Resource } from "./resources";
 import { Structure } from "./structure";
 
 export interface GameData {
-	AllDrugs:     Drug[]
-	AllLocations: Location[]
-	AllResources: Resource[]
-	AllStructures: Structure[]
+	AllDrugs:         Resource[]
+	AllLocations:     Location[]
+	AllResources:     Resource[]
+	AllStructures:    Structure[]
+	AllLandMaterials: LandMaterial[]
 }

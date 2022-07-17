@@ -1,0 +1,90 @@
+{
+	"failingDocumentId": { "$oid": "62d33ebe7200ba0259e90e92" },
+	"details": {
+		"operatorName": "$jsonSchema",
+		"schemaRulesNotSatisfied": [
+			{
+				"operatorName": "properties",
+				"propertiesNotSatisfied": [
+					{
+						"propertyName": "bases",
+						"details": [
+							{
+								"operatorName": "items",
+								"reason": "At least one item did not match the sub-schema",
+								"itemIndex": { "$numberInt": "0" },
+								"details": [
+									{
+										"operatorName": "properties",
+										"propertiesNotSatisfied": [
+											{
+												"propertyName": "location",
+												"details": [{ "operatorName": "required", "specifiedAs": { "required": ["name", "land_matieral"] }, "missingProperties": ["land_matieral"] }]
+											},
+											{
+												"propertyName": "hexagon_rows",
+												"details": [
+													{
+														"operatorName": "items",
+														"reason": "At least one item did not match the sub-schema",
+														"itemIndex": { "$numberInt": "0" },
+														"details": [
+															{
+																"operatorName": "properties",
+																"propertiesNotSatisfied": [
+																	{
+																		"propertyName": "hexagons",
+																		"details": [
+																			{
+																				"operatorName": "items",
+																				"reason": "At least one item did not match the sub-schema",
+																				"itemIndex": { "$numberInt": "0" },
+																				"details": [
+																					{
+																						"operatorName": "properties",
+																						"propertiesNotSatisfied": [
+																							{
+																								"propertyName": "structure",
+																								"details": [
+																									{
+																										"operatorName": "properties",
+																										"propertiesNotSatisfied": [
+																											{
+																												"propertyName": "resource_capacity",
+																												"details": [
+																													{
+																														"operatorName": "bsonType",
+																														"specifiedAs": { "bsonType": "array" },
+																														"reason": "type did not match",
+																														"consideredValue": null,
+																														"consideredType": "null"
+																													}
+																												]
+																											}
+																										]
+																									}
+																								]
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

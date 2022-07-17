@@ -11,15 +11,15 @@ type Resource struct {
 }
 
 type ResourcesAmount struct {
-	ResourceName string
+	ResourceName string `bson:"resource_name"`
 	Amount       int
 }
 
 var resourcesAmountSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"name", "amount"},
+	"required": []string{"resource_name", "amount"},
 	"properties": bson.M{
-		"name":   bson.M{"bsonType": "string"},
-		"amount": bson.M{"bsonType": "int"},
+		"resource_name": bsonString,
+		"amount":        bsonInt,
 	},
 }

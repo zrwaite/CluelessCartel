@@ -46,14 +46,10 @@ var userSchema = bson.M{
 	"bsonType": "object",
 	"required": []string{"username", "hash", "cash", "bases"},
 	"properties": bson.M{
-		"username": bson.M{"bsonType": "string"},
-		"hash":     bson.M{"bsonType": "string"},
-		"cash":     bson.M{"bsonType": "int"},
-		"bases": bson.M{
-			"bsonType":    "array",
-			"uniqueItems": false,
-			"items":       baseSchema,
-		},
+		"username": bsonString,
+		"hash":     bsonString,
+		"cash":     bsonInt,
+		"bases":    bsonArray(baseSchema),
 	},
 }
 

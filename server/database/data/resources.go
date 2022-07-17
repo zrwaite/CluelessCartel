@@ -71,4 +71,5 @@ var AllResources = []models.Resource{
 	Aluminium,
 	Pepper,
 	Piperine,
+	Ethanol,
 }

@@ -1,14 +1,13 @@
-import { Drugs } from './drugs'
 import { HexagonRow } from './hexagon'
-import { Resources } from './resources'
 import { Weapons } from './weapons'
 import { Location } from './locations'
+import { ResourcesAmount } from './resources'
 
 export interface Base {
 	Location: Location
 	Index: number
-	Resources: Resources
-	Drugs: Drugs
+	Resources: ResourcesAmount[]
+	Drugs: ResourcesAmount[]
 	Weapons: Weapons
 	HexagonRows: HexagonRow[]
 }

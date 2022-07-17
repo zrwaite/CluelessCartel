@@ -3,6 +3,7 @@ package data
 import (
 	"clueless-cartel-server/database/models"
 	"errors"
+	"fmt"
 	"math/rand"
 )
 
@@ -17,6 +18,7 @@ func CreateStartingBase(locationName string, index int) (models.Base, error) {
 	if !success {
 		return base, errors.New("invalid location")
 	}
+	fmt.Println(location)
 	base = models.Base{
 		Location:    location,
 		Index:       index,

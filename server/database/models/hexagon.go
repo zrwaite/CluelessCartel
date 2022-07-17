@@ -8,11 +8,11 @@ type LandMaterial struct {
 	Name string
 }
 
-var landMaterialScema = bson.M{
+var landMaterialSchema = bson.M{
 	"bsonType": "object",
 	"required": []string{"name"},
 	"properties": bson.M{
-		"name": bson.M{"bsonType": "string"},
+		"name": bsonString,
 	},
 }
 
@@ -29,12 +29,12 @@ var hexagonsSchema = bson.M{
 	"bsonType": "object",
 	"required": []string{"land_material", "rotation", "structure", "x", "owned", "buyable"},
 	"properties": bson.M{
-		"land_material": landMaterialScema,
+		"land_material": landMaterialSchema,
 		"structure":     structureSchema,
-		"x":             bson.M{"bsonType": "int"},
-		"rotation":      bson.M{"bsonType": "int"},
-		"owned":         bson.M{"bsonType": "bool"},
-		"buyable":       bson.M{"bsonType": "bool"},
+		"x":             bsonInt,
+		"rotation":      bsonInt,
+		"owned":         bsonBoolean,
+		"buyable":       bsonBoolean,
 	},
 }
 
@@ -47,11 +47,7 @@ var hexagonRowsSchema = bson.M{
 	"bsonType": "object",
 	"required": []string{"y", "hexagons"},
 	"properties": bson.M{
-		"y": bson.M{"bsonType": "int"},
-		"hexagons": bson.M{
-			"bsonType":    "array",
-			"uniqueItems": false,
-			"items":       hexagonsSchema,
-		},
+		"y":        bsonInt,
+		"hexagons": bsonArray(hexagonsSchema),
 	},
 }
