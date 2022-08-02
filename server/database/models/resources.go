@@ -4,11 +4,16 @@ import "go.mongodb.org/mongo-driver/bson"
 
 type Resource struct {
 	Name               string
-	SynthesizationCost []ResourceAmount
+	synthesizationCost []ResourceAmount
 	SynthesizationTime int // in minutes
 	BatchAmount        int
 	StartingUnitPrice  int
 	Type               ResourceType
+}
+
+func (resource Resource) AddSynthesizationCost(synthesizationCost []ResourceAmount) Resource {
+	resource.synthesizationCost = synthesizationCost
+	return resource
 }
 
 type ResourceType struct {

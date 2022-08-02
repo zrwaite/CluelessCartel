@@ -23,6 +23,8 @@ func CreateStartingBase(locationName string, index int) (models.Base, error) {
 		Location:    location,
 		Index:       index,
 		HexagonRows: CreateStartingHexagonRows(location),
+		Tasks:       []models.Task{},
+		Sims:        []models.Sim{},
 	}
 	return base, nil
 

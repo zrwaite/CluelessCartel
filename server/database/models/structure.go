@@ -9,7 +9,7 @@ type Structure struct {
 	Enemy         bool
 	Natural       bool
 	Name          string
-	LandMaterials []LandMaterial `bson:"land_materials"`
+	LandMaterials []LandMaterial `bson:"landMaterials"`
 	Capacities    []ResourceTypeCapacity
 	Resources     []ResourceAmount
 	Drugs         []ResourceAmount
@@ -18,16 +18,16 @@ type Structure struct {
 
 var structureSchema = bson.M{
 	"bsonType": "object",
-	"required": []string{"moveable", "enemy", "natural", "name", "land_materials", "capacities", "resources", "drugs", "weapons"},
+	"required": []string{"moveable", "enemy", "natural", "name", "landMaterials", "capacities", "resources", "drugs", "weapons"},
 	"properties": bson.M{
-		"moveable":       bsonBoolean,
-		"natural":        bsonBoolean,
-		"enemy":          bsonBoolean,
-		"name":           bsonString,
-		"land_materials": bsonArray(landMaterialSchema),
-		"capacities":     bsonArray(resourceTypeCapacitySchema),
-		"resources":      bsonArray(resourcesAmountSchema),
-		"drugs":          bsonArray(resourcesAmountSchema),
-		"weapons":        bsonArray(resourcesAmountSchema),
+		"moveable":      bsonBoolean,
+		"natural":       bsonBoolean,
+		"enemy":         bsonBoolean,
+		"name":          bsonString,
+		"landMaterials": bsonArray(landMaterialSchema),
+		"capacities":    bsonArray(resourceTypeCapacitySchema),
+		"resources":     bsonArray(resourcesAmountSchema),
+		"drugs":         bsonArray(resourcesAmountSchema),
+		"weapons":       bsonArray(resourcesAmountSchema),
 	},
 }

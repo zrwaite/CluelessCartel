@@ -25,40 +25,37 @@ var Acetone = makeRawResource("Acetone", 2, Liquid)
 var Ethanol = makeRawResource("Ethanol", 2, Liquid)
 
 var Piperine = models.Resource{
-	Name:              "Piperine",
-	StartingUnitPrice: 10,
-	SynthesizationCost: []models.ResourceAmount{
-		makeResourceAmount(Ethanol, 1),
-		makeResourceAmount(Charcoal, 1),
-		makeResourceAmount(Pepper, 1),
-		makeResourceAmount(Aluminium, 1),
-	},
+	Name:               "Piperine",
+	StartingUnitPrice:  10,
 	SynthesizationTime: 30,
 	Type:               Powder,
-}
+}.AddSynthesizationCost([]models.ResourceAmount{
+	makeResourceAmount(Ethanol, 1),
+	makeResourceAmount(Charcoal, 1),
+	makeResourceAmount(Pepper, 1),
+	makeResourceAmount(Aluminium, 1),
+})
 
 var Charcoal = models.Resource{
-	Name: "Charcoal",
-	SynthesizationCost: []models.ResourceAmount{
-		makeResourceAmount(Wood, 1),
-	},
+	Name:               "Charcoal",
 	BatchAmount:        1,
 	StartingUnitPrice:  1,
 	SynthesizationTime: 10,
 	Type:               Powder,
-}
+}.AddSynthesizationCost([]models.ResourceAmount{
+	makeResourceAmount(Wood, 1),
+})
 
 var GunPowder = models.Resource{
-	Name: "Gun Powder",
-	SynthesizationCost: []models.ResourceAmount{
-		makeResourceAmount(Nitrate, 15),
-		makeResourceAmount(Charcoal, 3),
-		makeResourceAmount(Sulfur, 2),
-	},
+	Name:               "Gun Powder",
 	StartingUnitPrice:  25,
 	SynthesizationTime: 5,
 	Type:               Powder,
-}
+}.AddSynthesizationCost([]models.ResourceAmount{
+	makeResourceAmount(Nitrate, 15),
+	makeResourceAmount(Charcoal, 3),
+	makeResourceAmount(Sulfur, 2),
+})
 
 func makeRawResource(name string, price int, resourceType models.ResourceType) models.Resource {
 	return models.Resource{
